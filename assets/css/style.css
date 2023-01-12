@@ -37,7 +37,7 @@ body {
     display: flex;
     width: 100%;
     height: 80vh;
-    background-color: black;
+    background-color: rgb(54, 30, 65);
 }
 
 #leftSideMain {
@@ -47,10 +47,38 @@ body {
 
 #middleMain {
     width: 50%;
-    background-color: aliceblue;
+    height: 100%;
+}
+
+#gameScreenGrid {
+    background-image: url(../images/village.png);
+    background-size: contain;
+    margin: auto;
+    display: flex;
+    height: 70%;
+    aspect-ratio: 1/1;
+}
+
+#gameScreenGrid div {
+    height: 100%;
+    width: 100%;
+}
+
+#gameScreenGrid div div{
+    width: 100%;
+    height: 20%;
+}
+
+#gameDialogueBox {
+    height: 25%;
+    
+}
+
+#gameDialogueBox p {
+    height: 80%;
+    overflow: hidden;
 }
 
 #rightSideMain {
     width: 25%;
-    background-color: aqua;
 }
