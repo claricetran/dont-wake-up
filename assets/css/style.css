@@ -32,3 +32,25 @@ body {
     height: 99vh;
 
 }
+
+#mainGame-Main {
+    display: flex;
+    width: 100%;
+    height: 80vh;
+    background-color: black;
+}
+
+#leftSideMain {
+    background-color: blueviolet;
+    width: 25%;
+}
+
+#middleMain {
+    width: 50%;
+    background-color: aliceblue;
+}
+
+#rightSideMain {
+    width: 25%;
+    background-color: aqua;
+}
