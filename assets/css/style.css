@@ -1,56 +1,155 @@
 body {
-    font-family: 'Press Start 2P', cursive;
+	font-family: "Press Start 2P", cursive;
 }
 
-
 #start-container {
-    position: relative;
-    border: 5px solid black;
-    background-color: #000000;
-    height: 100vh;
+	position: relative;
+	border: 5px solid black;
+	background-color: #000000;
+	height: 100vh;
 }
 
 #start-container h2 {
-    position: absolute;
-    color: white;
-    top: 30%;
-    left: 42%;
+	position: absolute;
+	color: white;
+	top: 30%;
+	left: 42%;
 }
 
-#start-container button{
-    position: absolute;
-    bottom: 50%;
-    left: 48%;
+#start-container button {
+	position: absolute;
+	bottom: 50%;
+	left: 48%;
 }
 
 #start-img img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 20px solid black;
-    width: 50%;
-    height: 99vh;
-
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 20px solid black;
+	width: 50%;
+	height: 99vh;
 }
 
 #mainGame-Main {
-    display: flex;
-    width: 100%;
-    height: 80vh;
-    background-color: black;
+	display: flex;
+	width: 100%;
+	height: 80vh;
+	background-color: black;
 }
 
+/* Character and Inventory Sections */
 #leftSideMain {
-    background-color: blueviolet;
-    width: 25%;
+	background-color: blueviolet;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
 }
 
-#middleMain {
-    width: 50%;
-    background-color: aliceblue;
+/*Character and progress section */
+#character-progress {
+	/* background-color: pink; */
+	margin: 3%;
+	border: 3px solid black;
+}
+/* Character section */
+#character-display {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+#name {
+	position: absolute;
+	left: 0;
+	margin: 10px;
+}
+
+/* Lives positioning */
+#lives {
+	position: absolute;
+	right: 0;
+	margin: 10px;
+}
+
+#character-display h5 {
+	position: absolute;
+	left: 0;
+	margin: 10px;
+}
+
+/* Character image*/
+#character-display img {
+	margin: auto;
+}
+
+hr {
+	width: 90%;
+}
+
+#progress-bars {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin: 20px auto 0px;
+	justify-content: center;
+}
+
+#progress-bars * {
+	display: flex;
+}
+
+#progress-bars div p {
+	width: 160px;
+	justify-content: flex-end;
+}
+
+#health,
+#xp {
+	height: 20px;
+	width: 65%;
+}
+
+/* Inventory and Weapon Section */
+#character-progress,
+#inventory-weapon {
+	/* background-color: pink; */
+	margin: 3%;
+	border: 3px solid black;
+	padding: 3%;
+}
+
+#inventory-weapon h4 {
+	text-align: center;
+	margin: 15px;
+}
+
+#inventory {
+	padding: 3%;
+}
+
+#weapon {
+	display: flex;
+}
+
+#weapon img {
+	width: 9vw;
+	object-fit: contain;
+	align-self: flex-start;
+	flex-wrap: wrap;
+}
+
+#weapon div {
+	flex: 1 1 auto;
+}
+
+#weapon #middleMain {
+	width: 50%;
+	background-color: aliceblue;
 }
 
 #rightSideMain {
-    width: 25%;
-    background-color: aqua;
+	width: 25%;
+	background-color: aqua;
 }

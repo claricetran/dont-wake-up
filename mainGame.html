@@ -16,7 +16,74 @@
 		</header>
 		<div id="mainGame-Main">
 			<section id="leftSideMain">
-				<p>g</p>
+				<section id="character-progress">
+					<section id="character-display">
+						<!-- Set character limit for name (10) -->
+						<h4 id="name">Hikarumiji</h4>
+						<section id="lives">
+							<!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
+							<i class="nes-icon is-small heart"></i
+							><i class="nes-icon is-small heart"></i
+							><i class="nes-icon is-small heart"></i>
+						</section>
+						<img
+							src="./assets/images/female-adventurer-example.png"
+							alt="adventurer"
+							id="adventurer" />
+					</section>
+					<hr />
+					<!-- At certain HPs, the health bar will change from is-success(green) to is-warning(yellow) to is-error(red) -->
+					<section id="progress-bars">
+						<div>
+							<p>Health:</p>
+							<progress
+								id="health"
+								class="nes-progress is-success"
+								value="100"
+								max="100"></progress>
+						</div>
+						<div>
+							<p>XP:</p>
+							<progress id="xp" class="nes-progress" value="100" max="100"></progress>
+						</div>
+
+						<p>Level: <span id="currLevel"></span></p>
+					</section>
+				</section>
+				<section id="inventory-weapon">
+					<h4>Inventory</h4>
+					<section id="inventory">
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+					</section>
+					<hr />
+					<h4>Weapon</h4>
+					<section id="weapon">
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<div id="weapon-info">
+							<!--name of weapon only-->
+							<p id="weapon">Wand</p>
+							<p>Attack +<span id="attack">0</span></p>
+						</div>
+					</section>
+				</section>
 			</section>
 			<section id="middleMain">
 				<p>p</p>
@@ -25,7 +92,6 @@
 				<p>d</p>
 			</section>
 		</div>
-		<footer>
-		</footer>
+		<footer></footer>
 	</body>
 </html>
