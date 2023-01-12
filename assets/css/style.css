@@ -109,7 +109,15 @@ footer {
     height: 90%;
 }
 
+#main-story-text p {
+    font-size: 0.9vw;
+}
+
 #main-story-btns {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 10px;
+    gap: 5px;
+    flex-wrap: wrap; 
 }
