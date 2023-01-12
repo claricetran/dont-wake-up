@@ -5,11 +5,13 @@ body {
 header {
     text-align: center;
     padding: 20px;
+    background-color: rgb(82, 57, 94);
 }
 
 footer {
     text-align: center;
     padding: 20px;
+    background-color: rgb(82, 57, 94);
 }
 
 #start-container {
@@ -51,7 +53,7 @@ footer {
     display: flex;
     width: 100%;
     height: 80vh;
-    background-color: rgb(54, 30, 65);
+    background-color: rgb(82, 57, 94);
 }
 
 #leftSideMain {
@@ -66,10 +68,10 @@ footer {
 
 #gameScreenGrid {
     background-image: url(../images/village.png);
-    background-size: contain;
+    background-size: cover;
     margin: auto;
     display: flex;
-    height: 70%;
+    height: 75%;
     aspect-ratio: 1/1;
 }
 
@@ -84,12 +86,13 @@ footer {
 }
 
 #gameDialogueBox {
-    height: 25%;
+    height: 20%;
 }
 
 #gameDialogueBox p {
     height: 80%;
     overflow: hidden;
+    font-size: 0.9vw;
 }
 
 #rightSideMain {
