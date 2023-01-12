@@ -5,11 +5,13 @@ body {
 <<<<<<< HEAD ======= header {
 	text-align: center;
 	padding: 20px;
+	background-color: rgb(82, 57, 94);
 }
 
 footer {
 	text-align: center;
 	padding: 20px;
+	background-color: rgb(82, 57, 94);
 }
 
 >>>>>>>stage #start-container {
@@ -50,7 +52,7 @@ footer {
 	display: flex;
 	width: 100%;
 	height: 80vh;
-	background-color: rgb(54, 30, 65);
+	background-color: rgb(82, 57, 94);
 }
 
 /* Character and Inventory Sections */
@@ -175,10 +177,10 @@ hr {
 
 #gameScreenGrid {
 	background-image: url(../images/village.png);
-	background-size: contain;
+	background-size: cover;
 	margin: auto;
 	display: flex;
-	height: 70%;
+	height: 75%;
 	aspect-ratio: 1/1;
 }
 
@@ -193,12 +195,13 @@ hr {
 }
 
 #gameDialogueBox {
-	height: 25%;
+	height: 20%;
 }
 
 #gameDialogueBox p {
 	height: 80%;
 	overflow: hidden;
+	font-size: 0.9vw;
 }
 
 #rightSideMain {
@@ -215,7 +218,15 @@ hr {
 	height: 90%;
 }
 
+#main-story-text p {
+	font-size: 0.9vw;
+}
+
 #main-story-btns {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
+	width: 100%;
+	padding: 10px;
+	gap: 5px;
+	flex-wrap: wrap;
 }
