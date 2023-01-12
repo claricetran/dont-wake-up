@@ -2,6 +2,15 @@ body {
     font-family: 'Press Start 2P', cursive;
 }
 
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+}
 
 #start-container {
     position: relative;
@@ -31,6 +40,11 @@ body {
     width: 50%;
     height: 99vh;
 
+}
+
+#main-page-nav {
+    display: flex;
+    justify-content: space-between;
 }
 
 #mainGame-Main {
@@ -71,7 +85,6 @@ body {
 
 #gameDialogueBox {
     height: 25%;
-    
 }
 
 #gameDialogueBox p {
@@ -81,4 +94,19 @@ body {
 
 #rightSideMain {
     width: 25%;
+}
+
+#main-story-text {
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 30px;
+    height: 90%;
+}
+
+#main-story-btns {
+    display: flex;
+    justify-content: space-between; 
 }

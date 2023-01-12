@@ -1,71 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./assets/css/style.css" />
-		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
-		<link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
-		<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-		<title>Don't Wake Up</title>
-	</head>
-	<body>
-		<header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/nes.css@latest/css/nes.min.css"
+      rel="stylesheet"
+    />
+    <title>Don't Wake Up</title>
+  </head>
+  <body>
+    <header>
+		<nav id="main-page-nav">
+			<div id="main-nav-btns">
+			<button type="button" class="nes-btn is-success">Save</button>
+			<button type="button" class="nes-btn is-error">Restart</button>
+			</div>
 			<h2>Don't Wake Up</h2>
-		</header>
-		<div id="mainGame-Main">
-			<section id="leftSideMain">
-				<p>g</p>
-			</section>
-			<section id="middleMain">
-				<div id="gameScreenGrid">
-					<div id="columnA">
-						<div Id="a1"></div>
-						<div Id="a2"></div>
-						<div Id="a3"></div>
-						<div Id="a4"></div>
-						<div Id="a5"></div>
-					</div>
-					<div id="columnB">
-						<div Id="b1"></div>
-						<div Id="b2"></div>
-						<div Id="b3"></div>
-						<div Id="b4"></div>
-						<div Id="b5"></div>
-					</div>
-					<div id="columnC">
-						<div Id="c1"></div>
-						<div Id="c2"></div>
-						<div Id="c3"></div>
-						<div Id="c4"></div>
-						<div Id="c5"></div>
-					</div>
-					<div id="columnD">
-						<div Id="d1"></div>
-						<div Id="d2"></div>
-						<div Id="d3"></div>
-						<div Id="d4"></div>
-						<div Id="d5"></div>
-					</div>
-					<div id="columnE">
-						<div Id="e1"></div>
-						<div Id="e2"></div>
-						<div Id="e3"></div>
-						<div Id="e4"></div>
-						<div Id="e5"></div>
-					</div>
-				</div>
-				<div id="gameDialogueBox" class="nes-balloon from-right">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero blanditiis. Sit voluptatum minima sequi asperiores?</p>
-					<button></button>
-				</div>
-			</section>
-			<section id="rightSideMain">
-				<p>d</p>
-			</section>
+			<p>volume controls</p>
+		</nav>
+    </header>
+    <div id="mainGame-Main">
+      <section id="leftSideMain">
+        <p>g</p>
+      </section>
+      <section id="middleMain">
+		<div id="gameScreenGrid">
+			<div id="columnA">
+				<div Id="a1"></div>
+				<div Id="a2"></div>
+				<div Id="a3"></div>
+				<div Id="a4"></div>
+				<div Id="a5"></div>
+			</div>
+			<div id="columnB">
+				<div Id="b1"></div>
+				<div Id="b2"></div>
+				<div Id="b3"></div>
+				<div Id="b4"></div>
+				<div Id="b5"></div>
+			</div>
+			<div id="columnC">
+				<div Id="c1"></div>
+				<div Id="c2"></div>
+				<div Id="c3"></div>
+				<div Id="c4"></div>
+				<div Id="c5"></div>
+			</div>
+			<div id="columnD">
+				<div Id="d1"></div>
+				<div Id="d2"></div>
+				<div Id="d3"></div>
+				<div Id="d4"></div>
+				<div Id="d5"></div>
+			</div>
+			<div id="columnE">
+				<div Id="e1"></div>
+				<div Id="e2"></div>
+				<div Id="e3"></div>
+				<div Id="e4"></div>
+				<div Id="e5"></div>
+			</div>
 		</div>
-		<footer>
-		</footer>
-	</body>
+		<div id="gameDialogueBox" class="nes-balloon from-right">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero blanditiis. Sit voluptatum minima sequi asperiores?</p>
+			<button></button>
+		</div>
+	</section>
+      <section id="rightSideMain">
+        <div id="main-story-text">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            deleniti incidunt nulla amet voluptas tempora quasi, consectetur
+            obcaecati hic. Ea voluptatem inventore dolores eos officia,
+            praesentium amet iste itaque fugiat!
+          </p>
+          <div id="main-story-btns">
+            <button type="button" class="nes-btn" id="main-back-btn">
+              Back
+            </button>
+            <button type="button" class="nes-btn" id="main-continue-btn">
+              Continue
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer>
+		<p>&copy;
+			<a href="https://github.com/Mayalynn96">Maya</a>
+			<a href="https://github.com/claricetran">Clarice</a>
+			<a href="https://github.com/VisualViolet">Savannah</a>
+		</p>
+	</footer>
+  </body>
 </html>
