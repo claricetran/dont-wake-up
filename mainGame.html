@@ -1,104 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
-      rel="stylesheet"
-    />
-    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
-    <link
-      href="https://unpkg.com/nes.css@latest/css/nes.min.css"
-      rel="stylesheet"
-    />
-    <title>Don't Wake Up</title>
-  </head>
-  <body>
-    <header>
-		<nav id="main-page-nav">
-			<div id="main-nav-btns">
-			<button type="button" class="nes-btn is-success">Save</button>
-			<button type="button" class="nes-btn is-error">Restart</button>
-			</div>
-			<h2>Don't Wake Up</h2>
-			<p>volume controls</p>
-		</nav>
-    </header>
-    <div id="mainGame-Main">
-      <section id="leftSideMain">
-        <p>g</p>
-      </section>
-      <section id="middleMain">
-		<div id="gameScreenGrid">
-			<div id="columnA">
-				<div Id="a1"></div>
-				<div Id="a2"></div>
-				<div Id="a3"></div>
-				<div Id="a4"></div>
-				<div Id="a5"></div>
-			</div>
-			<div id="columnB">
-				<div Id="b1"></div>
-				<div Id="b2"></div>
-				<div Id="b3"></div>
-				<div Id="b4"></div>
-				<div Id="b5"></div>
-			</div>
-			<div id="columnC">
-				<div Id="c1"></div>
-				<div Id="c2"></div>
-				<div Id="c3"></div>
-				<div Id="c4"></div>
-				<div Id="c5"></div>
-			</div>
-			<div id="columnD">
-				<div Id="d1"></div>
-				<div Id="d2"></div>
-				<div Id="d3"></div>
-				<div Id="d4"></div>
-				<div Id="d5"></div>
-			</div>
-			<div id="columnE">
-				<div Id="e1"></div>
-				<div Id="e2"></div>
-				<div Id="e3"></div>
-				<div Id="e4"></div>
-				<div Id="e5"></div>
-			</div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./assets/css/style.css" />
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+		<link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+		<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+		<title>Don't Wake Up</title>
+	</head>
+	<body>
+		<header>
+			<nav id="main-page-nav">
+				<div id="main-nav-btns">
+					<button type="button" class="nes-btn is-success">Save</button>
+					<button type="button" class="nes-btn is-error">Restart</button>
+				</div>
+				<h2>Don't Wake Up</h2>
+				<p>volume controls</p>
+			</nav>
+		</header>
+		<div id="mainGame-Main">
+			<section id="leftSideMain">
+				<section id="character-progress">
+					<section id="character-display">
+						<!-- Set character limit for name (10) -->
+						<h4 id="name">Hikarumiji</h4>
+						<section id="lives">
+							<!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
+							<i class="nes-icon is-small heart"></i
+							><i class="nes-icon is-small heart"></i
+							><i class="nes-icon is-small heart"></i>
+						</section>
+						<img
+							src="./assets/images/female-adventurer-example.png"
+							alt="adventurer"
+							id="adventurer" />
+					</section>
+					<hr />
+					<!-- At certain HPs, the health bar will change from is-success(green) to is-warning(yellow) to is-error(red) -->
+					<section id="progress-bars">
+						<div>
+							<p>Health:</p>
+							<progress
+								id="health"
+								class="nes-progress is-success"
+								value="100"
+								max="100"></progress>
+						</div>
+						<div>
+							<p>XP:</p>
+							<progress id="xp" class="nes-progress" value="100" max="100"></progress>
+						</div>
+
+						<p>Level: <span id="currLevel"></span></p>
+					</section>
+				</section>
+				<section id="inventory-weapon">
+					<h4>Inventory</h4>
+					<section id="inventory">
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+					</section>
+					<hr />
+					<h4>Weapon</h4>
+					<section id="weapon">
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<div id="weapon-info">
+							<!--name of weapon only-->
+							<p id="weapon">Wand</p>
+							<p>Attack +<span id="attack">0</span></p>
+						</div>
+					</section>
+				</section>
+			</section>
+			<section id="middleMain">
+				<div id="gameScreenGrid">
+					<div id="columnA">
+						<div id="a1"></div>
+						<div id="a2"></div>
+						<div id="a3"></div>
+						<div id="a4"></div>
+						<div id="a5"></div>
+					</div>
+					<div id="columnB">
+						<div id="b1"></div>
+						<div id="b2"></div>
+						<div id="b3"></div>
+						<div id="b4"></div>
+						<div id="b5"></div>
+					</div>
+					<div id="columnC">
+						<div id="c1"></div>
+						<div id="c2"></div>
+						<div id="c3"></div>
+						<div id="c4"></div>
+						<div id="c5"></div>
+					</div>
+					<div id="columnD">
+						<div id="d1"></div>
+						<div id="d2"></div>
+						<div id="d3"></div>
+						<div id="d4"></div>
+						<div id="d5"></div>
+					</div>
+					<div id="columnE">
+						<div id="e1"></div>
+						<div id="e2"></div>
+						<div id="e3"></div>
+						<div id="e4"></div>
+						<div id="e5"></div>
+					</div>
+				</div>
+				<div id="gameDialogueBox" class="nes-balloon from-right">
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero
+						blanditiis. Sit voluptatum minima sequi asperiores?
+					</p>
+					<button></button>
+				</div>
+			</section>
+			<section id="rightSideMain">
+				<div id="main-story-text">
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis deleniti
+						incidunt nulla amet voluptas tempora quasi, consectetur obcaecati hic. Ea
+						voluptatem inventore dolores eos officia, praesentium amet iste itaque
+						fugiat!
+					</p>
+					<div id="main-story-btns">
+						<button type="button" class="nes-btn" id="main-back-btn">Back</button>
+						<button type="button" class="nes-btn" id="main-continue-btn">
+							Continue
+						</button>
+					</div>
+				</div>
+			</section>
 		</div>
-		<div id="gameDialogueBox" class="nes-balloon from-right">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero blanditiis. Sit voluptatum minima sequi asperiores?</p>
-			<button></button>
-		</div>
-	</section>
-      <section id="rightSideMain">
-        <div id="main-story-text">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            deleniti incidunt nulla amet voluptas tempora quasi, consectetur
-            obcaecati hic. Ea voluptatem inventore dolores eos officia,
-            praesentium amet iste itaque fugiat!
-          </p>
-          <div id="main-story-btns">
-            <button type="button" class="nes-btn" id="main-back-btn">
-              Back
-            </button>
-            <button type="button" class="nes-btn" id="main-continue-btn">
-              Continue
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-    <footer>
-		<p>&copy;
-			<a href="https://github.com/Mayalynn96">Maya</a>
-			<a href="https://github.com/claricetran">Clarice</a>
-			<a href="https://github.com/VisualViolet">Savannah</a>
-		</p>
-	</footer>
-  </body>
+		<footer>
+			<p>
+				&copy;
+				<a href="https://github.com/Mayalynn96">Maya</a>
+				<a href="https://github.com/claricetran">Clarice</a>
+				<a href="https://github.com/VisualViolet">Savannah</a>
+			</p>
+		</footer>
+	</body>
 </html>

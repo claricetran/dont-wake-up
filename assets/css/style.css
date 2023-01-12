@@ -1,123 +1,232 @@
 body {
-    font-family: 'Press Start 2P', cursive;
+	font-family: "Press Start 2P", cursive;
 }
 
-header {
-    text-align: center;
-    padding: 20px;
-    background-color: rgb(82, 57, 94);
+<<<<<<< HEAD ======= header {
+	text-align: center;
+	padding: 20px;
+	background-color: rgb(82, 57, 94);
 }
 
 footer {
-    text-align: center;
-    padding: 20px;
-    background-color: rgb(82, 57, 94);
+	text-align: center;
+	padding: 20px;
+	background-color: rgb(82, 57, 94);
 }
 
-#start-container {
-    position: relative;
-    border: 5px solid black;
-    background-color: #000000;
-    height: 100vh;
+>>>>>>>stage #start-container {
+	position: relative;
+	border: 5px solid black;
+	background-color: #000000;
+	height: 100vh;
 }
 
 #start-container h2 {
-    position: absolute;
-    color: white;
-    top: 30%;
-    left: 42%;
+	position: absolute;
+	color: white;
+	top: 30%;
+	left: 42%;
 }
 
-#start-container button{
-    position: absolute;
-    bottom: 50%;
-    left: 48%;
+#start-container button {
+	position: absolute;
+	bottom: 50%;
+	left: 48%;
 }
 
 #start-img img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 20px solid black;
-    width: 50%;
-    height: 99vh;
-
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 20px solid black;
+	width: 50%;
+	height: 99vh;
 }
 
 #main-page-nav {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 #mainGame-Main {
-    display: flex;
-    width: 100%;
-    height: 80vh;
-    background-color: rgb(82, 57, 94);
+	display: flex;
+	width: 100%;
+	height: 80vh;
+	background-color: rgb(82, 57, 94);
 }
 
+/* Character and Inventory Sections */
 #leftSideMain {
-    background-color: blueviolet;
-    width: 25%;
+	background-color: blueviolet;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
 }
 
-#middleMain {
-    width: 50%;
-    height: 100%;
+/*Character and progress section */
+#character-progress {
+	/* background-color: pink; */
+	margin: 3%;
+	border: 3px solid black;
+}
+/* Character section */
+#character-display {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+#name {
+	position: absolute;
+	left: 0;
+	margin: 10px;
 }
 
-#gameScreenGrid {
-    background-image: url(../images/village.png);
-    background-size: cover;
-    margin: auto;
-    display: flex;
-    height: 75%;
-    aspect-ratio: 1/1;
+/* Lives positioning */
+#lives {
+	position: absolute;
+	right: 0;
+	margin: 10px;
 }
 
-#gameScreenGrid div {
-    height: 100%;
-    width: 100%;
+#character-display h5 {
+	position: absolute;
+	left: 0;
+	margin: 10px;
 }
 
-#gameScreenGrid div div{
-    width: 100%;
-    height: 20%;
+/* Character image*/
+#character-display img {
+	margin: auto;
 }
 
-#gameDialogueBox {
-    height: 20%;
+hr {
+	width: 90%;
 }
 
-#gameDialogueBox p {
-    height: 80%;
-    overflow: hidden;
-    font-size: 0.9vw;
+#progress-bars {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin: 20px auto 0px;
+	justify-content: center;
+}
+
+#progress-bars * {
+	display: flex;
+}
+
+#progress-bars div p {
+	width: 160px;
+	justify-content: flex-end;
+}
+
+#health,
+#xp {
+	height: 20px;
+	width: 65%;
+}
+
+/* Inventory and Weapon Section */
+#character-progress,
+#inventory-weapon {
+	/* background-color: pink; */
+	margin: 3%;
+	border: 3px solid black;
+	padding: 3%;
+}
+
+#inventory-weapon h4 {
+	text-align: center;
+	margin: 5px;
+}
+
+#inventory {
+	padding: 3%;
+}
+
+#weapon {
+	display: flex;
+}
+
+#weapon img {
+	width: 9vw;
+	object-fit: contain;
+	align-self: flex-start;
+	flex-wrap: wrap;
+}
+
+#weapon div {
+	flex: 1 1 auto;
+}
+
+#weapon #middleMain {
+	width: 50%;
+	background-color: aliceblue;
 }
 
 #rightSideMain {
-    width: 25%;
+	width: 25%;
+	background-color: aqua;
+}
+#middleMain {
+	width: 50%;
+	height: 100%;
+}
+
+#gameScreenGrid {
+	background-image: url(../images/village.png);
+	background-size: cover;
+	margin: auto;
+	display: flex;
+	height: 75%;
+	aspect-ratio: 1/1;
+}
+
+#gameScreenGrid div {
+	height: 100%;
+	width: 100%;
+}
+
+#gameScreenGrid div div {
+	width: 100%;
+	height: 20%;
+}
+
+#gameDialogueBox {
+	height: 20%;
+}
+
+#gameDialogueBox p {
+	height: 80%;
+	overflow: hidden;
+	font-size: 0.9vw;
+}
+
+#rightSideMain {
+	width: 25%;
 }
 
 #main-story-text {
-    background-color: blueviolet;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    margin: 30px;
-    height: 90%;
+	background-color: blueviolet;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 20px;
+	margin: 30px;
+	height: 90%;
 }
 
 #main-story-text p {
-    font-size: 0.9vw;
+	font-size: 0.9vw;
 }
 
 #main-story-btns {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    padding: 10px;
-    gap: 5px;
-    flex-wrap: wrap; 
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	padding: 10px;
+	gap: 5px;
+	flex-wrap: wrap;
 }
