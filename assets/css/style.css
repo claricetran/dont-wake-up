@@ -3,6 +3,8 @@ body {
 }
 
 
+
+
 #start-container {
     position: relative;
     border: 5px solid black;
@@ -53,4 +55,19 @@ body {
 #rightSideMain {
     width: 25%;
     background-color: aqua;
+}
+
+#main-story-text {
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 30px;
+    height: 90%;
+}
+
+#main-story-btns {
+    display: flex;
+    justify-content: space-between; 
 }
