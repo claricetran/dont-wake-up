@@ -1,0 +1,34 @@
+body {
+    font-family: 'Press Start 2P', cursive;
+}
+
+
+#start-container {
+    position: relative;
+    border: 5px solid black;
+    background-color: #000000;
+    height: 100vh;
+}
+
+#start-container h2 {
+    position: absolute;
+    color: white;
+    top: 30%;
+    left: 42%;
+}
+
+#start-container button{
+    position: absolute;
+    bottom: 50%;
+    left: 48%;
+}
+
+#start-img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 20px solid black;
+    width: 50%;
+    height: 99vh;
+
+}
