@@ -1,3 +1,7 @@
+// main game elements
+var mainGameBackBtn = document.getElementById("main-back-btn")
+
+// hangman elements
 var wordPool = ["elves", "human", "dwarf", "castle", "forest", "dragon", "princess", "witch", "troll"]
 var randomWord;
 var maskedWord = [];
@@ -6,9 +10,13 @@ var wordsFound = 0;
 
 var startMiniGameBtn = document.getElementById("hangmanStartBtn")
 var wordEl = document.getElementById("wordToFind")
+var wordFoundEl = document.getElementById("wordsFound")
+
+document.getElementById("yes").style.display = "none"
+document.getElementById("no").style.display = "none"
 
 startMiniGameBtn.addEventListener("click", function() {
-    document.getElementById("main-back-btn").setAttribute("class", "nes-btn is-disabled");
+    mainGameBackBtn.setAttribute("class", "nes-btn is-disabled");
     countdown();
     randomizer();
     wordEl.textContent = maskedWord.join(" ");
@@ -33,7 +41,7 @@ function letterInWord() {
             wordEl.textContent = maskedWord.join(" ");
             if(!maskedWord.includes("_")){
                 wordsFound++
-                document.getElementById("wordsFound").textContent = wordsFound + "/5 words";
+                wordFoundEl.textContent = wordsFound + "/5 words";
                 setTimeout(randomizer(), 1000)
                 return;
             } 
@@ -47,9 +55,6 @@ function keydownAction(event) {
     key = event.key.toLowerCase();
     return letterInWord();
 }
-
-document.getElementById("yes").style.display = "none"
-document.getElementById("no").style.display = "none"
 
 function countdown() {
     timeLeft = 30;
