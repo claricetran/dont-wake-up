@@ -1,3 +1,6 @@
+
+
+
 var wordPool = ["elves", "human", "dwarf", "castle", "forest", "dragon", "princess", "witch", "troll"]
 var randomWord;
 var maskedWord = [];

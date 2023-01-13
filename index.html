@@ -20,28 +20,32 @@
 </head>
 <body>
     <main>
-        <div id="start-container" class="hidden">
+        <div id="start-container" class="visible">
             <div class="title"><h2>Don't Wake Up</h2></div>
             <div id="start-img">
                 <img src="./assets/images/start-screen.png">
             </div>
-            <button type="button" class="nes-btn">Start</button>
+            <button type="button" class="nes-btn" id="start-btn">Start</button>
         </div>
         <!--Character Selection Container-->
-        <div id="character-select-container">
+        <div id="character-select-container" class="hidden">
+            <div id="character-select-nav">
+            <button type="button" class="nes-btn" id="back-btn">back</button>
             <h2>Don't Wake Up</h2>
+            <button type="button" class="nes-btn" id="scores-btn">Scores</button>
+            </div>
             <p>Choose a character</p>
             <!--Carousel Wrapper-->
             <div id="character-select-carousel">
-            <div id="character-slides" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#character-slides" data-slide-to="0" class="active"></li>
-                  <li data-target="#character-slides" data-slide-to="1"></li>
-                  <li data-target="#character-slides" data-slide-to="2"></li>
-                </ol>
+            <div id="character-slides" class="carousel slide" data-bs-interval="false">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#character-slides" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#character-slides" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#character-slides" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  </div>
                 <!--Slide Wrapper-->
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
+                  <div class="carousel-item active" id="witch">
                     <img class="d-block w-100" src="./assets/images/female-witch.png" alt="First slide">
                   </div>
                   <div class="carousel-item">
@@ -51,21 +55,22 @@
                     <img class="d-block w-100" src="./assets/images/fox-adventurer.png" alt="Third slide">
                   </div>
                 </div>
-                <a class="carousel-control-prev" href="#character-slides" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#character-slides" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
+                <button class="carousel-control-prev" type="button" data-bs-target="#character-slides" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#character-slides" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
               </div>
             </div>
+            <!--Name input and continue to main page-->
             <div class="nes-field" id="character-name-input">
                 <label for="character-name">Enter character name:</label>
                 <input type="text" id="character-name" class="nes-input">
             </div>
-            <button type="button" class="nes-btn" id="continue-btn">continue</button>
+            <button onclick="javascript: location.href='mainGame.html'" type="button" class="nes-btn" id="continue-btn">continue</button>
             <p>
                 &copy;
 				<a href="https://github.com/Mayalynn96">Maya</a>
@@ -74,5 +79,17 @@
             </p>
         </div>
     </main>
+    <!--Scripts-->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"
+    ></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+
+
+    <script src="./assets/js/indexscript.js"></script>
 </body>
 </html>
