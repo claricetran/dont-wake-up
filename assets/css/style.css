@@ -1,21 +1,22 @@
-#body {
-    background-color: rgb(82, 57, 94);
+#body,
+body {
+	background-color: rgb(82, 57, 94);
 }
 
 header {
-    height: 12vh;
+	height: 12vh;
 	text-align: center;
 	padding: 20px;
 }
 
 #saveBtn {
-    width: 32%;
-    font-size: 1.5vh;
+	width: 32%;
+	font-size: 1.5vh;
 }
 
 #restartBtn {
-    width: 50%;
-    font-size: 1.5vh;
+	width: 50%;
+	font-size: 1.5vh;
 }
 
 #start-container {
@@ -120,7 +121,7 @@ header {
 }
 
 hr {
-    border-color: #000000;
+	border-color: #000000;
 	width: 90%;
 }
 
@@ -193,12 +194,12 @@ hr {
 }
 
 #middleMain {
-    width: 50%;
+	width: 50%;
 	height: 100%;
 }
 
 #gameScreenGrid {
-    background-image: url(../images/village.png);
+	background-image: url(../images/village.png);
 	background-size: cover;
 	margin: auto;
 	display: flex;
@@ -212,51 +213,51 @@ hr {
 }
 
 #gameScreenGrid div div {
-    width: 100%;
+	width: 100%;
 	height: 20%;
 }
 
 #gameDialogueBox {
-    height: 20%;
-    background-color: blanchedalmond;
+	height: 20%;
+	background-color: blanchedalmond;
 }
 
 #gameDialogueBox p {
-    height: 80%;
+	height: 80%;
 	overflow: hidden;
 	font-size: 0.7vw;
-    margin: 0;
+	margin: 0;
 }
 
 #dialogueBtn {
-    height: 3vh;
-    opacity: 70%;
+	height: 3vh;
+	opacity: 70%;
 }
 
 #dialogueBtn:hover {
-    opacity: 100%;
+	opacity: 100%;
 }
 
 #dialogueBtn:active {
-    position: relative;
-    top: 5px;
+	position: relative;
+	top: 5px;
 }
 
 #dialogueBtnContainer {
-    display: flex;
-    justify-content: space-evenly;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 #dialogueBtnContainer button {
-    padding: 5px;
-    width: 20%;
-    font-size: 0.6vw;
-    background-color: rgba(105, 75, 112, 0.236);
+	padding: 5px;
+	width: 20%;
+	font-size: 0.6vw;
+	background-color: rgba(105, 75, 112, 0.236);
 }
 
 /* Right Side CSS*/
 #rightSideMain {
-    width: 25%;
+	width: 25%;
 }
 
 #main-story-text {
@@ -266,8 +267,8 @@ hr {
 	padding: 3%;
 	margin: 3%;
 	height: 96%;
-    border: 3px solid black;
-    background-color: rgba(187, 160, 193, 0.675);
+	border: 3px solid black;
+	background-color: rgba(187, 160, 193, 0.675);
 }
 
 #main-story-text p {
@@ -278,25 +279,29 @@ hr {
 	display: flex;
 	justify-content: space-evenly;
 	width: 100%;
-    height: 6vh;
-    margin-bottom: 5px;
+	height: 6vh;
+	margin-bottom: 5px;
 }
 
 #main-back-btn {
-    height: 100%;
-    width: 35%;
-    font-size: 0.75vw;
-    border-style: solid;
+	height: 100%;
+	width: 35%;
+	font-size: 0.75vw;
+	border-style: solid;
 }
 
 #main-continue-btn {
-    height: 100%;
-    width: 50%;
-    font-size: 0.75vw;
+	height: 100%;
+	width: 50%;
+	font-size: 0.75vw;
 }
 
 footer {
-    height: 8vh;
+	height: 8vh;
 	text-align: center;
 	padding: 20px;
+}
+main {
+	margin: 0 auto;
+	text-align: center;
 }
