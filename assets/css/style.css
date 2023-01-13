@@ -19,6 +19,7 @@ header {
 	font-size: 1.5vh;
 }
 
+/*Start Screen CSS */
 #start-container {
 	position: relative;
 	border: 5px solid black;
@@ -29,13 +30,13 @@ header {
 #start-container h2 {
 	position: absolute;
 	color: white;
-	top: 30%;
+	top: 20%;
 	left: 42%;
 }
 
 #start-container button {
 	position: absolute;
-	bottom: 50%;
+	bottom: 60%;
 	left: 48%;
 }
 
@@ -48,6 +49,61 @@ header {
 	height: 99vh;
 }
 
+/*Character Select CSS */
+#character-select-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(15, 15, 15);
+    background-image: url(../images/resting-forest.png);
+
+}
+
+#character-select-container h2 {
+    color: white;
+    margin-top: 1%;
+}
+
+#character-select-carousel {
+    margin: auto;
+    margin-top: 1%;
+    padding: 50px;
+    background-color: rgba(19, 35, 37, 0.801);
+    box-shadow: 0 0 10px 10px rgba(19, 35, 37, 0.801);
+    background-size: 100% 130%;
+    width: 40%;
+}
+
+.carousel-inner {
+    margin: auto;
+    height: 400px;
+    width: 400px;
+}
+
+.hidden {
+    display:none;
+}
+
+#character-select-container {
+    position: absolute;
+    text-align: center;
+}
+
+#character-name-input {
+    color: white;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 30%;
+}
+
+#character-select-container p {
+    color: white;
+    margin-top: 3%;
+}
+
+
+/* Main page CSS */
 #main-page-nav {
 	display: flex;
 	justify-content: space-between;
