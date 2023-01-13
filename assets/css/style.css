@@ -2,7 +2,7 @@ body {
 	font-family: "Press Start 2P", cursive;
 }
 
-<<<<<<< HEAD ======= header {
+header {
 	text-align: center;
 	padding: 20px;
 	background-color: rgb(82, 57, 94);
@@ -14,7 +14,7 @@ footer {
 	background-color: rgb(82, 57, 94);
 }
 
->>>>>>>stage #start-container {
+#start-container {
 	position: relative;
 	border: 5px solid black;
 	background-color: #000000;
@@ -166,17 +166,13 @@ hr {
 	background-color: aliceblue;
 }
 
-#rightSideMain {
-	width: 25%;
-	background-color: aqua;
-}
 #middleMain {
-	width: 50%;
+    width: 50%;
 	height: 100%;
 }
 
 #gameScreenGrid {
-	background-image: url(../images/village.png);
+    background-image: url(../images/village.png);
 	background-size: cover;
 	margin: auto;
 	display: flex;
@@ -190,32 +186,38 @@ hr {
 }
 
 #gameScreenGrid div div {
-	width: 100%;
+    width: 100%;
 	height: 20%;
 }
 
 #gameDialogueBox {
-	height: 20%;
+    height: 20%;
 }
 
 #gameDialogueBox p {
-	height: 80%;
+    height: 80%;
 	overflow: hidden;
 	font-size: 0.9vw;
 }
 
+/* Right Side CSS*/
 #rightSideMain {
-	width: 25%;
+    width: 25%;
+    background-color: blueviolet;
+}
+
+#rightSideMain {
+    width: 25%;
 }
 
 #main-story-text {
-	background-color: blueviolet;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: 20px;
-	margin: 30px;
-	height: 90%;
+	padding: 3%;
+	margin: 3%;
+	height: 96%;
+    border: 3px solid black;
 }
 
 #main-story-text p {
@@ -226,7 +228,19 @@ hr {
 	display: flex;
 	justify-content: space-evenly;
 	width: 100%;
-	padding: 10px;
-	gap: 5px;
-	flex-wrap: wrap;
+    height: 7%;
+    margin-bottom: 5px;
+}
+
+#main-back-btn {
+    height: 100%;
+    aspect-ratio: 5/3;
+    font-size: 0.75vw;
+    border-style: solid;
+}
+
+#main-continue-btn {
+    height: 100%;
+    aspect-ratio: 3/1;
+    font-size: 0.75vw;
 }
