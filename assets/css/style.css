@@ -3,12 +3,14 @@ body {
 }
 
 header {
+    height: 12vh;
 	text-align: center;
 	padding: 20px;
 	background-color: rgb(82, 57, 94);
 }
 
 footer {
+    height: 8vh;
 	text-align: center;
 	padding: 20px;
 	background-color: rgb(82, 57, 94);
