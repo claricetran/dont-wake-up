@@ -10,12 +10,12 @@
 		<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
 		<title>Don't Wake Up</title>
 	</head>
-	<body>
+	<body id="body">
 		<header>
 			<nav id="main-page-nav">
 				<div id="main-nav-btns">
-					<button type="button" class="nes-btn is-success">Save</button>
-					<button type="button" class="nes-btn is-error">Restart</button>
+					<button id="saveBtn" type="button" class="nes-btn is-success">Save</button>
+					<button id="restartBtn" type="button" class="nes-btn is-error">Restart</button>
 				</div>
 				<h2>Don't Wake Up</h2>
 				<p>volume controls</p>
@@ -26,12 +26,12 @@
 				<section id="character-progress">
 					<section id="character-display">
 						<!-- Set character limit for name (10) -->
-						<h4 id="name">Hikarumiji</h4>
+						<p id="name">Hikarumiji</p>
 						<section id="lives">
 							<!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
-							<i class="nes-icon is-small heart"></i
-							><i class="nes-icon is-small heart"></i
-							><i class="nes-icon is-small heart"></i>
+							<i class="nes-icon is-medium heart"></i
+							><i class="nes-icon is-medium heart"></i
+							><i class="nes-icon is-medium heart"></i>
 						</section>
 						<img
 							src="./assets/images/female-adventurer-example.png"
@@ -42,7 +42,7 @@
 					<!-- At certain HPs, the health bar will change from is-success(green) to is-warning(yellow) to is-error(red) -->
 					<section id="progress-bars">
 						<div>
-							<p>Health:</p>
+							<p class="stat-titles">Health:</p>
 							<progress
 								id="health"
 								class="nes-progress is-success"
@@ -50,15 +50,17 @@
 								max="100"></progress>
 						</div>
 						<div>
-							<p>XP:</p>
+							<p class="stat-titles">XP:</p>
 							<progress id="xp" class="nes-progress" value="100" max="100"></progress>
 						</div>
-
-						<p>Level: <span id="currLevel"></span></p>
+						<div>
+							<p class="stat-titles">Level:</p>
+							<p id="currLevel">1</p>
+						</div>
 					</section>
 				</section>
 				<section id="inventory-weapon">
-					<h4>Inventory</h4>
+					<p>Inventory</p>
 					<section id="inventory">
 						<img
 							class="nes-avatar is-large"
@@ -75,9 +77,89 @@
 							alt="Gravatar image example"
 							src="https://www.gravatar.com/avatar?s=15"
 							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
+						<img
+							class="nes-avatar is-large"
+							alt="Gravatar image example"
+							src="https://www.gravatar.com/avatar?s=15"
+							style="image-rendering: pixelated" />
 					</section>
 					<hr />
-					<h4>Weapon</h4>
+					<p>Weapon</p>
 					<section id="weapon">
 						<img
 							class="nes-avatar is-large"
@@ -133,9 +215,19 @@
 				<div id="gameDialogueBox" class="nes-balloon from-right">
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero
-						blanditiis. Sit voluptatum minima sequi asperiores?
+						blanditiis. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <img class="nes-pointer" id="dialogueBtn" src="./assets/images/dialogue-button.png" alt="Dialogue next button">
 					</p>
-					<button></button>
+					<div id="dialogueBtnContainer">
+						<label>
+							<input type="radio" class="nes-radio" name="answer" checked />
+							<span>Yes</span>
+						  </label>
+						  
+						  <label>
+							<input type="radio" class="nes-radio" name="answer" />
+							<span>No</span>
+						  </label>
+					</div>
 				</div>
 			</section>
 			<section id="rightSideMain">

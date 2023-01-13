@@ -1,19 +1,22 @@
+#body,
 body {
-	font-family: "Press Start 2P", cursive;
+	background-color: rgb(82, 57, 94);
 }
 
 header {
-    height: 12vh;
+	height: 12vh;
 	text-align: center;
 	padding: 20px;
-	background-color: rgb(82, 57, 94);
 }
 
-footer {
-    height: 8vh;
-	text-align: center;
-	padding: 20px;
-	background-color: rgb(82, 57, 94);
+#saveBtn {
+	width: 32%;
+	font-size: 1.5vh;
+}
+
+#restartBtn {
+	width: 50%;
+	font-size: 1.5vh;
 }
 
 /*Start Screen CSS */
@@ -115,19 +118,30 @@ footer {
 
 /* Character and Inventory Sections */
 #leftSideMain {
-	background-color: blueviolet;
 	width: 25%;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: space-between;
 }
 
 /*Character and progress section */
 #character-progress {
-	/* background-color: pink; */
 	margin: 3%;
 	border: 3px solid black;
+	height: fit-content;
+	max-height: 50%;
+}
+
+#character-progress * {
+	height: inherit;
+}
+/* borders */
+#character-progress,
+#inventory-weapon {
+	background-color: rgba(187, 160, 193, 0.675);
+	margin: 3%;
+	border: 3px solid black;
+	padding: 3%;
 }
 /* Character section */
 #character-display {
@@ -145,28 +159,32 @@ footer {
 #lives {
 	position: absolute;
 	right: 0;
-	margin: 10px;
 }
 
-#character-display h5 {
+#character-display p {
 	position: absolute;
 	left: 0;
 	margin: 10px;
+	font-size: 0.9vw;
 }
 
 /* Character image*/
 #character-display img {
-	margin: auto;
+	margin: 0 auto;
+	max-width: 100%;
+	max-height: 100%;
+	height: 20vh;
 }
 
 hr {
+	border-color: #000000;
 	width: 90%;
 }
 
 #progress-bars {
 	display: flex;
 	flex-direction: column;
-	width: 90%;
+	width: 95%;
 	margin: 20px auto 0px;
 	justify-content: center;
 }
@@ -175,37 +193,45 @@ hr {
 	display: flex;
 }
 
-#progress-bars div p {
-	width: 160px;
+#progress-bars .stat-titles {
+	font-size: 0.8vw;
+	width: 10vw;
 	justify-content: flex-end;
 }
 
 #health,
-#xp {
-	height: 20px;
-	width: 65%;
+#xp,
+#currLevel {
+	font-size: 0.8vw;
+	height: 1.5vh;
+	width: 75%;
 }
 
 /* Inventory and Weapon Section */
-#character-progress,
 #inventory-weapon {
-	/* background-color: pink; */
-	margin: 3%;
-	border: 3px solid black;
-	padding: 3%;
+	overflow: auto;
 }
 
-#inventory-weapon h4 {
+#inventory-weapon p {
 	text-align: center;
 	margin: 5px;
 }
 
 #inventory {
 	padding: 3%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+	align-items: center;
+}
+
+#inventory img {
+	margin: 5px;
 }
 
 #weapon {
 	display: flex;
+	justify-content: center;
 }
 
 #weapon img {
@@ -219,18 +245,17 @@ hr {
 	flex: 1 1 auto;
 }
 
-#weapon #middleMain {
+#middleMain {
 	width: 50%;
-	background-color: aliceblue;
 }
 
 #middleMain {
-    width: 50%;
+	width: 50%;
 	height: 100%;
 }
 
 #gameScreenGrid {
-    background-image: url(../images/village.png);
+	background-image: url(../images/village.png);
 	background-size: cover;
 	margin: auto;
 	display: flex;
@@ -244,28 +269,51 @@ hr {
 }
 
 #gameScreenGrid div div {
-    width: 100%;
+	width: 100%;
 	height: 20%;
 }
 
 #gameDialogueBox {
-    height: 20%;
+	height: 20%;
+	background-color: blanchedalmond;
 }
 
 #gameDialogueBox p {
-    height: 80%;
+	height: 80%;
 	overflow: hidden;
-	font-size: 0.9vw;
+	font-size: 0.7vw;
+	margin: 0;
+}
+
+#dialogueBtn {
+	height: 3vh;
+	opacity: 70%;
+}
+
+#dialogueBtn:hover {
+	opacity: 100%;
+}
+
+#dialogueBtn:active {
+	position: relative;
+	top: 5px;
+}
+
+#dialogueBtnContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#dialogueBtnContainer button {
+	padding: 5px;
+	width: 20%;
+	font-size: 0.6vw;
+	background-color: rgba(105, 75, 112, 0.236);
 }
 
 /* Right Side CSS*/
 #rightSideMain {
-    width: 25%;
-    background-color: blueviolet;
-}
-
-#rightSideMain {
-    width: 25%;
+	width: 25%;
 }
 
 #main-story-text {
@@ -275,7 +323,8 @@ hr {
 	padding: 3%;
 	margin: 3%;
 	height: 96%;
-    border: 3px solid black;
+	border: 3px solid black;
+	background-color: rgba(187, 160, 193, 0.675);
 }
 
 #main-story-text p {
@@ -286,19 +335,29 @@ hr {
 	display: flex;
 	justify-content: space-evenly;
 	width: 100%;
-    height: 7%;
-    margin-bottom: 5px;
+	height: 6vh;
+	margin-bottom: 5px;
 }
 
 #main-back-btn {
-    height: 100%;
-    aspect-ratio: 5/3;
-    font-size: 0.75vw;
-    border-style: solid;
+	height: 100%;
+	width: 35%;
+	font-size: 0.75vw;
+	border-style: solid;
 }
 
 #main-continue-btn {
-    height: 100%;
-    aspect-ratio: 3/1;
-    font-size: 0.75vw;
+	height: 100%;
+	width: 50%;
+	font-size: 0.75vw;
+}
+
+footer {
+	height: 8vh;
+	text-align: center;
+	padding: 20px;
+}
+main {
+	margin: 0 auto;
+	text-align: center;
 }
