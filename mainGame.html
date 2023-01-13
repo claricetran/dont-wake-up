@@ -10,12 +10,12 @@
 		<link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
 		<title>Don't Wake Up</title>
 	</head>
-	<body>
+	<body id="body">
 		<header>
 			<nav id="main-page-nav">
 				<div id="main-nav-btns">
-					<button type="button" class="nes-btn is-success">Save</button>
-					<button type="button" class="nes-btn is-error">Restart</button>
+					<button id="saveBtn" type="button" class="nes-btn is-success">Save</button>
+					<button id="restartBtn" type="button" class="nes-btn is-error">Restart</button>
 				</div>
 				<h2>Don't Wake Up</h2>
 				<!-- audio player change auto_play=truee in src. Src currently is lofi genshin impact playlist, but this can be changed if we find another sound we want.-->
@@ -36,9 +36,9 @@
 						<p id="name">Hikarumiji</p>
 						<section id="lives">
 							<!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
-							<i class="nes-icon is-small heart"></i
-							><i class="nes-icon is-small heart"></i
-							><i class="nes-icon is-small heart"></i>
+							<i class="nes-icon is-medium heart"></i
+							><i class="nes-icon is-medium heart"></i
+							><i class="nes-icon is-medium heart"></i>
 						</section>
 						<img
 							src="./assets/images/female-adventurer-example.png"
@@ -222,9 +222,19 @@
 				<div id="gameDialogueBox" class="nes-balloon from-right">
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero
-						blanditiis. Sit voluptatum minima sequi asperiores?
+						blanditiis. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <img class="nes-pointer" id="dialogueBtn" src="./assets/images/dialogue-button.png" alt="Dialogue next button">
 					</p>
-					<button></button>
+					<div id="dialogueBtnContainer">
+						<label>
+							<input type="radio" class="nes-radio" name="answer" checked />
+							<span>Yes</span>
+						  </label>
+						  
+						  <label>
+							<input type="radio" class="nes-radio" name="answer" />
+							<span>No</span>
+						  </label>
+					</div>
 				</div>
 			</section>
 			<section id="rightSideMain">
