@@ -188,6 +188,7 @@ hr {
 	flex: 1 1 auto;
 }
 
+/* gameplay section */
 #middleMain {
 	width: 50%;
 }
@@ -197,25 +198,38 @@ hr {
 	height: 100%;
 }
 
+/* game grid layout */
 #gameScreenGrid {
     background-image: url(../images/village.png);
 	background-size: cover;
 	margin: auto;
-	display: flex;
+	display: grid;
+    grid-template-columns: repeat(5, auto) ;
 	height: 75%;
 	aspect-ratio: 1/1;
 }
 
 #gameScreenGrid div {
 	height: 100%;
-	width: 100%;
-}
-
-#gameScreenGrid div div {
     width: 100%;
-	height: 20%;
+    object-fit: cover;
+    border: #000000 solid 1px;
 }
 
+#gameScreenGrid img {
+    width: 100%;
+    height: auto;
+}
+
+.isYellowOk {
+    color: rgb(203, 69, 194);
+}
+
+#picture {
+    grid-area: span 5;
+}
+
+/* dialogue box layout */
 #gameDialogueBox {
     height: 20%;
     background-color: blanchedalmond;
