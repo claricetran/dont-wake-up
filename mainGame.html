@@ -110,11 +110,18 @@
 		</section>
 		<section id="middleMain">
 			<div id="gameScreenGrid">
-				<div id="a1"></div>
+				<div id="a1">
+					<p id="wordsFound">0 / 5 words</p>
+				</div>
 				<div id="a2"></div>
 				<div id="a3"></div>
 				<div id="a4"></div>
-				<div id="a5"></div>
+				<div id="a5">
+					<div id="timer">
+						<p>time left</p>
+						<p id="timeLeft">60 seconds</p>
+					</div>
+				</div>
 				<div id="b1"></div>
 				<div id="b2"></div>
 				<div id="b3"></div>
@@ -122,7 +129,13 @@
 				<div id="b5"></div>
 				<div id="c1"></div>
 				<div id="c2"></div>
-				<div id="c3"></div>
+				<div id="c3">
+					<div id="miniGame">
+						<p>the Hangman game</p>
+						<p id="wordToFind"></p>
+						<button id="hangmanStartBtn">Start!</button>
+					</div>
+				</div>
 				<div id="c4"></div>
 				<div id="c5"></div>
 				<div id="d1"></div>
@@ -137,35 +150,32 @@
 				<div id="e5"></div>
 			</div>
 			<div id="gameDialogueBox" class="nes-balloon from-right">
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, libero
-					blanditiis. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <img class="nes-pointer"
-						id="dialogueBtn" src="./assets/images/dialogue-button.png" alt="Dialogue next button">
+				<p id="dialogueText">
+					Help us start the game by finding RPG related words as fast as possible!. 
 				</p>
-				<div id="dialogueBtnContainer">
-					<label>
+				<form id="dialogueBtnContainer">
+					<label id="yes">
 						<input type="radio" class="nes-radio" name="answer" checked />
 						<span>Yes</span>
 					</label>
 
-					<label>
+					<label id="no" >
 						<input type="radio" class="nes-radio" name="answer" />
 						<span>No</span>
 					</label>
-				</div>
+					<img class="nes-pointer"
+						id="dialogueBtn" src="./assets/images/dialogue-button.png" alt="Dialogue next button">
+				</form>
 			</div>
 		</section>
 		<section id="rightSideMain">
 			<div id="main-story-text">
 				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis deleniti
-					incidunt nulla amet voluptas tempora quasi, consectetur obcaecati hic. Ea
-					voluptatem inventore dolores eos officia, praesentium amet iste itaque
-					fugiat!
+					Find as many words as you can in the time given! If the timer runs out before getting at least 5 words you loose a life. Any extra words give you extra XP !
 				</p>
 				<div id="main-story-btns">
 					<button type="button" class="nes-btn" id="main-back-btn">Back</button>
-					<button type="button" class="nes-btn" id="main-continue-btn">
+					<button type="button" class="nes-btn is-disabled" id="main-continue-btn">
 						Continue
 					</button>
 				</div>
@@ -180,6 +190,7 @@
 			<a href="https://github.com/VisualViolet">Savannah</a>
 		</p>
 	</footer>
+	<script src="./assets/js/script.js"></script>
 </body>
 
 </html>

@@ -267,15 +267,43 @@ hr {
 }
 
 #gameScreenGrid div {
-	height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border: #000000 solid 1px;
+	/* height: 100%;
+    width: 100%; */
+    /* border: #000000 solid 1px; */
+    text-align: center;
 }
 
 #gameScreenGrid img {
     width: 100%;
     height: auto;
+}
+
+/* game layout */
+#miniGame {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    border: #000000 solid 1px;
+}
+
+#a1 {
+    border: #000000 solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    width: 100%;
+    font-size: 50%;
+    background-color: antiquewhite
+}
+
+#timer {
+    border: #000000 solid 1px;
+    font-size: 50%;
+    background-color: antiquewhite;
+    /* overflow-wrap: break-word; */
 }
 
 /* dialogue box layout */
@@ -316,6 +344,7 @@ hr {
 	font-size: 0.6vw;
 	background-color: rgba(105, 75, 112, 0.236);
 }
+
 
 /* Right Side CSS*/
 #rightSideMain {
