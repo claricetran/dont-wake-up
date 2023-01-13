@@ -1,19 +1,21 @@
-body {
-	font-family: "Press Start 2P", cursive;
+#body {
+    background-color: rgb(82, 57, 94);
 }
 
 header {
     height: 12vh;
 	text-align: center;
 	padding: 20px;
-	background-color: rgb(82, 57, 94);
 }
 
-footer {
-    height: 8vh;
-	text-align: center;
-	padding: 20px;
-	background-color: rgb(82, 57, 94);
+#saveBtn {
+    width: 32%;
+    font-size: 1.5vh;
+}
+
+#restartBtn {
+    width: 50%;
+    font-size: 1.5vh;
 }
 
 #start-container {
@@ -59,7 +61,6 @@ footer {
 
 /* Character and Inventory Sections */
 #leftSideMain {
-	background-color: blueviolet;
 	width: 25%;
 	display: flex;
 	flex-direction: column;
@@ -68,7 +69,6 @@ footer {
 
 /*Character and progress section */
 #character-progress {
-	/* background-color: pink; */
 	margin: 3%;
 	border: 3px solid black;
 	height: fit-content;
@@ -81,7 +81,7 @@ footer {
 /* borders */
 #character-progress,
 #inventory-weapon {
-	/* background-color: pink; */
+	background-color: rgba(187, 160, 193, 0.675);
 	margin: 3%;
 	border: 3px solid black;
 	padding: 3%;
@@ -120,6 +120,7 @@ footer {
 }
 
 hr {
+    border-color: #000000;
 	width: 90%;
 }
 
@@ -146,7 +147,7 @@ hr {
 #currLevel {
 	font-size: 0.8vw;
 	height: 1.5vh;
-	width: 65%;
+	width: 75%;
 }
 
 /* Inventory and Weapon Section */
@@ -217,20 +218,43 @@ hr {
 
 #gameDialogueBox {
     height: 20%;
+    background-color: blanchedalmond;
 }
 
 #gameDialogueBox p {
     height: 80%;
 	overflow: hidden;
-	font-size: 0.9vw;
+	font-size: 0.7vw;
+    margin: 0;
+}
+
+#dialogueBtn {
+    height: 3vh;
+    opacity: 70%;
+}
+
+#dialogueBtn:hover {
+    opacity: 100%;
+}
+
+#dialogueBtn:active {
+    position: relative;
+    top: 5px;
+}
+
+#dialogueBtnContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#dialogueBtnContainer button {
+    padding: 5px;
+    width: 20%;
+    font-size: 0.6vw;
+    background-color: rgba(105, 75, 112, 0.236);
 }
 
 /* Right Side CSS*/
-#rightSideMain {
-    width: 25%;
-    background-color: blueviolet;
-}
-
 #rightSideMain {
     width: 25%;
 }
@@ -243,6 +267,7 @@ hr {
 	margin: 3%;
 	height: 96%;
     border: 3px solid black;
+    background-color: rgba(187, 160, 193, 0.675);
 }
 
 #main-story-text p {
@@ -253,19 +278,25 @@ hr {
 	display: flex;
 	justify-content: space-evenly;
 	width: 100%;
-    height: 7%;
+    height: 6vh;
     margin-bottom: 5px;
 }
 
 #main-back-btn {
     height: 100%;
-    aspect-ratio: 5/3;
+    width: 35%;
     font-size: 0.75vw;
     border-style: solid;
 }
 
 #main-continue-btn {
     height: 100%;
-    aspect-ratio: 3/1;
+    width: 50%;
     font-size: 0.75vw;
+}
+
+footer {
+    height: 8vh;
+	text-align: center;
+	padding: 20px;
 }
