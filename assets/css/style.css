@@ -64,7 +64,6 @@ footer {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: space-between;
 }
 
 /*Character and progress section */
@@ -72,6 +71,20 @@ footer {
 	/* background-color: pink; */
 	margin: 3%;
 	border: 3px solid black;
+	height: fit-content;
+	max-height: 50%;
+}
+
+#character-progress * {
+	height: inherit;
+}
+/* borders */
+#character-progress,
+#inventory-weapon {
+	/* background-color: pink; */
+	margin: 3%;
+	border: 3px solid black;
+	padding: 3%;
 }
 /* Character section */
 #character-display {
@@ -89,18 +102,21 @@ footer {
 #lives {
 	position: absolute;
 	right: 0;
-	margin: 10px;
 }
 
-#character-display h5 {
+#character-display p {
 	position: absolute;
 	left: 0;
 	margin: 10px;
+	font-size: 0.9vw;
 }
 
 /* Character image*/
 #character-display img {
-	margin: auto;
+	margin: 0 auto;
+	max-width: 100%;
+	max-height: 100%;
+	height: 20vh;
 }
 
 hr {
@@ -110,7 +126,7 @@ hr {
 #progress-bars {
 	display: flex;
 	flex-direction: column;
-	width: 90%;
+	width: 95%;
 	margin: 20px auto 0px;
 	justify-content: center;
 }
@@ -119,37 +135,45 @@ hr {
 	display: flex;
 }
 
-#progress-bars div p {
-	width: 160px;
+#progress-bars .stat-titles {
+	font-size: 0.8vw;
+	width: 10vw;
 	justify-content: flex-end;
 }
 
 #health,
-#xp {
-	height: 20px;
+#xp,
+#currLevel {
+	font-size: 0.8vw;
+	height: 1.5vh;
 	width: 65%;
 }
 
 /* Inventory and Weapon Section */
-#character-progress,
 #inventory-weapon {
-	/* background-color: pink; */
-	margin: 3%;
-	border: 3px solid black;
-	padding: 3%;
+	overflow: auto;
 }
 
-#inventory-weapon h4 {
+#inventory-weapon p {
 	text-align: center;
 	margin: 5px;
 }
 
 #inventory {
 	padding: 3%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+	align-items: center;
+}
+
+#inventory img {
+	margin: 5px;
 }
 
 #weapon {
 	display: flex;
+	justify-content: center;
 }
 
 #weapon img {
@@ -163,9 +187,8 @@ hr {
 	flex: 1 1 auto;
 }
 
-#weapon #middleMain {
+#middleMain {
 	width: 50%;
-	background-color: aliceblue;
 }
 
 #middleMain {
