@@ -1,12 +1,17 @@
-
-// Retrieving values from local storage and displaying them in character display panel
+// Global variables and document selectors
 var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
 var playerImage = document.getElementById("adventurer");
 var playerName = document.getElementById("name");
 var playerLevel = document.getElementById("currLevel")
 var playerHealth = document.getElementById("health");
 var playerXP = document.getElementById("xp");
+var heartOne = document.getElementById("1");
+var heartTwo = document.getElementById("2");
+var heartThree = document.getElementById("3");
+var dialogueTextEl = document.getElementById("dialogueText");
 
+
+// Retrieving values from local storage and displaying them in character display panel
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
 var adventurerLevel = playerCharacter.level;
@@ -15,12 +20,29 @@ var adventurerDamage = playerCharacter.damage;
 var adventurerXP = playerCharacter.xp;
 var adventurerLives = playerCharacter.lives;
 
+
 playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
 playerHealth.setAttribute("value", adventurerHealth);
 playerHealth.setAttribute("max", 250);
 playerXP.setAttribute("value", adventurerXP);
+
+displayLives();
+
+// Display dialogue one letter at a time
+function printMessage(destination, message, speed){
+    var i = 0;
+    var interval = setInterval(function(){
+        destination.innerHTML += message.charAt(i);
+        i++;
+        if (i > message.length){
+            clearInterval(interval);
+        }
+    }, speed);
+}
+
+printMessage(dialogueTextEl, "Help us start the game by finding RPG related words as fast as possible!", 30);
 
 // Restart Button On-Click
 var resetBtn = document.getElementById("restartBtn");
@@ -31,10 +53,48 @@ function restartGame() {
     location.href = "./index.html"
 }
 
+// change heart classes based on lives
+function displayLives(){
+   if (adventurerLives == 2.5)
+   {
+    heartThree.classList.add("is-half");
+   }
+   else if (adventurerLives == 2)
+   {
+    heartThree.classList.add("is-transparent");
+   }
+   else if (adventurerLives == 1.5)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-half");
+   }
+   else if (adventurerLives == 1)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-transparent");
+   }
+   else if (adventurerLevel == 0.5)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-transparent");
+    heartOne.classList.add("is-half");
+   }
+   else if (adventurerLives == 0)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-transparent");
+    heartOne.classList.add("is-transparent");
+   }
+   else
+   {
+    // leave heart classes as they are
+   }
+}
+
 // main game elements
 var mainGameBackBtn = document.getElementById("main-back-btn")
 var mainGameContinueBtn = document.getElementById("main-continue-btn")
-var dialogueTextEl = document.getElementById("dialogueText")
+
 var yesEl = document.getElementById("yes")
 var noEl = document.getElementById("no")
 var dialogueNextBnt = document.getElementById("dialogueBtn")
