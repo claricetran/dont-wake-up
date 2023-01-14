@@ -16,9 +16,9 @@ var characterOptions = [{
     "health": 250,
     "damage": 8,
     "xp": 0,
-    "level": 0,
+    "level": 1,
     "lives": 3,
-    "src": "none"
+    "src": "assets/images/female-witch.png"
 },
 {
     "id": "adventurer",
@@ -26,7 +26,7 @@ var characterOptions = [{
     "health": 250,
     "damage": 15,
     "xp": 0,
-    "level": 0,
+    "level": 1,
     "lives": 3,
     "src": "assets/images/male-adventurer.png"
 },
@@ -36,12 +36,10 @@ var characterOptions = [{
     "health": 250,
     "damage": 10,
     "xp": 0,
-    "level": 0,
-    "lives": 3
+    "level": 1,
+    "lives": 3,
+    "src": "assets/images/fox-adventurer.png"
 }]
-
-
-
 
 // Navigate between start and character select containers on button click
 function showCharacterSelect(){
@@ -67,8 +65,7 @@ $('#character-slides').on('slide.bs.carousel', function onSlide (e) {
             {
                 playerCharacter = character;
                 localStorage.setItem("playerCharacter", JSON.stringify(playerCharacter))
-            }
-            
+            } 
         });
   })
 

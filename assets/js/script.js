@@ -1,4 +1,33 @@
+// Retrieving values from local storage and displaying them in character display panel
+var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
+var playerImage = document.getElementById("adventurer");
+var playerName = document.getElementById("name");
+var playerLevel = document.getElementById("currLevel")
+var playerHealth = document.getElementById("health");
+var playerXP = document.getElementById("xp");
 
+var adventurerImg = playerCharacter.src;
+var adventurerName = playerCharacter.characterName;
+var adventurerLevel = playerCharacter.level;
+var adventurerHealth = playerCharacter.health;
+var adventurerDamage = playerCharacter.damage;
+var adventurerXP = playerCharacter.xp;
+var adventurerLives = playerCharacter.lives;
+
+playerImage.setAttribute("src", adventurerImg);
+playerName.textContent = adventurerName;
+playerLevel.textContent = adventurerLevel;
+playerHealth.setAttribute("value", adventurerHealth);
+playerXP.setAttribute("value", adventurerXP);
+
+// Restart Button On-Click
+var resetBtn = document.getElementById("restartBtn");
+resetBtn.addEventListener("click", restartGame);
+
+function restartGame(){
+    localStorage.clear();
+    location.href = "./index.html"
+}
 
 
 var wordPool = ["elves", "human", "dwarf", "castle", "forest", "dragon", "princess", "witch", "troll"]
