@@ -1,4 +1,3 @@
-
 // Retrieving values from local storage and displaying them in character display panel
 var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
 var playerImage = document.getElementById("adventurer");
@@ -6,6 +5,9 @@ var playerName = document.getElementById("name");
 var playerLevel = document.getElementById("currLevel")
 var playerHealth = document.getElementById("health");
 var playerXP = document.getElementById("xp");
+var heartOne = document.getElementById("1");
+var heartTwo = document.getElementById("2");
+var heartThree = document.getElementById("3");
 
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
@@ -21,6 +23,8 @@ playerLevel.textContent = adventurerLevel;
 playerHealth.setAttribute("value", adventurerHealth);
 playerXP.setAttribute("value", adventurerXP);
 
+displayLives();
+
 // Restart Button On-Click
 var resetBtn = document.getElementById("restartBtn");
 resetBtn.addEventListener("click", restartGame);
@@ -29,6 +33,45 @@ function restartGame(){
     localStorage.clear();
     location.href = "./index.html"
 }
+
+// change heart classes based on lives
+function displayLives(){
+   if (adventurerLives == 2.5)
+   {
+    heartThree.classList.add("is-half");
+   }
+   else if (adventurerLives == 2)
+   {
+    heartThree.classList.add("is-transparent");
+   }
+   else if (adventurerLives == 1.5)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-half");
+   }
+   else if (adventurerLives == 1)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-transparent");
+   }
+   else if (adventurerLevel == 0.5)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-transparent");
+    heartOne.classList.add("is-half");
+   }
+   else if (adventurerLives == 0)
+   {
+    heartThree.classList.add("is-transparent");
+    heartTwo.classList.add("is-transparent");
+    heartOne.classList.add("is-transparent");
+   }
+   else
+   {
+    // leave heart classes as they are
+   }
+}
+
 
 // main game elements
 var mainGameBackBtn = document.getElementById("main-back-btn")
