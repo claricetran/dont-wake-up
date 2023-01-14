@@ -42,17 +42,21 @@
                     <button type="button" data-bs-target="#character-slides" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#character-slides" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#character-slides" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#character-slides" data-bs-slide-to="3" aria-label="Slide 4"></button>
                   </div>
                 <!--Slide Wrapper-->
                 <div class="carousel-inner">
-                  <div class="carousel-item active" id="witch">
-                    <img class="d-block w-100" src="./assets/images/female-witch.png" alt="First slide">
+                  <div class="carousel-item active" id="scroll">
+                    <p class=" d-block w-100">Use side buttons to select</p>
                   </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="./assets/images/male-adventurer.png" alt="Second slide">
+                  <div class="carousel-item" id="witch">
+                    <img class="d-block w-100" src="./assets/images/female-witch.png" alt="Second slide">
                   </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="./assets/images/fox-adventurer.png" alt="Third slide">
+                  <div class="carousel-item" id="adventurer">
+                    <img class="d-block w-100" src="./assets/images/male-adventurer.png" alt="Third slide">
+                  </div>
+                  <div class="carousel-item" id="fox">
+                    <img class="d-block w-100" src="./assets/images/fox-adventurer.png" alt="Fourth slide">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#character-slides" data-bs-slide="prev">
@@ -70,7 +74,7 @@
                 <label for="character-name">Enter character name:</label>
                 <input type="text" id="character-name" class="nes-input">
             </div>
-            <button onclick="javascript: location.href='mainGame.html'" type="button" class="nes-btn" id="continue-btn">continue</button>
+            <button type="button" class="nes-btn" id="continue-btn">continue</button>
             <p>
                 &copy;
 				<a href="https://github.com/Mayalynn96">Maya</a>
@@ -87,8 +91,6 @@
     ></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
-    <script type="text/javascript" src="./assets/js/script.js"></script>
-
 
     <script src="./assets/js/indexscript.js"></script>
 </body>
