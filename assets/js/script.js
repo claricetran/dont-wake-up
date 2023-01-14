@@ -37,6 +37,7 @@ var dialogueTextEl = document.getElementById("dialogueText")
 var yesEl = document.getElementById("yes")
 var noEl = document.getElementById("no")
 var dialogueNextBnt = document.getElementById("dialogueBtn")
+var gameGridEl = document.getElementById("gameScreenGrid")
 var divA1 = document.getElementById("a1")
 var divA5 = document.getElementById("a5")
 var divC3 = document.getElementById("c3")
@@ -44,7 +45,16 @@ var divC3 = document.getElementById("c3")
 yesEl.style.display = "none"
 noEl.style.display = "none"
 
+gameGridEl.style.backgroundImage = "url(./assets/images/backgrounds/cave.png)"
 
+function makeEnemyAppear(enemyFileName, divId){
+    var enemyEl = document.createElement("img")
+    enemyEl.src = "./assets/images/characters/" + enemyFileName + ".png"
+    var divContainer = document.getElementById(divId)
+    divContainer.appendChild(enemyEl)
+}
+
+// Hangman Game function
 function playHangman() {
     // hangman game elements
     var wordPool = ["elves", "human", "dwarf", "castle", "forest", "dragon", "princess", "witch", "troll"]
