@@ -8,6 +8,7 @@ var playerXP = document.getElementById("xp");
 var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
+var dialogueTextEl = document.getElementById("dialogueText")
 
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
@@ -24,6 +25,19 @@ playerHealth.setAttribute("value", adventurerHealth);
 playerXP.setAttribute("value", adventurerXP);
 
 displayLives();
+
+function printMessage(destination, message, speed){
+    var i = 0;
+    var interval = setInterval(function(){
+        destination.innerHTML += message.charAt(i);
+        i++;
+        if (i > message.length){
+            clearInterval(interval);
+        }
+    }, speed);
+}
+
+printMessage(dialogueTextEl, "Help us start the game by finding RPG related words as fast as possible!", 30);
 
 // Restart Button On-Click
 var resetBtn = document.getElementById("restartBtn");
@@ -76,7 +90,7 @@ function displayLives(){
 // main game elements
 var mainGameBackBtn = document.getElementById("main-back-btn")
 var mainGameContinueBtn = document.getElementById("main-continue-btn")
-var dialogueTextEl = document.getElementById("dialogueText")
+
 var yesEl = document.getElementById("yes")
 var noEl = document.getElementById("no")
 var dialogueNextBnt = document.getElementById("dialogueBtn")
