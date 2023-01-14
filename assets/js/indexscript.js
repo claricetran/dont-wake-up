@@ -3,11 +3,14 @@ var startBtn = document.getElementById("start-btn");
 var backBtn = document.getElementById("back-btn");
 var continueBtn = document.getElementById("continue-btn");
 var playerCharacter = {};
+var apiKey = "5f4d6a42bcd88a23a38f5dc2463373d6"
+var requestURL = "https://api.parser.name/?api_key=" + apiKey + "&endpoint=generate&country_code=IS&results=1";
 
 // Document selectors
 var startContainer = document.getElementById("start-container");
 var characterSelectContainer = document.getElementById("character-select-container");
 var characterNameInput = document.querySelector("#character-name");
+var randomizeBtn = document.getElementById("randomize-btn");
 
 // Character object array
 var characterOptions = [{
@@ -69,11 +72,25 @@ $('#character-slides').on('slide.bs.carousel', function onSlide (e) {
         });
   })
 
+// API call to generate random name
+function generateName(){
+    fetch(requestURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log();
+        var name = data.data[0].name.firstname.name;
+        characterNameInput.value = name;
+    })
+};
+
   // Event listeners
 startBtn.addEventListener("click", showCharacterSelect);
 backBtn.addEventListener("click", returnToTitle);
+randomizeBtn.addEventListener("click", generateName);
 continueBtn.addEventListener("click", function(){
     playerCharacter.characterName = characterNameInput.value;
     localStorage.setItem("playerCharacter", JSON.stringify(playerCharacter))
     location.href = "./mainGame.html"
-})
+});
