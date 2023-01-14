@@ -275,12 +275,15 @@ hr {
 #gameScreenGrid div {
 	/* height: 100%;
     width: 100%; */
-    /* border: #000000 solid 1px; */
+    position: relative;
+    border: #000000 solid 1px;
     text-align: center;
 }
 
 #gameScreenGrid img {
-    width: 100%;
+    position: absolute;
+    transform: translate(-50%, -70%);
+    width: 400%;
     height: auto;
 }
 
@@ -310,6 +313,20 @@ hr {
     font-size: 50%;
     background-color: antiquewhite;
     /* overflow-wrap: break-word; */
+}
+
+/* enemy health bar */
+#enemyHealthBar {
+    position: absolute;
+    height: 25%;
+    width: 200%;
+    transform: translate(-50%, -50%);
+}
+
+#combatMessage {
+    position: absolute;
+    transform: translate(-25%, -50%);
+    color: white;
 }
 
 /* dialogue box layout */

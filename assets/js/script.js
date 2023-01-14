@@ -19,13 +19,14 @@ playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
 playerHealth.setAttribute("value", adventurerHealth);
+playerHealth.setAttribute("max", 250);
 playerXP.setAttribute("value", adventurerXP);
 
 // Restart Button On-Click
 var resetBtn = document.getElementById("restartBtn");
 resetBtn.addEventListener("click", restartGame);
 
-function restartGame(){
+function restartGame() {
     localStorage.clear();
     location.href = "./index.html"
 }
@@ -39,6 +40,7 @@ var noEl = document.getElementById("no")
 var dialogueNextBnt = document.getElementById("dialogueBtn")
 var gameGridEl = document.getElementById("gameScreenGrid")
 var divA1 = document.getElementById("a1")
+var divA3 = document.getElementById("a3")
 var divA5 = document.getElementById("a5")
 var divC3 = document.getElementById("c3")
 
@@ -47,11 +49,61 @@ noEl.style.display = "none"
 
 gameGridEl.style.backgroundImage = "url(./assets/images/backgrounds/cave.png)"
 
-function makeEnemyAppear(enemyFileName, divId){
+function makeEnemyAppear(enemyFileName, divId, newFileName) {
     var enemyEl = document.createElement("img")
     enemyEl.src = "./assets/images/characters/" + enemyFileName + ".png"
+    enemyEl.setAttribute("id", "targetEnemy")
     var divContainer = document.getElementById(divId)
     divContainer.appendChild(enemyEl)
+    function changeImage() {
+        enemyEl.src = "./assets/images/characters/" + newFileName + ".png"
+    }
+    setTimeout(changeImage, 1000)
+}
+
+playCombat("troll-lord-appearing", "e3", "troll-lord")
+
+function playCombat(enemyAppear, position, enemyAfter) {
+    makeEnemyAppear(enemyAppear, position, enemyAfter)
+    
+    var endMessageEl = document.createElement("h2")
+    endMessageEl.setAttribute("id", "combatMessage")
+
+
+    
+    function startCombat() {
+        var enemyHealth = 20
+        var enemyHealthProgress = document.createElement("progress")
+        enemyHealthProgress.setAttribute("class", "nes-progress is-success enemyHealthBar")
+        enemyHealthProgress.setAttribute("id", "enemyHealthBar")
+        enemyHealthProgress.setAttribute("value", enemyHealth)
+        enemyHealthProgress.setAttribute("max", enemyHealth)
+        divC3.appendChild(enemyHealthProgress)
+        var targetEnemyEl = document.getElementById("targetEnemy")
+        targetEnemyEl.addEventListener("click", function () {
+            enemyHealth--
+            enemyHealthProgress.setAttribute("value", enemyHealth)
+            console.log(enemyHealth)
+            if(enemyHealth <= 0){
+                enemyHealthProgress.remove()
+                targetEnemyEl.remove()
+                endMessageEl.textContent = "Victory!"
+                divC3.appendChild(endMessageEl)
+            }
+        })
+        timerInterval = setInterval(function () {
+            if(enemyHealth > 0) {
+                adventurerHealth = adventurerHealth - 20
+                playerHealth.setAttribute("value", adventurerHealth);
+            }
+            if (adventurerHealth <= 0 || enemyHealth <= 0) {
+                clearInterval(timerInterval)
+                enemyHealthProgress.remove()
+                endMessageEl.textContent = "Defeated"
+                divC3.appendChild(endMessageEl)
+            }
+        }, 1000)
+    }
 }
 
 // Hangman Game function
