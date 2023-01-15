@@ -9,6 +9,7 @@ var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
 var dialogueTextEl = document.getElementById("dialogueText");
+var musicEl = document.getElementById("music");
 
 
 // Retrieving values from local storage and displaying them in character display panel
@@ -28,6 +29,10 @@ playerHealth.setAttribute("value", adventurerHealth);
 playerXP.setAttribute("value", adventurerXP);
 
 displayLives();
+
+// music controls
+musicEl.volume = 0.1;
+musicEl.loop = true;
 
 // Display dialogue one letter at a time
 function printMessage(destination, message, speed){
