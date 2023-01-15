@@ -16,16 +16,47 @@
 			<h3 class="onWin hide">Congratulations!</h3>
 		</header>
 		<main id="endPageMain">
-			<p class="onWin hide">You made it through the night and completed the story!</p>
+			<div id="endpage-content">
+			<p class="onWin hide credit-hide">You made it through the night and completed the story!</p>
 			<!-- Image to be replaced by someone that woke up in the middle of the night. -->
-			<img class="onLoss hide" src="https://placekitten.com/400/400" alt="disturbed sleep" />
+			<img class="onLoss hide" id="end-game-img" src="./assets/images/dream-over.png" alt="disturbed sleep" />
 			<p class="onLoss hide">You woke up before completing the story...</p>
+			<div class="quote-container">
 			<p id="quote" class="hide"></p>
 			<p id="author"></p>
+			</div>
+			</div>
+
+			<div class="hidden" id="credits-container">
+				<div id="credits">
+					<p>Developers:<br>
+						Maya Cohen, Clarice Tran, and Savannah Miller<br><br>
+						Created For:<br>
+						University of Washington Coding Bootcamp Project 1<br><br>
+						Music By:<br>
+						PGN Music<br><br>
+						Background Art:<br>
+						Midjourney AI<br><br>
+						Character Art:<br>
+						Reroll<br><br>
+						API's:<br>
+						Quotes API by API Ninja's<br>
+						Name Parser API by Ninble BV<br><br>
+						Framework By:<br>
+						NES CSS <i class="nes-logo"></i><br><br>
+						Engergy Provided By:<br>
+						Coffee☕ <br><br>
+						Special Thanks:<br>
+						To our partners and their support!<br>
+						Google<br>
+						Lo-fi Study Music🎵
+					</p>
+				</div>
+				</div>
 
 			<button class="onLoss hide newGame">Go Back to Sleep 🛌</button>
 			<button class="onLoss hide scores">Scores 💯</button>
-			<button class="onLoss hide">Roll Credits 🎥</button>
+			<button class="onLoss hide" id="credits-btn">Roll Credits 🎥</button>
 			<h3 class="hide">Your Final Score is</h3>
 			<h2 id="finalScore" class="hide">250</h2>
 			<!-- Skipped entering name since assumed it would be the name the user put in at the beginning. Do we want to auto submit score and just have roll credits and scores? -->
