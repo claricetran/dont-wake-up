@@ -274,15 +274,18 @@ hr {
 }
 
 #gameScreenGrid div {
-	/* height: 100%;
-    width: 100%; */
-	/* border: #000000 solid 1px; */
-	text-align: center;
+    position: relative;
+    /* border: #000000 solid 1px; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 #gameScreenGrid img {
-	width: 100%;
-	height: auto;
+    position: absolute;
+    align-self: flex-end;
+    width: 400%;
+    height: auto;
 }
 
 /* game layout */
@@ -313,6 +316,29 @@ hr {
 	/* overflow-wrap: break-word; */
 }
 
+/* Combat mini games */
+#enemyHealthBar {
+    position: absolute;
+    height: 25%;
+    width: 200%;
+}
+
+#combatMessage {
+    position: absolute;
+    text-align: center;
+    align-self: flex-start;
+    color: white;
+}
+
+.fade-out-image { 
+    animation: fadeOut 5s;
+ }
+
+@keyframes fadeOut {
+    100% { opacity: 0; }
+    0% { opacity: 1; }
+}
+
 /* dialogue box layout */
 #gameDialogueBox {
 	height: 20%;
@@ -328,16 +354,22 @@ hr {
 	margin: 0;
 }
 
-#dialogueBtn {
+#dialogueBtnContainer button{
+    position: absolute;
+    bottom: 5%;
+
+}
+
+#dialogueBtnContainer img {
 	height: 3vh;
 	opacity: 70%;
 }
 
-#dialogueBtn:hover {
+#dialogueBtnContainer img:hover {
 	opacity: 100%;
 }
 
-#dialogueBtn:active {
+#dialogueBtnContainer img:active {
 	position: relative;
 	top: 5px;
 }
@@ -345,13 +377,6 @@ hr {
 #dialogueBtnContainer {
 	display: flex;
 	justify-content: space-evenly;
-}
-
-#dialogueBtnContainer button {
-	padding: 5px;
-	width: 20%;
-	font-size: 0.6vw;
-	background-color: rgba(105, 75, 112, 0.236);
 }
 
 /* Right Side CSS*/
@@ -370,7 +395,7 @@ hr {
 	background-color: rgba(187, 160, 193, 0.675);
 }
 
-#main-story-text p {
+#mainStoryText {
 	font-size: 0.9vw;
 }
 

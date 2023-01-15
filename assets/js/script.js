@@ -8,7 +8,8 @@ var playerXP = document.getElementById("xp");
 var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
-var dialogueTextEl = document.getElementById("dialogueText");
+
+
 var musicEl = document.getElementById("music");
 // Retrieving values from local storage and displaying them in character display panel
 var adventurerImg = playerCharacter.src;
@@ -23,6 +24,7 @@ playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
 playerHealth.setAttribute("value", adventurerHealth);
+playerHealth.setAttribute("max", 250);
 playerXP.setAttribute("value", adventurerXP);
 
 displayLives();
@@ -80,13 +82,25 @@ function displayLives() {
 // main game elements
 var mainGameBackBtn = document.getElementById("main-back-btn");
 var mainGameContinueBtn = document.getElementById("main-continue-btn");
+var dialogueTextEl = document.getElementById("dialogueText");
+var storyTextPEl = document.getElementById("storyText");
+var dialogueBtnContainer = document.getElementById("dialogueBtnContainer")
 var yesEl = document.getElementById("yes");
 var noEl = document.getElementById("no");
 var dialogueNextBtn = document.getElementById("dialogueBtn");
+var gameGridEl = document.getElementById("gameScreenGrid")
 var divA1 = document.getElementById("a1");
+var divA3 = document.getElementById("a3")
 var divA5 = document.getElementById("a5");
+var divB3 = document.getElementById("b3")
 var divC3 = document.getElementById("c3");
-var storyTextPEl = document.getElementById("storyText");
+
+
+// Display dialogue one letter at a time
+var allowNextDialogue = false;
+var allowNextGame = true;
+var gameIsPlaying = false;
+
 
 yesEl.style.display = "none";
 noEl.style.display = "none";
@@ -104,6 +118,130 @@ var dialogIndex;
 // var continueButtonState = false;
 // var dialogButtonState = false;
 
+function printMessage(destination, message, speed) {
+    destination.innerHTML = ""
+    var i = 0;
+    var interval = setInterval(function () {
+        destination.innerHTML += message.charAt(i);
+        allowNextDialogue = false
+        i++;
+        if (i >= message.length) {
+            allowNextDialogue = true
+            clearInterval(interval);
+        }
+    }, speed);
+
+}
+
+// playCombat()
+
+function playCombat() {
+    gameIsPlaying = true
+    gameGridEl.style.backgroundImage = "url(./assets/images/backgrounds/cave.png)"
+    printMessage(storyTextPEl, "You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel", 30);
+    mainGameContinueBtn.setAttribute("class", "nes-btn");
+
+    mainGameContinueBtn.addEventListener("click", function () {
+        if (allowNextDialogue && allowNextGame && gameIsPlaying) {
+            mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
+            startCombatGame("troll-lord-appearing", "e3", "troll-lord", "The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win.", "Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him! Click on the enemy to deal damage once the game starts.")
+            allowNextGame = false;
+        }
+    })
+
+}
+
+function makeEnemyAppear(enemyFileName, divId, newFileName) {
+    
+    var enemyEl = document.createElement("img")
+    enemyEl.src = "./assets/images/characters/" + enemyFileName + ".png"
+
+    var divContainer = document.getElementById(divId)
+    divContainer.appendChild(enemyEl)
+
+    var nextEnemyEl = document.createElement("img")
+    nextEnemyEl.src = "./assets/images/characters/" + newFileName + ".png"
+    nextEnemyEl.setAttribute("id", "targetEnemy")
+    divContainer.appendChild(nextEnemyEl)
+    enemyEl.setAttribute("class", "fade-out-image")
+    function changeImage() {
+        enemyEl.remove()
+    }
+    setTimeout(changeImage, 4500)
+}
+
+function startCombatGame(enemyAppear, position, enemyAfter, dialogue, story) {
+    var startBtn = document.createElement("button")
+    startBtn.setAttribute("class", "nes-btn")
+    startBtn.textContent = "Fight!"
+    dialogueBtnContainer.appendChild(startBtn)
+    makeEnemyAppear(enemyAppear, position, enemyAfter)
+    printMessage(dialogueTextEl, dialogue, 30)
+    printMessage(storyTextPEl, story, 30)
+    var messageEl = document.createElement("h2")
+    messageEl.setAttribute("id", "combatMessage")
+    allowNextDialogue = false;
+    startBtn.addEventListener("click", function(event) {
+        event.preventDefault()
+        if (allowNextDialogue) {
+            startBtn.remove()
+            allowNextGame = true
+            countdownTime = 4
+            messageEl.textContent = "Ready?"
+            divB3.appendChild(messageEl)
+            countdown = setInterval(function () {
+                countdownTime--
+                messageEl.textContent = countdownTime
+                if (countdownTime < 0) {
+                    clearInterval(countdown)
+                    messageEl.textContent = "Attack!"
+                }
+            }, 1000)
+            setTimeout(startCombat, 4000)
+        }
+    })
+
+    function startCombat() {
+        messageEl.remove()
+        var enemyHealth = 20
+        var enemyHealthProgress = document.createElement("progress")
+        enemyHealthProgress.setAttribute("class", "nes-progress is-success")
+        enemyHealthProgress.setAttribute("id", "enemyHealthBar")
+        enemyHealthProgress.setAttribute("value", enemyHealth)
+        enemyHealthProgress.setAttribute("max", enemyHealth)
+        divC3.appendChild(enemyHealthProgress)
+        var targetEnemyEl = document.getElementById("targetEnemy")
+        targetEnemyEl.addEventListener("click", function () {
+            enemyHealth--
+            enemyHealthProgress.setAttribute("value", enemyHealth)
+            console.log(enemyHealth)
+        })
+        timerInterval = setInterval(function () {
+            if (enemyHealth > 0) {
+                adventurerHealth = adventurerHealth - 20
+                playerHealth.setAttribute("value", adventurerHealth);
+            } else {
+                clearInterval(timerInterval)
+                enemyHealthProgress.remove()
+                targetEnemyEl.remove()
+                messageEl.textContent = "Victory!"
+                printMessage(dialogueTextEl, "Aaargh...", 30)
+                printMessage(storyTextPEl, "You defeated the enemy and are able to pass!", 30)
+                mainGameContinueBtn.setAttribute("class", "nes-btn")
+                divB3.appendChild(messageEl)
+                gameIsPlaying = false
+            }
+            if (adventurerHealth <= 0) {
+                clearInterval(timerInterval)
+                enemyHealthProgress.remove()
+                messageEl.textContent = "Defeated"
+                divB3.appendChild(messageEl)
+            }
+        }, 1000)
+    }
+}
+
+// Hangman Game function
 function playHangman() {
 	// hangman game elements
 	var wordPool = [
@@ -331,84 +469,88 @@ function loadDialog() {
 	// loadStory();
 }
 
-mainGameContinueBtn.addEventListener("click", () => {
-	sceneIndex++;
-	console.log(
-		"update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
-	);
-	console.log(sceneIndex + 1 == taleArray[taleTracker][1].story.length);
-	if (sceneIndex < taleArray[taleTracker][1].story.length) {
-		clearStory();
-		loadScene();
-	} else if (sceneIndex + 1 == taleArray[taleTracker][1].story.length) {
-		enableContinue(false);
-		clearDialog();
-		loadDialog();
-		showDialogButton(true);
-	}
-});
+if(!gameIsPlaying){
+    mainGameContinueBtn.addEventListener("click", () => {
+        sceneIndex++;
+        console.log(
+            "update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
+        );
+        console.log(sceneIndex + 1 == taleArray[taleTracker][1].story.length);
+        if (sceneIndex < taleArray[taleTracker][1].story.length) {
+            clearStory();
+            loadScene();
+        } else if (sceneIndex + 1 == taleArray[taleTracker][1].story.length) {
+            enableContinue(false);
+            clearDialog();
+            loadDialog();
+            showDialogButton(true);
+        }
+    });
+
+    dialogueNextBtn.addEventListener("click", () => {
+        console.log("dialog button clicked");
+        dialogIndex++;
+        clearDialog();
+        // // taleArray[taleTracker][1].dialog.length;
+        if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
+            console.log(
+                "update taleTracker: " +
+                    taleTracker +
+                    " storyI: " +
+                    sceneIndex +
+                    " dialogI: " +
+                    dialogIndex
+            );
+            printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[dialogIndex], 30);
+            if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
+                showDialogButton(false);
+                taleTracker++;
+                sceneIndex = 0;
+                dialogIndex = 0;
+                console.log(
+                    "next scene should be enabled. taleTracker: " +
+                        taleTracker +
+                        " storyI: " +
+                        sceneIndex +
+                        " dialogI: " +
+                        dialogIndex
+                );
+                setTimeout(() => {
+                    enableContinue(true);
+                    clearStory();
+                    loadScene();
+                }, 3000);
+                // 		showDialogButton(false);
+                // 		taleTracker++;
+                // 		sceneIndex = 0;
+                // 		clearStory();
+                // 		// loadStory();
+            }
+        } else {
+            setTimeout(() => {
+                showDialogButton(false);
+                taleTracker++;
+                sceneIndex = 0;
+                dialogIndex = 0;
+                console.log(
+                    "next scene should be enabled. taleTracker: " +
+                        taleTracker +
+                        " storyI: " +
+                        sceneIndex +
+                        " dialogI: " +
+                        dialogIndex
+                );
+                enableContinue(true);
+                clearStory();
+                loadScene();
+            }, 3000);
+        }
+    });
+}
 
 // Load the dialog to the dialog section
 
-dialogueNextBtn.addEventListener("click", () => {
-	console.log("dialog button clicked");
-	dialogIndex++;
-	clearDialog();
-	// // taleArray[taleTracker][1].dialog.length;
-	if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
-		console.log(
-			"update taleTracker: " +
-				taleTracker +
-				" storyI: " +
-				sceneIndex +
-				" dialogI: " +
-				dialogIndex
-		);
-		printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[dialogIndex], 30);
-		if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
-			showDialogButton(false);
-			taleTracker++;
-			sceneIndex = 0;
-			dialogIndex = 0;
-			console.log(
-				"next scene should be enabled. taleTracker: " +
-					taleTracker +
-					" storyI: " +
-					sceneIndex +
-					" dialogI: " +
-					dialogIndex
-			);
-			setTimeout(() => {
-				enableContinue(true);
-				clearStory();
-				loadScene();
-			}, 3000);
-			// 		showDialogButton(false);
-			// 		taleTracker++;
-			// 		sceneIndex = 0;
-			// 		clearStory();
-			// 		// loadStory();
-		}
-	} else {
-		setTimeout(() => {
-			showDialogButton(false);
-			taleTracker++;
-			sceneIndex = 0;
-			dialogIndex = 0;
-			console.log(
-				"next scene should be enabled. taleTracker: " +
-					taleTracker +
-					" storyI: " +
-					sceneIndex +
-					" dialogI: " +
-					dialogIndex
-			);
-			enableContinue(true);
-			clearStory();
-			loadScene();
-		}, 3000);
-	}
-});
+
 
 // Hides or shows the dialog button depending on if it is true/false
 function showDialogButton(state) {
