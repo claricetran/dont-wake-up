@@ -4,7 +4,7 @@
 		"story": [
 			"You open your eyes to a forest. Tall trees surround you and you hear a little scuffle behind you. You turn around to see a small, chubby pig."
 		],
-		"dialog": ["Hey Oinks!", "*oink oink*"],
+		"dialog": ["Hey Mr. Oinks!", "*oink oink*"],
 		"next": "scene-1-1"
 	},
 	"scene-1-1": {

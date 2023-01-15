@@ -1,7 +1,79 @@
+// Retrieving values from local storage and displaying them in character display panel
+var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
+var playerImage = document.getElementById("adventurer");
+var playerName = document.getElementById("name");
+var playerLevel = document.getElementById("currLevel");
+var playerHealth = document.getElementById("health");
+var playerXP = document.getElementById("xp");
+var heartOne = document.getElementById("1");
+var heartTwo = document.getElementById("2");
+var heartThree = document.getElementById("3");
+var dialogueTextEl = document.getElementById("dialogueText");
+
+var adventurerImg = playerCharacter.src;
+var adventurerName = playerCharacter.characterName;
+var adventurerLevel = playerCharacter.level;
+var adventurerHealth = playerCharacter.health;
+var adventurerDamage = playerCharacter.damage;
+var adventurerXP = playerCharacter.xp;
+var adventurerLives = playerCharacter.lives;
+
+playerImage.setAttribute("src", adventurerImg);
+playerName.textContent = adventurerName;
+playerLevel.textContent = adventurerLevel;
+playerHealth.setAttribute("value", adventurerHealth);
+playerXP.setAttribute("value", adventurerXP);
+
+displayLives();
+
+function printMessage(destination, message, speed) {
+	var i = 0;
+	var interval = setInterval(function () {
+		destination.innerHTML += message.charAt(i);
+		i++;
+		if (i > message.length) {
+			clearInterval(interval);
+		}
+	}, speed);
+}
+
+// Restart Button On-Click
+var resetBtn = document.getElementById("restartBtn");
+resetBtn.addEventListener("click", restartGame);
+
+function restartGame() {
+	localStorage.clear();
+	location.href = "./index.html";
+}
+
+// change heart classes based on lives
+function displayLives() {
+	if (adventurerLives == 2.5) {
+		heartThree.classList.add("is-half");
+	} else if (adventurerLives == 2) {
+		heartThree.classList.add("is-transparent");
+	} else if (adventurerLives == 1.5) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-half");
+	} else if (adventurerLives == 1) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-transparent");
+	} else if (adventurerLevel == 0.5) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-transparent");
+		heartOne.classList.add("is-half");
+	} else if (adventurerLives == 0) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-transparent");
+		heartOne.classList.add("is-transparent");
+	} else {
+		// leave heart classes as they are
+	}
+}
+
 // main game elements
 var mainGameBackBtn = document.getElementById("main-back-btn");
 var mainGameContinueBtn = document.getElementById("main-continue-btn");
-var dialogueTextEl = document.getElementById("dialogueText");
 var yesEl = document.getElementById("yes");
 var noEl = document.getElementById("no");
 var dialogueNextBtn = document.getElementById("dialogueBtn");
@@ -22,6 +94,9 @@ var taleArray;
 var taleTracker;
 var sceneIndex;
 var dialogIndex;
+
+// var continueButtonState = false;
+// var dialogButtonState = false;
 
 function playHangman() {
 	// hangman game elements
@@ -181,59 +256,157 @@ function clearStory() {
 	storyTextPEl.innerText = "";
 }
 
-// Load the story to the story section
-function loadStory() {
-	var scene = taleArray[taleTracker][1];
-	if (scene.story != null && scene.story.length > 0) {
-		console.log(scene.story[sceneIndex]);
-		storyTextPEl.textContent = scene.story[sceneIndex];
-		if (sceneIndex < scene.story.length) {
-			enableContinue(true);
-
-			mainGameContinueBtn.addEventListener("click", () => {
-				sceneIndex++;
-				console.log(sceneIndex + ", " + scene.story.length);
-				storyTextPEl.textContent = scene.story[sceneIndex];
-				if (sceneIndex > scene.story.length) {
-					console.log("reaches to disable");
-					enableContinue(false);
-				}
-			});
-		}
+//checks the scene for story
+function hasStory() {
+	if (taleArray[taleTracker][1].story !== undefined) {
+		return true;
+	} else {
+		return false;
 	}
-	dialogIndex = 0;
-	loadDialog();
 }
 
-mainGameContinueBtn.addEventListener("click", () => {});
+//checks the scene for a dialog
+function hasDialog() {
+	if (taleArray[taleTracker][1].dialog !== undefined) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function hasOptions() {
+	if (taleArray[taleTracker][1].options !== undefined) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// checks the scene for a game
+function hasGame() {
+	if (taleArray[taleTracker][1].game !== undefined) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// Load the story to the story section
+function loadScene() {
+	printMessage(storyTextPEl, taleArray[taleTracker][1].story[sceneIndex], 30);
+	if (sceneIndex == taleArray[taleTracker][1].story.length - 1) {
+		enableContinue(false);
+		clearDialog();
+		setTimeout(() => {
+			loadDialog();
+			showDialogButton(true);
+		}, 3000);
+	}
+}
+
+function loadDialog() {
+	printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[dialogIndex], 30);
+
+	// if (taleArray[taleTracker][1].dialog != null && taleArray[taleTracker][1].dialog.length > 0) {
+	// 	showDialogButton(true);
+	// 	if (taleArray[taleTracker][1].dialog.length == 1) {
+	// 		showDialogButton(false);
+	// 		enableContinue(true);
+	// 	}
+	// if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
+	// 	showDialogButton(true);
+	// } else {
+	// 	showDialogButton(false);
+	// }
+	// }
+	// taleTracker++;
+	// sceneIndex = 0;
+	// add return boolean to let load/continue functions know when to renable continue button.
+	// loadStory();
+}
+
+mainGameContinueBtn.addEventListener("click", () => {
+	sceneIndex++;
+	console.log(
+		"update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
+	);
+	console.log(sceneIndex + 1 == taleArray[taleTracker][1].story.length);
+	if (sceneIndex < taleArray[taleTracker][1].story.length) {
+		clearStory();
+		loadScene();
+	} else if (sceneIndex + 1 == taleArray[taleTracker][1].story.length) {
+		enableContinue(false);
+		clearDialog();
+		loadDialog();
+		showDialogButton(true);
+	}
+});
 
 // Load the dialog to the dialog section
-function loadDialog() {
-	var scene = taleArray[taleTracker][1];
-	if (scene.dialog != null && scene.dialog.length > 0) {
-		console.log(scene.dialog[dialogIndex]);
-		dialogueTextEl.textContent = scene.dialog[dialogIndex];
-		if (dialogIndex < scene.dialog.length) {
-			showDialogButton(true);
-			dialogueNextBtn.addEventListener("click", function eventHandler() {
-				dialogIndex++;
-				console.log(dialogIndex + ", " + scene.dialog.length);
-				dialogueTextEl.textContent = scene.dialog[dialogIndex];
-				if (dialogIndex > scene.dialog.length) {
-					console.log("reaches to disable");
-					showDialogButton(false);
-				}
-			});
+
+dialogueNextBtn.addEventListener("click", () => {
+	console.log("dialog button clicked");
+	dialogIndex++;
+	clearDialog();
+	// // taleArray[taleTracker][1].dialog.length;
+	if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
+		console.log(
+			"update taleTracker: " +
+				taleTracker +
+				" storyI: " +
+				sceneIndex +
+				" dialogI: " +
+				dialogIndex
+		);
+		printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[dialogIndex], 30);
+		if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
+			showDialogButton(false);
+			taleTracker++;
+			sceneIndex = 0;
+			dialogIndex = 0;
+			console.log(
+				"next scene should be enabled. taleTracker: " +
+					taleTracker +
+					" storyI: " +
+					sceneIndex +
+					" dialogI: " +
+					dialogIndex
+			);
+			setTimeout(() => {
+				enableContinue(true);
+				clearStory();
+				loadScene();
+			}, 3000);
+			// 		showDialogButton(false);
+			// 		taleTracker++;
+			// 		sceneIndex = 0;
+			// 		clearStory();
+			// 		// loadStory();
 		}
+	} else {
+		setTimeout(() => {
+			showDialogButton(false);
+			taleTracker++;
+			sceneIndex = 0;
+			dialogIndex = 0;
+			console.log(
+				"next scene should be enabled. taleTracker: " +
+					taleTracker +
+					" storyI: " +
+					sceneIndex +
+					" dialogI: " +
+					dialogIndex
+			);
+			enableContinue(true);
+			clearStory();
+			loadScene();
+		}, 3000);
 	}
-	taleTracker++;
-	sceneIndex = 0;
-	loadStory();
-}
+});
 
 // Hides or shows the dialog button depending on if it is true/false
-function showDialogButton(dialogTF) {
-	if (dialogTF) {
+function showDialogButton(state) {
+	if (state) {
 		dialogueNextBtn.style.visibility = "visible";
 	} else {
 		dialogueNextBtn.style.visibility = "hidden";
@@ -241,8 +414,8 @@ function showDialogButton(dialogTF) {
 }
 
 // enable/disable continue button in story section based on true false
-function enableContinue(continButtonTF) {
-	if (continButtonTF) {
+function enableContinue(state) {
+	if (state) {
 		mainGameContinueBtn.classList.remove("is-disabled");
 		mainGameContinueBtn.disabled = false;
 	} else {
@@ -251,15 +424,11 @@ function enableContinue(continButtonTF) {
 	}
 }
 
-//might not need this function if loading story and dialog separately?
-function printText() {}
-
 // TODO: update background image based on location.
 // function updateBackgroundImage(){}
 
 // First load of the game.
 function initGame() {
-	console.log(tale);
 	taleArray = Object.entries(tale);
 	taleTracker = 0;
 	// clear dialog and story to load new prompts
@@ -268,7 +437,14 @@ function initGame() {
 	//call updateBackgroundImage(); here
 	//check if there is a story for the scene then proceed to print the text and use continue button as needed.
 	sceneIndex = 0;
-	loadStory();
+	dialogIndex = 0;
+	printMessage(storyTextPEl, taleArray[taleTracker][1].story[sceneIndex], 30);
+	enableContinue(false);
+	setTimeout(() => {
+		clearDialog();
+		printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[sceneIndex], 30);
+		showDialogButton(true);
+	}, 5000);
 }
 
 // Game is started after story json data is grabbed.
