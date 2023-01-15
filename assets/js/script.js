@@ -1,4 +1,4 @@
-// Retrieving values from local storage and displaying them in character display panel
+// Global variables and document selectors
 var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
 var playerImage = document.getElementById("adventurer");
 var playerName = document.getElementById("name");
@@ -9,7 +9,8 @@ var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
 var dialogueTextEl = document.getElementById("dialogueText");
-
+var musicEl = document.getElementById("music");
+// Retrieving values from local storage and displaying them in character display panel
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
 var adventurerLevel = playerCharacter.level;
@@ -26,6 +27,11 @@ playerXP.setAttribute("value", adventurerXP);
 
 displayLives();
 
+// music controls
+musicEl.volume = 0.1;
+musicEl.loop = true;
+
+// Display dialogue one letter at a time
 function printMessage(destination, message, speed) {
 	var i = 0;
 	var interval = setInterval(function () {

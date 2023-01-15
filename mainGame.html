@@ -19,7 +19,9 @@
 					<button id="restartBtn" type="button" class="nes-btn is-error">Restart</button>
 				</div>
 				<h2>Don't Wake Up</h2>
-				<p>volume controls</p>
+				<audio id="music" controls autoplay muted>
+					<source src="./assets/music/embers-in-the-wind.mp3" type="audio/mpeg" />
+				</audio>
 			</nav>
 		</header>
 		<div id="mainGame-Main">
@@ -27,17 +29,14 @@
 				<section id="character-progress">
 					<section id="character-display">
 						<!-- Set character limit for name (10) -->
-						<p id="name">Hikarumiji</p>
+						<p id="name"></p>
 						<section id="lives">
 							<!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
-							<i class="nes-icon is-small heart"></i
-							><i class="nes-icon is-small heart"></i
-							><i class="nes-icon is-small heart"></i>
+							<i class="nes-icon is-medium heart" id="1"></i
+							><i class="nes-icon is-medium heart" id="2"></i
+							><i class="nes-icon is-medium heart" id="3"></i>
 						</section>
-						<img
-							src="./assets/images/female-adventurer-example.png"
-							alt="adventurer"
-							id="adventurer" />
+						<img alt="adventurer" id="adventurer" />
 					</section>
 					<hr />
 					<!-- At certain HPs, the health bar will change from is-success(green) to is-warning(yellow) to is-error(red) -->
@@ -56,7 +55,7 @@
 						</div>
 						<div>
 							<p class="stat-titles">Level:</p>
-							<p id="currLevel">1</p>
+							<p id="currLevel"></p>
 						</div>
 					</section>
 				</section>
@@ -204,15 +203,20 @@
 					<div id="e5"></div>
 				</div>
 				<div id="gameDialogueBox" class="nes-balloon from-right">
-					<p id="dialogueText">t</p>
+					<p id="dialogueText"></p>
 					<form id="dialogueBtnContainer">
 						<label id="yes">
-							<input type="radio" class="nes-radio" name="answer" checked />
+							<input
+								type="radio"
+								class="nes-radio"
+								name="answer"
+								visibility="none"
+								checked />
 							<span>Yes</span>
 						</label>
 
 						<label id="no">
-							<input type="radio" class="nes-radio" name="answer" />
+							<input type="radio" class="nes-radio" name="answer" display="none" />
 							<span>No</span>
 						</label>
 						<img
