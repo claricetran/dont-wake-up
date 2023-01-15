@@ -396,6 +396,30 @@ hr {
 	font-size: 0.75vw;
 }
 
+#end-game-img {
+	height: 400px;
+	margin: 1%;
+	box-shadow: 0 0 15px 15px rgba(19, 35, 37, 0.801);
+}
+
+#credits-container{
+	overflow: hidden;
+}
+
+#credits {
+  transform: translateY(100%);
+  animation: my-animation 20s linear;
+}
+
+@keyframes my-animation {
+  from { 
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+} 
+
 footer {
 	height: 8vh;
 	text-align: center;
