@@ -32,19 +32,19 @@ audio {
 /*Start Screen CSS */
 #start-container {
 	position: relative;
-    text-align: center;
+	text-align: center;
 	border: 5px solid black;
-    background-image: url(../images/backgrounds/start-screen.png);
-    background-position: center;
+	background-image: url(../images/backgrounds/start-screen.png);
+	background-position: center;
 	height: 100vh;
-    width: 100%;
+	width: 100%;
 }
 
 #start-info {
-    position: absolute;
-    left: 50%;                     
-    top: 40%;                         
-    transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	transform: translate(-50%, -50%);
 }
 
 #start-container h2 {
@@ -53,63 +53,62 @@ audio {
 
 /*Character Select CSS */
 #character-select-container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    background-color: #111116;
-    background-image: url(../images/backgrounds/forest-character-select.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: auto;
+	position: relative;
+	height: 100vh;
+	width: 100%;
+	background-color: #111116;
+	background-image: url(../images/backgrounds/forest-character-select.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: auto;
 }
 
 #character-select-nav {
-    display: flex;
-    justify-content: space-between;
-    margin: 1%;
+	display: flex;
+	justify-content: space-between;
+	margin: 1%;
 }
 
 #character-select-container h2 {
-    color: white;
+	color: white;
 }
 
 #character-select-carousel {
-    margin: auto;
-    padding: 50px;
-    background-color: rgba(19, 35, 37, 0.801);
-    box-shadow: 0 0 10px 10px rgba(19, 35, 37, 0.801);
-    background-size: 100% 130%;
-    width: 40%;
+	margin: auto;
+	padding: 50px;
+	background-color: rgba(19, 35, 37, 0.801);
+	box-shadow: 0 0 10px 10px rgba(19, 35, 37, 0.801);
+	background-size: 100% 130%;
+	width: 40%;
 }
 
 .carousel-inner {
-    margin: auto;
-    height: 400px;
-    width: 400px;
+	margin: auto;
+	height: 400px;
+	width: 400px;
 }
 
 .hidden {
-    display:none;
+	display: none;
 }
 
 #character-select-container {
-    position: absolute;
-    text-align: center;
+	position: absolute;
+	text-align: center;
 }
 
 #character-name-input {
-    color: white;
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 30%;
+	color: white;
+	margin: auto;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	width: 30%;
 }
 
 #character-select-container p {
-    color: white;
-    margin-top: 3%;
+	color: white;
+	margin-top: 3%;
 }
-
 
 /* Main page CSS */
 #main-page-nav {
@@ -269,7 +268,7 @@ hr {
 	background-size: cover;
 	margin: auto;
 	display: grid;
-    grid-template-columns: repeat(5, auto) ;
+	grid-template-columns: repeat(5, auto);
 	height: 75%;
 	aspect-ratio: 1/1;
 }
@@ -277,41 +276,41 @@ hr {
 #gameScreenGrid div {
 	/* height: 100%;
     width: 100%; */
-    /* border: #000000 solid 1px; */
-    text-align: center;
+	/* border: #000000 solid 1px; */
+	text-align: center;
 }
 
 #gameScreenGrid img {
-    width: 100%;
-    height: auto;
+	width: 100%;
+	height: auto;
 }
 
 /* game layout */
 #miniGame {
-    height: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: antiquewhite;
-    border: #000000 solid 1px;
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: antiquewhite;
+	border: #000000 solid 1px;
 }
 
 #wordsFound {
-    border: #000000 solid 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40%;
-    width: 100%;
-    font-size: 50%;
-    background-color: antiquewhite
+	border: #000000 solid 1px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40%;
+	width: 100%;
+	font-size: 50%;
+	background-color: antiquewhite;
 }
 
 #timer {
-    border: #000000 solid 1px;
-    font-size: 50%;
-    background-color: antiquewhite;
-    /* overflow-wrap: break-word; */
+	border: #000000 solid 1px;
+	font-size: 50%;
+	background-color: antiquewhite;
+	/* overflow-wrap: break-word; */
 }
 
 /* dialogue box layout */
@@ -319,6 +318,7 @@ hr {
 	height: 20%;
 	width: 98%;
 	background-color: blanchedalmond;
+	width: 98%;
 }
 
 #gameDialogueBox p {
@@ -353,7 +353,6 @@ hr {
 	font-size: 0.6vw;
 	background-color: rgba(105, 75, 112, 0.236);
 }
-
 
 /* Right Side CSS*/
 #rightSideMain {
