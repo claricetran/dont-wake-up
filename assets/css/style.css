@@ -265,16 +265,16 @@ hr {
 }
 
 #gameScreenGrid div {
-	/* height: 100%;
-    width: 100%; */
     position: relative;
-    border: #000000 solid 1px;
+    /* border: #000000 solid 1px; */
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 #gameScreenGrid img {
     position: absolute;
-    transform: translate(-50%, -70%);
+    align-self: flex-end;
     width: 400%;
     height: auto;
 }
@@ -307,18 +307,26 @@ hr {
     /* overflow-wrap: break-word; */
 }
 
-/* enemy health bar */
+/* Combat mini games */
 #enemyHealthBar {
     position: absolute;
     height: 25%;
     width: 200%;
-    transform: translate(-50%, -50%);
 }
 
 #combatMessage {
     position: absolute;
-    transform: translate(-25%, -50%);
+    text-align: center;
     color: white;
+}
+
+.fade-out-image { 
+    animation: fadeOut 5s;
+ }
+
+@keyframes fadeOut {
+    100% { opacity: 0; }
+    0% { opacity: 1; }
 }
 
 /* dialogue box layout */
@@ -367,7 +375,7 @@ hr {
 	width: 25%;
 }
 
-#main-story-text {
+#main-story-text-Container {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -378,7 +386,7 @@ hr {
 	background-color: rgba(187, 160, 193, 0.675);
 }
 
-#main-story-text p {
+#mainStoryText {
 	font-size: 0.9vw;
 }
 

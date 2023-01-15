@@ -9,6 +9,7 @@ var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
 var dialogueTextEl = document.getElementById("dialogueText");
+var mainStoryTextEl = document.getElementById("mainStoryText")
 
 
 // Retrieving values from local storage and displaying them in character display panel
@@ -30,20 +31,6 @@ playerXP.setAttribute("value", adventurerXP);
 
 displayLives();
 
-// Display dialogue one letter at a time
-function printMessage(destination, message, speed){
-    var i = 0;
-    var interval = setInterval(function(){
-        destination.innerHTML += message.charAt(i);
-        i++;
-        if (i > message.length){
-            clearInterval(interval);
-        }
-    }, speed);
-}
-
-printMessage(dialogueTextEl, "Help us start the game by finding RPG related words as fast as possible!", 30);
-
 // Restart Button On-Click
 var resetBtn = document.getElementById("restartBtn");
 resetBtn.addEventListener("click", restartGame);
@@ -54,41 +41,34 @@ function restartGame() {
 }
 
 // change heart classes based on lives
-function displayLives(){
-   if (adventurerLives == 2.5)
-   {
-    heartThree.classList.add("is-half");
-   }
-   else if (adventurerLives == 2)
-   {
-    heartThree.classList.add("is-transparent");
-   }
-   else if (adventurerLives == 1.5)
-   {
-    heartThree.classList.add("is-transparent");
-    heartTwo.classList.add("is-half");
-   }
-   else if (adventurerLives == 1)
-   {
-    heartThree.classList.add("is-transparent");
-    heartTwo.classList.add("is-transparent");
-   }
-   else if (adventurerLevel == 0.5)
-   {
-    heartThree.classList.add("is-transparent");
-    heartTwo.classList.add("is-transparent");
-    heartOne.classList.add("is-half");
-   }
-   else if (adventurerLives == 0)
-   {
-    heartThree.classList.add("is-transparent");
-    heartTwo.classList.add("is-transparent");
-    heartOne.classList.add("is-transparent");
-   }
-   else
-   {
-    // leave heart classes as they are
-   }
+function displayLives() {
+    if (adventurerLives == 2.5) {
+        heartThree.classList.add("is-half");
+    }
+    else if (adventurerLives == 2) {
+        heartThree.classList.add("is-transparent");
+    }
+    else if (adventurerLives == 1.5) {
+        heartThree.classList.add("is-transparent");
+        heartTwo.classList.add("is-half");
+    }
+    else if (adventurerLives == 1) {
+        heartThree.classList.add("is-transparent");
+        heartTwo.classList.add("is-transparent");
+    }
+    else if (adventurerLevel == 0.5) {
+        heartThree.classList.add("is-transparent");
+        heartTwo.classList.add("is-transparent");
+        heartOne.classList.add("is-half");
+    }
+    else if (adventurerLives == 0) {
+        heartThree.classList.add("is-transparent");
+        heartTwo.classList.add("is-transparent");
+        heartOne.classList.add("is-transparent");
+    }
+    else {
+        // leave heart classes as they are
+    }
 }
 
 // main game elements
@@ -106,35 +86,96 @@ var divC3 = document.getElementById("c3")
 
 yesEl.style.display = "none"
 noEl.style.display = "none"
+dialogueNextBnt.style.display = "none"
 
-gameGridEl.style.backgroundImage = "url(./assets/images/backgrounds/cave.png)"
+// Display dialogue one letter at a time
+var allowNextDialogue = false;
+var allowNextGame = true;
+var gameIsPlaying = false;
+
+function printMessage(destination, message, speed) {
+    destination.innerHTML = ""
+    var i = 0;
+    var interval = setInterval(function () {
+        destination.innerHTML += message.charAt(i);
+        allowNextDialogue = false
+        i++;
+        if (i >= message.length) {
+            allowNextDialogue = true
+            clearInterval(interval);
+        }
+    }, speed);
+
+}
+
+// playCombat()
+
+function playCombat() {
+    gameGridEl.style.backgroundImage = "url(./assets/images/backgrounds/cave.png)"
+    printMessage(mainStoryTextEl, "You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel", 30);
+    mainGameContinueBtn.setAttribute("class", "nes-btn");
+
+    mainGameContinueBtn.addEventListener("click", function () {
+        if (allowNextDialogue && allowNextGame && !gameIsPlaying) {
+            gameIsPlaying = true
+            mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
+            mainGameBackBtn.setAttribute("class", "nes-btn is-disabled");
+            startCombatGame("troll-lord-appearing", "e3", "troll-lord", "The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win.", "Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him! Click on the enemy to deal damage once the game starts.")
+            allowNextGame = false;
+        }
+    })
+
+}
 
 function makeEnemyAppear(enemyFileName, divId, newFileName) {
     var enemyEl = document.createElement("img")
     enemyEl.src = "./assets/images/characters/" + enemyFileName + ".png"
-    enemyEl.setAttribute("id", "targetEnemy")
+
     var divContainer = document.getElementById(divId)
     divContainer.appendChild(enemyEl)
+
+    var nextEnemyEl = document.createElement("img")
+    nextEnemyEl.src = "./assets/images/characters/" + newFileName + ".png"
+    nextEnemyEl.setAttribute("id", "targetEnemy")
+    divContainer.appendChild(nextEnemyEl)
+    enemyEl.setAttribute("class", "fade-out-image")
     function changeImage() {
-        enemyEl.src = "./assets/images/characters/" + newFileName + ".png"
+        enemyEl.remove()
     }
-    setTimeout(changeImage, 1000)
+    setTimeout(changeImage, 4500)
 }
 
-playCombat("troll-lord-appearing", "e3", "troll-lord")
-
-function playCombat(enemyAppear, position, enemyAfter) {
+function startCombatGame(enemyAppear, position, enemyAfter, dialogue, story) {
+    dialogueNextBnt.style.display = "block"
     makeEnemyAppear(enemyAppear, position, enemyAfter)
-    
-    var endMessageEl = document.createElement("h2")
-    endMessageEl.setAttribute("id", "combatMessage")
+    printMessage(dialogueTextEl, dialogue, 30)
+    printMessage(mainStoryTextEl, story, 30)
+    var messageEl = document.createElement("h2")
+    messageEl.setAttribute("id", "combatMessage")
+    allowNextDialogue = false;
+    dialogueNextBnt.addEventListener("click", function () {
+        if (allowNextDialogue) {
+            allowNextGame = true
+            countdownTime = 4
+            messageEl.textContent = "Ready?"
+            divC3.appendChild(messageEl)
+            countdown = setInterval(function () {
+                countdownTime--
+                messageEl.textContent = countdownTime
+                if (countdownTime < 0) {
+                    clearInterval(countdown)
+                    messageEl.textContent = "Attack!"
+                }
+            }, 1000)
+            setTimeout(startCombat, 4000)
+        }
+    })
 
-
-    
     function startCombat() {
+        messageEl.remove()
         var enemyHealth = 20
         var enemyHealthProgress = document.createElement("progress")
-        enemyHealthProgress.setAttribute("class", "nes-progress is-success enemyHealthBar")
+        enemyHealthProgress.setAttribute("class", "nes-progress is-success")
         enemyHealthProgress.setAttribute("id", "enemyHealthBar")
         enemyHealthProgress.setAttribute("value", enemyHealth)
         enemyHealthProgress.setAttribute("max", enemyHealth)
@@ -144,23 +185,29 @@ function playCombat(enemyAppear, position, enemyAfter) {
             enemyHealth--
             enemyHealthProgress.setAttribute("value", enemyHealth)
             console.log(enemyHealth)
-            if(enemyHealth <= 0){
-                enemyHealthProgress.remove()
-                targetEnemyEl.remove()
-                endMessageEl.textContent = "Victory!"
-                divC3.appendChild(endMessageEl)
-            }
         })
         timerInterval = setInterval(function () {
-            if(enemyHealth > 0) {
+            if (enemyHealth > 0) {
                 adventurerHealth = adventurerHealth - 20
                 playerHealth.setAttribute("value", adventurerHealth);
-            }
-            if (adventurerHealth <= 0 || enemyHealth <= 0) {
+            } else {
                 clearInterval(timerInterval)
                 enemyHealthProgress.remove()
-                endMessageEl.textContent = "Defeated"
-                divC3.appendChild(endMessageEl)
+                targetEnemyEl.remove()
+                messageEl.textContent = "Victory!"
+                printMessage(dialogueTextEl, "Aaargh...", 30)
+                printMessage(mainStoryTextEl, "You defeated the enemy and are able to pass!", 30)
+                mainGameContinueBtn.setAttribute("class", "nes-btn")
+                divC3.appendChild(messageEl)
+                mainGameContinueBtn.addEventListener("click", function () {
+                    return
+                })
+            }
+            if (adventurerHealth <= 0) {
+                clearInterval(timerInterval)
+                enemyHealthProgress.remove()
+                messageEl.textContent = "Defeated"
+                divC3.appendChild(messageEl)
             }
         }, 1000)
     }
@@ -297,4 +344,5 @@ function playHangman() {
         }, 1000)
     }
 }
+
 
