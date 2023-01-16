@@ -13,7 +13,8 @@ var characterNameInput = document.querySelector("#character-name");
 var randomizeBtn = document.getElementById("randomize-btn");
 
 // Character object array
-var characterOptions = [{
+var characterOptions = [
+{
     "id": "witch",
     "characterName": "",
     "health": 250,
@@ -62,13 +63,12 @@ function returnToTitle(){
 // Retrieve selected carousel character and set to local storage
 $('#character-slides').on('slide.bs.carousel', function onSlide (e) {
     var currentItem = $(e.relatedTarget);
-    console.log(currentItem[0]);
         characterOptions.forEach(character => {
             if (currentItem[0].id == character.id)
             {
                 playerCharacter = character;
                 localStorage.setItem("playerCharacter", JSON.stringify(playerCharacter))
-            } 
+            }
         });
   })
 
@@ -89,8 +89,16 @@ function generateName(){
 startBtn.addEventListener("click", showCharacterSelect);
 backBtn.addEventListener("click", returnToTitle);
 randomizeBtn.addEventListener("click", generateName);
+
 continueBtn.addEventListener("click", function(){
-    playerCharacter.characterName = characterNameInput.value;
+    if (characterNameInput.value.length == 0)
+    {
+        playerCharacter.characterName = "Nameless";
+    }
+    else
+    {
+        playerCharacter.characterName = characterNameInput.value;
+    }
     localStorage.setItem("playerCharacter", JSON.stringify(playerCharacter))
     location.href = "./mainGame.html"
 });
