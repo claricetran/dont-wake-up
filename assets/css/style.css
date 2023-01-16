@@ -19,16 +19,6 @@ audio {
     height: 30px;
 }
 
-#saveBtn {
-    width: 32%;
-    font-size: 1.5vh;
-}
-
-#restartBtn {
-    width: 50%;
-    font-size: 1.5vh;
-}
-
 /*Start Screen CSS */
 #start-container {
     position: relative;
@@ -48,6 +38,16 @@ audio {
 }
 
 #start-container h2 {
+    color: white;
+}
+
+#warning-modal {
+    height: 300px;
+    width: 100%;
+}
+
+#modal-content {
+    background-color: black;
     color: white;
 }
 
@@ -121,6 +121,10 @@ audio {
     width: 100%;
     height: 80vh;
     background-color: rgb(82, 57, 94);
+}
+
+#main-nav-btns{
+    font-size: 1.5vh;
 }
 
 /* Character and Inventory Sections */
