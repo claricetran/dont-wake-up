@@ -8,10 +8,12 @@ var playerXP = document.getElementById("xp");
 var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
-var saveBtn = document.getElementById("saveBtn");
-var resetBtn = document.getElementById("restartBtn");
+var saveBtn = document.getElementById("save-btn");
+var resetBtn = document.getElementById("restart-btn");
+var titleBtn = document.getElementById("title-btn")
 var musicEl = document.getElementById("music");
-// Retrieving values from local storage and displaying them in character display panel
+
+// Retrieving values from local storage
 var adventurerID = playerCharacter.id;
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
@@ -21,6 +23,7 @@ var adventurerDamage = playerCharacter.damage;
 var adventurerXP = playerCharacter.xp;
 var adventurerLives = playerCharacter.lives;
 
+// Display to character panel
 playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
@@ -31,6 +34,7 @@ playerXP.setAttribute("max", 100);
 
 displayLives();
 
+// Save player information to local storage
 function savePlayerInfo(){
     var playerCharacterSave = {
         "id": adventurerID,
@@ -45,20 +49,13 @@ function savePlayerInfo(){
     localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
 }
 
-// music controls
-musicEl.volume = 0.1;
-musicEl.loop = true;
-
-// Header On-Click Events
-saveBtn.addEventListener("click", savePlayerInfo);
-resetBtn.addEventListener("click", restartGame);
-
+// Clear player character save and return to start page
 function restartGame() {
-    localStorage.clear();
+    localStorage.clear(playerCharacter);
     location.href = "./index.html";
 }
 
-// change heart classes based on lives
+// Change heart classes based on lives
 function displayLives() {
     if (adventurerLives == 2.5) {
         heartThree.classList.add("is-half");
@@ -83,7 +80,19 @@ function displayLives() {
     }
 }
 
-// main game elements
+// Music controls
+musicEl.volume = 0.1;
+musicEl.loop = true;
+
+// Header On-Click Events
+saveBtn.addEventListener("click", savePlayerInfo);
+resetBtn.addEventListener("click", restartGame);
+titleBtn.addEventListener("click", function(){
+    location.href = "./index.html";
+})
+
+
+// Main game document selectors
 var mainGameBackBtn = document.getElementById("main-back-btn");
 var mainGameContinueBtn = document.getElementById("main-continue-btn");
 var dialogueTextEl = document.getElementById("dialogueText");
