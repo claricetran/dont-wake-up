@@ -441,6 +441,12 @@ label {
     font-size: 0.75vw;
 }
 
+/* End Game CSS*/
+
+#quote-container {
+	padding: 20px;
+}
+
 #end-game-img {
     height: 400px;
     margin: 1%;
@@ -448,22 +454,44 @@ label {
 }
 
 #credits-container {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 #credits {
-    transform: translateY(100%);
-    animation: my-animation 20s linear;
+	transform: translateY(100%);
+	animation: my-animation 20s linear;
 }
 
 @keyframes my-animation {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(-100%);
-    }
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(-100%);
+	}
 }
+
+/*Score Page CSS*/
+#scores-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgba(187, 160, 193, 0.675);
+	height: 80vh;
+	width: 60%;
+	padding: 30px;
+}
+
+#score-board {
+	border: 3px solid black;
+	height: 90%;
+	width: 90%;
+}
+
+#score-board ul{
+	list-style-type: none;
+}
+
 
 footer {
     height: 8vh;

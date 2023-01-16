@@ -7,6 +7,7 @@ var creditsBtn = document.getElementById("credits-btn");
 var creditsContainer = document.getElementById("credits-container");
 var creditEl = document.getElementById("credits");
 var endPageContent = document.getElementById("endpage-content");
+var scoreBtn = document.getElementById("score-btn");
 
 // api call to set endgame quote
 var requestURL = "https://api.api-ninjas.com/v1/quotes?category=" + category;
@@ -36,5 +37,10 @@ function returnToPage(){
     creditsContainer.classList.add("hidden");
 }
 
+function submitScore(){
+    location.href = "./scores.html"
+}
+
 creditsBtn.addEventListener("click", runCredits);
 creditEl.addEventListener("animationend", returnToPage);
+scoreBtn.addEventListener("click", submitScore);
