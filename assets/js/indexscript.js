@@ -1,7 +1,4 @@
 // Global variables
-var startBtn = document.getElementById("start-btn");
-var backBtn = document.getElementById("back-btn");
-var continueBtn = document.getElementById("continue-btn");
 var playerCharacter = {};
 var apiKey = "5f4d6a42bcd88a23a38f5dc2463373d6"
 var requestURL = "https://api.parser.name/?api_key=" + apiKey + "&endpoint=generate&country_code=IS&results=1";
@@ -11,6 +8,14 @@ var startContainer = document.getElementById("start-container");
 var characterSelectContainer = document.getElementById("character-select-container");
 var characterNameInput = document.querySelector("#character-name");
 var randomizeBtn = document.getElementById("randomize-btn");
+var startBtn = document.getElementById("start-btn");
+var loadBtn = document.getElementById("load-btn");
+var backBtn = document.getElementById("back-btn");
+var continueBtn = document.getElementById("continue-btn");
+var modal = document.getElementById("warning-modal");
+var modalClose = document.getElementsByClassName("close")[0];
+var noBtn = document.getElementById("modal-close");
+var yesBtn = document.getElementById("modal-continue");
 
 // Character object array
 var characterOptions = [
@@ -47,10 +52,18 @@ var characterOptions = [
 
 // Navigate between start and character select containers on button click
 function showCharacterSelect(){
-    startContainer.classList.remove("visible");
-    startContainer.classList.add("hidden");
-    characterSelectContainer.classList.remove("hidden");
-    characterSelectContainer.classList.add("visible");
+    if (localStorage.getItem("playerCharacter") != null)
+    {   
+        modal.style.display = "block";
+        modalBtnSelect();
+    }
+    else 
+    {
+        startContainer.classList.remove("visible");
+        startContainer.classList.add("hidden");
+        characterSelectContainer.classList.remove("hidden");
+        characterSelectContainer.classList.add("visible");
+    }
 }
 
 function returnToTitle(){
@@ -58,6 +71,24 @@ function returnToTitle(){
     startContainer.classList.add("visible");
     characterSelectContainer.classList.remove("visible");
     characterSelectContainer.classList.add("hidden");
+}
+
+// Shows load button if a save is available in local storage
+if (localStorage.getItem("playerCharacter") != null)
+{
+    loadBtn.classList.remove("is-disabled");
+}
+
+function modalBtnSelect(){
+    noBtn.onclick = function(){
+        modal.style.display = "none";
+        return false;
+    }
+    yesBtn.onclick = function(){
+        modal.style.display = "none";
+        localStorage.clear();
+        showCharacterSelect();
+    }
 }
 
 // Retrieve selected carousel character and set to local storage
@@ -87,6 +118,9 @@ function generateName(){
 
   // Event listeners
 startBtn.addEventListener("click", showCharacterSelect);
+loadBtn.addEventListener("click", function(){
+    location.href = "./mainGame.html"
+});
 backBtn.addEventListener("click", returnToTitle);
 randomizeBtn.addEventListener("click", generateName);
 

@@ -51,6 +51,16 @@ audio {
     color: white;
 }
 
+#warning-modal {
+    height: 300px;
+    width: 100%;
+}
+
+#modal-content {
+    background-color: black;
+    color: white;
+}
+
 /*Character Select CSS */
 #character-select-container {
     position: relative;

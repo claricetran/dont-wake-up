@@ -23,6 +23,14 @@
 					<h2>Don't Wake Up</h2>
 					<br />
 					<button type="button" class="nes-btn" id="start-btn">Start</button>
+					<button type="button" class="nes-btn is-disabled" id="load-btn">Load</button>
+					<div id="warning-modal" class="modal hidden">
+						<div id="modal-content">
+							<p>Pressing start will override any previous save and start a new game. Are you sure you want to continue?</p>
+							<button type="button" class="nes-btn" id="modal-close">No</button>
+							<button type="button" class="nes-btn" id="modal-continue">Yes</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!--Character Selection Container-->
