@@ -9,7 +9,6 @@ var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
 
-
 var musicEl = document.getElementById("music");
 // Retrieving values from local storage and displaying them in character display panel
 var adventurerImg = playerCharacter.src;
@@ -73,17 +72,16 @@ var mainGameBackBtn = document.getElementById("main-back-btn");
 var mainGameContinueBtn = document.getElementById("main-continue-btn");
 var dialogueTextEl = document.getElementById("dialogueText");
 var storyTextPEl = document.getElementById("storyText");
-var dialogueBtnContainer = document.getElementById("dialogueBtnContainer")
+var dialogueBtnContainer = document.getElementById("dialogueBtnContainer");
 var yesEl = document.getElementById("yes");
 var noEl = document.getElementById("no");
 var dialogueNextBtn = document.getElementById("dialogueBtn");
-var gameGridEl = document.getElementById("gameScreenGrid")
+var gameGridEl = document.getElementById("gameScreenGrid");
 var divA1 = document.getElementById("a1");
-var divA3 = document.getElementById("a3")
+var divA3 = document.getElementById("a3");
 var divA5 = document.getElementById("a5");
-var divB3 = document.getElementById("b3")
+var divB3 = document.getElementById("b3");
 var divC3 = document.getElementById("c3");
-
 
 // Display dialogue one letter at a time
 var allowNextDialogue = false;
@@ -94,7 +92,8 @@ yesEl.style.display = "none";
 noEl.style.display = "none";
 dialogueNextBtn.style.visibility = "hidden";
 mainGameBackBtn.style.visibility = "hidden";
-
+yesEl.style.visibility = "hidden";
+noEl.style.visibility = "hidden";
 // JSON will be saved to this variable after fetching.
 var tale;
 var taleArray;
@@ -102,23 +101,23 @@ var taleArray;
 var taleTracker;
 var sceneIndex;
 var dialogIndex;
+var miniGame = "none";
 
 // var continueButtonState = false;
 // var dialogButtonState = false;
 
 function printMessage(destination, message, speed) {
-    destination.innerHTML = ""
+    destination.innerHTML = "";
     var i = 0;
     var interval = setInterval(function () {
         destination.innerHTML += message.charAt(i);
-        allowNextDialogue = false
+        allowNextDialogue = false;
         i++;
         if (i >= message.length) {
-            allowNextDialogue = true
+            allowNextDialogue = true;
             clearInterval(interval);
         }
     }, speed);
-
 }
 
 function playTrollCombat() {
@@ -240,7 +239,7 @@ function playCombat(backgroundImg, begginingText, enemyAppear, enemyAfter, dialo
                 })
 
             }
-        }, 1000)
+        }, 1000);
     }
 
     function makeEnemyAppear(enemyFileName, newFileName) {
@@ -277,7 +276,7 @@ var RPGwordPool = [
     "troll",
 ];
 
-// playHangman(RPGwordPool, 35, 6)
+playHangman(RPGwordPool, 35, 6)
 
 // Hangman Game function
 function playHangman(chosenWordPool, totalTime, nbrOfWords) {
@@ -487,9 +486,12 @@ function clearStory() {
 
 //checks the scene for story
 function hasStory() {
+    console.log("Checking story: " + taleTracker);
     if (taleArray[taleTracker][1].story !== undefined) {
+        console.log("has story");
         return true;
     } else {
+        console.log("no story");
         return false;
     }
 }
@@ -503,6 +505,7 @@ function hasDialog() {
     }
 }
 
+// checks if there's options in the scene
 function hasOptions() {
     if (taleArray[taleTracker][1].options !== undefined) {
         return true;
@@ -511,9 +514,19 @@ function hasOptions() {
     }
 }
 
+function showOptions(state) {
+    if (state) {
+        yesEl.style.visibility = "visible";
+        noEl.style.visibility = "visible";
+    } else {
+        yesEl.style.visibility = "hidden";
+        noEl.style.visibility = "hidden";
+    }
+}
+
 // checks the scene for a game
-function hasGame() {
-    if (taleArray[taleTracker][1].game !== undefined) {
+function hasGame(game) {
+    if (game != undefined) {
         return true;
     } else {
         return false;
@@ -521,9 +534,14 @@ function hasGame() {
 }
 
 // Load the story to the story section
+//TODO: changing background function should be called in here.
 function loadScene() {
-    printMessage(storyTextPEl, taleArray[taleTracker][1].story[sceneIndex], 30);
-    if (sceneIndex == taleArray[taleTracker][1].story.length - 1) {
+    console.log(hasStory());
+    if (hasStory()) {
+        printMessage(storyTextPEl, taleArray[taleTracker][1].story[sceneIndex], 30);
+    }
+    if (hasStory() == false || sceneIndex == taleArray[taleTracker][1].story.length - 1) {
+        console.log("enable disabled because end of story or no story, load dialog");
         enableContinue(false);
         clearDialog();
         setTimeout(() => {
@@ -534,110 +552,152 @@ function loadScene() {
 }
 
 function loadDialog() {
-    printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[dialogIndex], 30);
+    if (hasOptions() == true) {
+        printMessage(
+            dialogueTextEl,
+            taleArray[taleTracker][1].dialog[dialogIndex].replace("Player:", adventurerName + ":"),
+            30
+        );
 
-    // if (taleArray[taleTracker][1].dialog != null && taleArray[taleTracker][1].dialog.length > 0) {
-    // 	showDialogButton(true);
-    // 	if (taleArray[taleTracker][1].dialog.length == 1) {
-    // 		showDialogButton(false);
-    // 		enableContinue(true);
-    // 	}
-    // if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
-    // 	showDialogButton(true);
-    // } else {
-    // 	showDialogButton(false);
-    // }
-    // }
-    // taleTracker++;
-    // sceneIndex = 0;
-    // add return boolean to let load/continue functions know when to renable continue button.
-    // loadStory();
+        setTimeout(() => {
+            loadOptions();
+            showOptions(true);
+            showDialogButton(true);
+        }, 3000);
+    } else {
+        printMessage(
+            dialogueTextEl,
+            taleArray[taleTracker][1].dialog[dialogIndex].replace("Player:", adventurerName + ":"),
+            30
+        );
+    }
+}
+
+function loadOptions() {
+    yesEl.children[1].innerText = taleArray[taleTracker][1].options.one.replace(
+        "Player:",
+        adventurerName + ":"
+    );
+    noEl.children[1].innerText = taleArray[taleTracker][1].options.two.replace(
+        "Player:",
+        adventurerName + ":"
+    );
 }
 
 mainGameContinueBtn.addEventListener("click", () => {
-    if (!gameIsPlaying) {
+    if(!gameIsPlaying){
         sceneIndex++;
-        console.log(
-            "update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
-        );
-        console.log(sceneIndex + 1 == taleArray[taleTracker][1].story.length);
-        if (sceneIndex < taleArray[taleTracker][1].story.length) {
-            clearStory();
-            loadScene();
-        } else if (sceneIndex + 1 == taleArray[taleTracker][1].story.length) {
-            enableContinue(false);
-            clearDialog();
-            loadDialog();
-            showDialogButton(true);
-        }
+    console.log(
+        "update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
+    );
+    console.log(sceneIndex + 1 == taleArray[taleTracker][1].story.length);
+    if (sceneIndex < taleArray[taleTracker][1].story.length) {
+        clearStory();
+        loadScene();
+    } else if (sceneIndex + 1 == taleArray[taleTracker][1].story.length) {
+        enableContinue(false);
+        clearDialog();
+        loadDialog();
+        showDialogButton(true);
+    }
     }
 });
 
+// taleTracker ++ changed to taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
+// Load the dialog to the dialog section
 dialogueNextBtn.addEventListener("click", () => {
-    if (!gameIsPlaying) {
-        console.log("dialog button clicked");
-        dialogIndex++;
-        clearDialog();
-        // // taleArray[taleTracker][1].dialog.length;
-        if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
-            console.log(
-                "update taleTracker: " +
+   if(!gameIsPlaying){
+     // if (hasOptions() == false || dialogIndex + 1 < taleArray[taleTracker][1].dialog.length) {
+    //     console.log("no options OR not at scene where options are needed yet");
+    // clear options on click in case there are any
+    showOptions(false);
+    // }
+    console.log("dialog button clicked");
+    dialogIndex++;
+    clearDialog();
+    if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
+        console.log(
+            "update taleTracker: " +
                 taleTracker +
                 " storyI: " +
                 sceneIndex +
                 " dialogI: " +
                 dialogIndex
-            );
-            printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[dialogIndex], 30);
-            if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
-                showDialogButton(false);
-                taleTracker++;
-                sceneIndex = 0;
-                dialogIndex = 0;
+        );
+        loadDialog();
+        if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
+            console.log("Options? " + hasOptions());
+            showDialogButton(false);
+            //checks if the next scene has a game
+            if (hasGame(taleArray[taleTracker + 1][1].game) == true) {
+                // if user chooses to play the game
+                console.log("next story has game is true");
+                // TODO: The if statement here is getting messed up when trying to go to the next scene. the taleTracker is not getting updated properly at lines 420 and 424 based on user selection.
+                if (yesEl.children[0].checked == true) {
+                    // clearStory();
+                    // clearDialog();
+                    // enableContinue(false);
+                    // showDialogButton(false);
+                    // showOptions(false);
+
+                    console.log("at 424: " + taleTracker);
+                    taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
+                } else if (noEl.children[0].checked == true) {
+                    // if user chooses to not play the game
+                    console.log("at 434:" + taleTracker);
+                    taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
+                } else {
+                    taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
+                }
+            } else {
+                // if there's no game
+                console.log("at 439:" + taleTracker);
                 console.log(
-                    "next scene should be enabled. taleTracker: " +
-                    taleTracker +
-                    " storyI: " +
-                    sceneIndex +
-                    " dialogI: " +
-                    dialogIndex
+                    taleTracker + " " + Object.keys(tale).indexOf(taleArray[taleTracker][1].next)
                 );
-                setTimeout(() => {
-                    enableContinue(true);
-                    clearStory();
-                    loadScene();
-                }, 3000);
-                // 		showDialogButton(false);
-                // 		taleTracker++;
-                // 		sceneIndex = 0;
-                // 		clearStory();
-                // 		// loadStory();
+                //
+                taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
             }
-        } else {
-            setTimeout(() => {
-                showDialogButton(false);
-                taleTracker++;
-                sceneIndex = 0;
-                dialogIndex = 0;
-                console.log(
-                    "next scene should be enabled. taleTracker: " +
+            sceneIndex = 0;
+            dialogIndex = 0;
+            console.log(
+                "next scene should be enabled. taleTracker: " +
                     taleTracker +
                     " storyI: " +
                     sceneIndex +
                     " dialogI: " +
                     dialogIndex
-                );
+            );
+            setTimeout(() => {
                 enableContinue(true);
                 clearStory();
                 loadScene();
             }, 3000);
         }
+    } else {
+        setTimeout(() => {
+            showDialogButton(false);
+            console.log("at 465:" + taleTracker);
+            console.log(Object.keys(tale).indexOf(taleArray[taleTracker][1].next));
+            taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
+
+            sceneIndex = 0;
+            dialogIndex = 0;
+            console.log(
+                "next scene should be enabled. taleTracker: " +
+                    taleTracker +
+                    " storyI: " +
+                    sceneIndex +
+                    " dialogI: " +
+                    dialogIndex
+            );
+            enableContinue(true);
+            clearStory();
+            loadScene();
+        }, 3000);
     }
+   }
 });
-
-// Load the dialog to the dialog section
-
-
 
 // Hides or shows the dialog button depending on if it is true/false
 function showDialogButton(state) {
@@ -666,6 +726,7 @@ function enableContinue(state) {
 function initGame() {
     taleArray = Object.entries(tale);
     taleTracker = 0;
+    console.log(taleArray);
     // clear dialog and story to load new prompts
     clearDialog();
     clearStory();
@@ -677,7 +738,7 @@ function initGame() {
     enableContinue(false);
     setTimeout(() => {
         clearDialog();
-        printMessage(dialogueTextEl, taleArray[taleTracker][1].dialog[sceneIndex], 30);
+        loadDialog();
         showDialogButton(true);
     }, 5000);
 }
