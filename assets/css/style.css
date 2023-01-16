@@ -274,7 +274,6 @@ hr {
     display: grid;
     grid-template-columns: repeat(5, auto);
     height: 75%;
-    aspect-ratio: 1/1;
 }
 
 #gameScreenGrid div {
