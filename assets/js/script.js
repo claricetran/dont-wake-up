@@ -22,6 +22,7 @@ var adventurerHealth = playerCharacter.health;
 var adventurerDamage = playerCharacter.damage;
 var adventurerXP = playerCharacter.xp;
 var adventurerLives = playerCharacter.lives;
+var playerScore = 0;
 
 // Display to character panel
 playerImage.setAttribute("src", adventurerImg);
@@ -78,6 +79,12 @@ function displayLives() {
     } else {
         // leave heart classes as they are
     }
+}
+
+function calculateScore(){
+    var levelScore = adventurerLevel * 1000;
+    var livesScore =  adventurerLives * 100;
+    playerScore = levelScore + livesScore;
 }
 
 // Music controls
