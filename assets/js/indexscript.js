@@ -79,6 +79,7 @@ if (localStorage.getItem("playerCharacter") != null)
     loadBtn.classList.remove("is-disabled");
 }
 
+// On click events for modal buttons
 function modalBtnSelect(){
     noBtn.onclick = function(){
         modal.style.display = "none";
@@ -86,7 +87,7 @@ function modalBtnSelect(){
     }
     yesBtn.onclick = function(){
         modal.style.display = "none";
-        localStorage.clear();
+        localStorage.clear(playerCharacter);
         showCharacterSelect();
     }
 }
