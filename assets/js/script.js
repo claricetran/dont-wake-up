@@ -180,6 +180,8 @@ var enemyHealthPoints;
 var enemyDamagePoints;
 var enemyWinDialogue;
 
+playCombat(1)
+
 function playCombat(index) {
     var index = index
     backgroundImg = combatVersion[index].backgroundImg;
