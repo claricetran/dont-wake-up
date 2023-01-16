@@ -1,106 +1,104 @@
 {
-	"scene-1-0": {
-		"place": "forest",
-		"story": [
-			"You open your eyes to a forest. Tall trees surround you and you hear a little scuffle behind you. You turn around to see a small, chubby pig."
-		],
-		"dialog": ["Hey Mr. Oinks!", "*oink oink*"],
-		"next": "scene-1-1"
-	},
-	"scene-1-1": {
-		"place": "forest",
-		"story": ["That cute pig you named Mr. Oinks gets snatched away in a blur."],
-		"dialog": ["Mr. Oinks???"],
-		"next": "scene-1-2"
-	},
-	"scene-1-2": {
-		"place": "village",
-		"story": [
-			"You search desparately for Mr. Oinks and stumble upon a nearby village. You shout and plead for help finding him."
-		],
-		"dialog": [
-			"Player: \"Help me please!\"",
-			"Player: \"My pet pig, Mr. Oinks has been taken.\"",
-			"Woman: \"Have you tried the local butcher's He gets fresh pigs every day.\"",
-			" Player: \"WHERE?\""
-		],
-		"next": "scene-1-3"
-	},
-	"scene-1-3": {
-		"place": "village",
-		"story": [
-			"The woman points you in the right direction.",
-			"You burst into the butcher's shop."
-		],
-		"dialog": [
-			"Player: \"MR. OINKS?\"",
-			"Butcher: \"'fraid that's not my name. I can help ya if yer lookin fer someone else in town.\"",
-			"Player: \"Did you butcher my pig?!\"",
-			"Butcher: \"None yet fer the day -\"",
-			"Player: \"Let me see your live pigs please.\""
-		],
-		"next": "scene-1-4"
-	},
-	"scene-1-4": {
-		"place": "village",
-		"story": ["The butcher is offended"],
-		"dialog": [
-			"Butcher: \"Oh no. I ain’t trustin no one that bursts into my shop accusin me of thievery and murderin loved ones. I have a heart ya know.\""
-		],
-		"options": {
-			"plead": "Player: \"I’m sorry, but please let me just take a little peek.\"",
-			"yell": "Player: \"LET ME SEE 'EM.\""
-		},
-		"next": "scene-1-5-1"
-	},
-	"scene-1-5-1": {
-		"place": "village",
-		"dialog": [
-			"Butcher: \"If you can guess the word I'm thinkin of in a minute you can have a peek.\""
-		],
-		"options": {
-			"yes": "Try to guess the butcher's words.",
-			"no": "Leave and try checking in the back for Mr. Oinks."
-		},
-		"next": ["scene-1-5-2", "scene-1-5-3"]
-	},
-	"scene-1-5-2": {
-		"place": "village",
-		"story": ["Play Hangman. Guess 5 words in 60 seconds."],
-		"game": "hangman",
-		"next": ["scene-1-5-4", "scene-1-5-5"]
-	},
-	"scene-1-5-3": {
-		"place": "village",
-		"story": ["You sneak around the back. Mr. Oinks might be there."],
-		"next": "scene-1-5-7"
-	},
-	"scene-1-5-4": {
-		"place": "village",
-		"story": ["You beat the butcher's game and he leads you to the pigs."],
-		"next": "scene-1-5-7"
-	},
-	"scene-1-5-5": {
-		"place": "village",
-		"story": ["You lost the butcher's game."],
-		"dialog": [
-			"'Fraid a deal's a deal, now git outta my shop before ya scaree away my loyal customers."
-		],
-		"next": "scene-1-5-6"
-	},
-	"scene-1-5-6": {
-		"place": "village",
-		"story": ["You sneak around the back anyways. Mr. Oinks might be there."],
-		"dialog": [
-			"'Fraid a deal's a deal, now git outta my shop before ya scaree away my loyal customers."
-		],
-		"next": "scene-1-5-7"
-	},
-	"scene-1-5-7": {
-		"place": "village",
-		"story": [
-			"You take a look, but Mr. Oinks could not be found.",
-			"There isn't much left to search in the village. Saddened once more, you go on your way, calling Mr. Oinks occasionally hoping for his squeal in reply."
-		]
-	}
+    "scene-1-0": {
+        "place": "forest",
+        "story": [
+            "You open your eyes to a forest. Tall trees surround you and you hear a little scuffle behind you. You turn around to see a small, chubby pig."
+        ],
+        "dialog": ["Player: Hey Mr. Oinks!", "Mr. Oinks: *oink oink*"],
+        "next": "scene-1-1"
+    },
+    "scene-1-1": {
+        "place": "forest",
+        "story": ["That cute pig you named Mr. Oinks gets snatched away in a blur."],
+        "dialog": ["Player: Mr. Oinks???"],
+        "next": "scene-1-2"
+    },
+    "scene-1-2": {
+        "place": "village",
+        "story": [
+            "You search desparately for Mr. Oinks and stumble upon a nearby village. You shout and plead for help finding him."
+        ],
+        "dialog": [
+            "Player: \"Help me please!\"",
+            "Player: \"My pet pig, Mr. Oinks has been taken.\"",
+            "Woman: \"Have you tried the local butcher's? He gets fresh pigs every day.\"",
+            "Player: \"WHERE?\""
+        ],
+        "next": "scene-1-3"
+    },
+    "scene-1-3": {
+        "place": "village",
+        "story": [
+            "The woman points you in the right direction.",
+            "You burst into the butcher's shop."
+        ],
+        "dialog": [
+            "Player: \"MR. OINKS?\"",
+            "Butcher: \"'fraid that's not my name. I can help ya if yer lookin fer someone else in town.\"",
+            "Player: \"Did you butcher my pig?!\"",
+            "Butcher: \"None yet fer the day -\"",
+            "Player: \"Let me see your live pigs please.\""
+        ],
+        "next": "scene-1-4"
+    },
+    "scene-1-4": {
+        "place": "village",
+        "story": ["The butcher is offended."],
+        "dialog": [
+            "Butcher: \"Oh no. I ain’t trustin no one that bursts into my shop accusin me of thievery and murderin loved ones. I have a heart ya know.\""
+        ],
+        "options": {
+            "one": "Player: \"I’m sorry, but please let me just take a little peek.\"",
+            "two": "Player: \"LET ME SEE 'EM.\""
+        },
+        "next": "scene-1-5"
+    },
+    "scene-1-5": {
+        "place": "village",
+        "dialog": [
+            "Butcher: \"If you can guess the words I'm thinkin of in a minute you can have a peek.\""
+        ],
+        "options": {
+            "one": "Try to guess the butcher's words.",
+            "two": "Leave and try checking in the back for Mr. Oinks."
+        },
+        "next": ["scene-1-6", "scene-1-7"]
+    },
+    "scene-1-6": {
+        "place": "village",
+        "story": ["Playing Hangman. Guess 5 words in 60 seconds."],
+        "game": "hangman",
+        "next": ["scene-1-8", "scene-1-9"]
+    },
+    "scene-1-7": {
+        "place": "village",
+        "story": ["You sneak around the back. Mr. Oinks might be there."],
+        "next": "scene-1-11"
+    },
+    "scene-1-8": {
+        "place": "village",
+        "story": ["You beat the butcher's game and he leads you to the pigs."],
+        "next": "scene-1-11"
+    },
+    "scene-1-9": {
+        "place": "village",
+        "story": ["You lost the butcher's game."],
+        "dialog": [
+            "Butcher: 'Fraid a deal's a deal, now git outta my shop before ya scaree away my loyal customers."
+        ],
+        "next": "scene-1-10"
+    },
+    "scene-1-10": {
+        "place": "village",
+        "story": ["You sneak around the back anyways. Mr. Oinks might be there."],
+        "dialog": ["Player: Mr. Oinks, you there?"],
+        "next": "scene-1-11"
+    },
+    "scene-1-11": {
+        "place": "village",
+        "story": [
+            "You take a look, but Mr. Oinks could not be found.",
+            "There isn't much left to search in the village. Saddened once more, you go on your way, calling Mr. Oinks occasionally hoping for his squeal in reply."
+        ]
+    }
 }
