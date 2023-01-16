@@ -8,9 +8,11 @@ var playerXP = document.getElementById("xp");
 var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
-
+var saveBtn = document.getElementById("saveBtn");
+var resetBtn = document.getElementById("restartBtn");
 var musicEl = document.getElementById("music");
 // Retrieving values from local storage and displaying them in character display panel
+var adventurerID = playerCharacter.id;
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
 var adventurerLevel = playerCharacter.level;
@@ -29,12 +31,26 @@ playerXP.setAttribute("max", 100);
 
 displayLives();
 
+function savePlayerInfo(){
+    var playerCharacterSave = {
+        "id": adventurerID,
+        "characterName": adventurerName,
+        "health": adventurerHealth,
+        "damage": adventurerDamage,
+        "xp": adventurerXP,
+        "level": adventurerLevel,
+        "lives": adventurerLives,
+        "src": adventurerImg
+    }
+    localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
+}
+
 // music controls
 musicEl.volume = 0.1;
 musicEl.loop = true;
 
-// Restart Button On-Click
-var resetBtn = document.getElementById("restartBtn");
+// Header On-Click Events
+saveBtn.addEventListener("click", savePlayerInfo);
 resetBtn.addEventListener("click", restartGame);
 
 function restartGame() {
@@ -372,6 +388,7 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
         key = event.key.toLowerCase();
         return letterInWord();
     }
+
 
     function startHangmanGame() {
         console.log("Countdown starts time to find words")
