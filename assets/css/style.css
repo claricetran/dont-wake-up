@@ -287,8 +287,8 @@ hr {
 #gameScreenGrid img {
     position: absolute;
     align-self: flex-end;
-    width: 300%;
-    bottom: -50%;
+    width: 250%;
+    bottom: -60%;
     height: auto;
 }
 
@@ -340,6 +340,7 @@ hr {
     text-align: center;
     align-self: flex-start;
     color: white;
+    background-color: black;
 }
 
 .fade-out-image {
