@@ -302,6 +302,7 @@ hr {
 #hangmanStartBtn {
     position: absolute;
     font-size: 0.9vw;
+    top: 50%;
 }
 
 #wordsFound {
@@ -327,6 +328,7 @@ hr {
     position: absolute;
     height: 25%;
     width: 200%;
+    top: -10%
 }
 
 #combatMessage {
