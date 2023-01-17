@@ -147,15 +147,13 @@ function gameLose() {
 	}, 3000);
 }
 
-function checkGameWin(){
-    if (taleTracker == taleArray.length -1)
-    {
-        calculateScore();
-        localStorage.setItem("gameStatus", "win");
-        localStorage.setItem("score", playerScore);
-        location.href = "./endGame.html"
-        
-    }
+function checkGameWin() {
+	if (taleTracker == taleArray.length - 1) {
+		calculateScore();
+		localStorage.setItem("gameStatus", "win");
+		localStorage.setItem("score", playerScore);
+		location.href = "./endGame.html";
+	}
 }
 
 function printMessage(destination, message, speed) {
@@ -769,7 +767,7 @@ function loadOptions() {
 }
 
 mainGameContinueBtn.addEventListener("click", () => {
-    checkGameWin();
+	checkGameWin();
 	// When not playing the game
 	if (!gameIsPlaying && allowNextDialogue) {
 		// if the current scene does not have a game
@@ -954,15 +952,7 @@ function initGame() {
 	} else {
 		taleTracker = 0;
 	}
-	if (savedData.lives != null) {
-		adventurerLives = savedData.adventurerLives;
-	}
-	if (savedData.level != null) {
-		adventurerLevel = savedData.level;
-	}
-	if (savedData.xp != null) {
-		adventurerXP = savedData.xp;
-	}
+
 	console.log(taleArray);
 	// clear dialog and story to load new prompts
 	clearDialog();
