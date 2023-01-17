@@ -402,16 +402,62 @@ function startCombat(indexToReplay) {
 	}, 1000);
 }
 
-var RPGwordPool = [
-	"elves",
-	"human",
-	"dwarf",
-	"castle",
+var butcherWordPool = [
+	"meat",
+	"deli",
+	"cured",
+	"links",
+	"salami",
+	"bacon",
+	"beef",
+	"pork",
+	"lamb",
+	"chicken",
+	"filet",
+	"fish",
+	"venison",
+	"poultry",
+	"halal",
+	"kosher",
+	"meatloaf",
+	"steak",
+	"sausage",
+	"ribs",
+	"drumsticks",
+	"ham",
+	"roast",
+	"cleaver",
+	"salt",
+];
+
+var forestWordPool = [
+	"stick",
+	"flint",
+	"berries",
+	"rabbit",
+	"squirrel",
+	"fire",
+	"rock",
+	"forage",
 	"forest",
-	"dragon",
-	"princess",
-	"witch",
-	"troll",
+	"raspberry",
+	"strawberry",
+	"blueberry",
+	"dandelion",
+	"pebble",
+	"blackberry",
+	"nettle",
+	"elderflower",
+	"chestnut",
+	"mushroom",
+	"huckleberry",
+	"acorn",
+	"walnut",
+	"almond",
+	"cashew",
+	"watercress",
+	"burdock",
+	"parsnip",
 ];
 
 // Hangman Game function
@@ -463,7 +509,7 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 
 	startMiniGameBtn.addEventListener("click", function () {
 		mainGameBackBtn.setAttribute("class", "nes-btn is-disabled");
-		startHangmanGame();
+		startHangmanGame(timeLeft);
 		randomizer();
 		wordEl.textContent = maskedWord.join(" ");
 		startMiniGameBtn.style.display = "none";
@@ -507,9 +553,8 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 		return letterInWord();
 	}
 
-	function startHangmanGame() {
+	function startHangmanGame(timeLeft) {
 		console.log("Countdown starts time to find words");
-		timeLeft = 30;
 		timerInterval = setInterval(function () {
 			timeLeft--;
 			timeLeftEl.textContent = "Time Left: " + timeLeft + " seconds";
@@ -700,7 +745,11 @@ function loadScene() {
 	updateBackgroundImage();
 	if (hasStory()) {
 		console.log("pm in load scene a");
-		printMessage(storyTextPEl, taleArray[taleTracker][1].story[storyIndex], 30);
+		printMessage(
+			storyTextPEl,
+			taleArray[taleTracker][1].story[storyIndex].replace("Player", adventurerName),
+			30
+		);
 	}
 	// if there's a dialog to the scene AND there's no story or the story has reached the end, then load the dialog. Dialog will always be loaded after the story if there is onne.
 	if (
@@ -718,7 +767,9 @@ function loadScene() {
 	// if there is a game to play, check what type of game it is and play it.
 	if (hasGame(taleArray[taleTracker][1].game) == true) {
 		if (taleArray[taleTracker][1].game == "hangman") {
-			playHangman(RPGwordPool, 35, 6);
+			playHangman(butcherWordPool, 60, 6);
+		} else if (taleArray[taleTracker][1].game == "hangman 2") {
+			playHangman(forestWordPool, 60, 6);
 		} else if (taleArray[taleTracker][1].game == "troll") {
 			playCombat(0);
 		} else if (taleArray[taleTracker][1].game == "witch") {
@@ -854,6 +905,7 @@ dialogueNextBtn.addEventListener("click", () => {
 						console.log("at 434:" + taleTracker);
 						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
 					} else {
+						console.log("at 905:");
 						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
 					}
 				} else {
