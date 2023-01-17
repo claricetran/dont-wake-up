@@ -165,7 +165,6 @@ healthPotionEl.addEventListener("click", function(){
     if(!gameIsPlaying && adventurerHealth < playerHealth.max){
         adventurerHealth = adventurerHealth + 10
         playerHealth.setAttribute("value", adventurerHealth);
-        console.log(playerHealth)
     }
 })
 
@@ -325,12 +324,16 @@ function startCombat(indexToReplay) {
         enemyHealth--
         enemyHealthProgress.setAttribute("value", enemyHealth)
     })
+    var timePlayed = 0
     timerInterval = setInterval(function () {
         if (enemyHealth > 0) {
+            timePlayed++
             adventurerHealth = adventurerHealth - enemyDamagePoints
             playerHealth.setAttribute("value", adventurerHealth);
         } else {
-            addXPToTotal(adventurerHealth)
+            var figthTimeTotal = playerHealth.max/enemyDamagePoints
+            var xpGainedCombat = Math.floor((figthTimeTotal/timePlayed)*enemyHealthPoints*2)
+            addXPToTotal(xpGainedCombat)
             console.log("Player Won")
             clearInterval(timerInterval)
             enemyHealthProgress.remove()
@@ -338,7 +341,7 @@ function startCombat(indexToReplay) {
             messageEl.textContent = "Victory!"
             allowNextDialogue = false;
             printMessage(dialogueTextEl, "Aaargh...", 30)
-            var endMessage = "You defeated the enemy and gained " + adventurerHealth + " XP! You are able to continue!"
+            var endMessage = "You defeated the enemy and gained " + xpGainedCombat + " XP! You are able to continue!"
             printMessage(storyTextPEl, endMessage, 30)
             mainGameContinueBtn.setAttribute("class", "nes-btn")
             divB3.appendChild(messageEl)
@@ -938,5 +941,5 @@ fetch("./assets/JSON/story.json")
 	.then((res) => res.json())
 	.then((data) => {
 		tale = data;
-		initGame();
+		// initGame();
 	});
