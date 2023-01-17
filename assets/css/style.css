@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(82, 57, 94);
+    background-color: #05040a;
 }
 
 header {
@@ -29,8 +29,9 @@ audio {
     border: 5px solid black;
     background-image: url(../images/backgrounds/start-screen-2.png);
     background-position: center;
+    background-repeat: no-repeat;
     height: 100vh;
-    width: 100%;
+    /* width: 100%; */
 }
 
 #start-info {
@@ -295,7 +296,7 @@ hr {
 #gameScreenGrid {
     background-image: url(../images/backgrounds/sun-shinning-through.png);
     border: #000 solid 5px;
-    background-size: contain;
+    background-size: cover;
     margin: 0;
     display: grid;
     grid-template-columns: repeat(5, auto);

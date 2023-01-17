@@ -50,6 +50,7 @@ function savePlayerInfo() {
 		currScene: taleTracker,
 	};
 	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
+    console.log("save")
 }
 
 // Clear player character save and return to start page
@@ -99,9 +100,10 @@ musicEl.loop = true;
 // Header On-Click Events
 saveBtn.addEventListener("click", function(){
     if(!gameIsPlaying){
-        savePlayerInfo
+        savePlayerInfo()
     }
 });
+
 resetBtn.addEventListener("click", restartGame);
 titleBtn.addEventListener("click", function () {
 	location.href = "./index.html";
