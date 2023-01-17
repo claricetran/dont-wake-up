@@ -1,4 +1,3 @@
-#body,
 body {
     background-color: rgb(82, 57, 94);
 }
@@ -19,12 +18,16 @@ audio {
     height: 30px;
 }
 
+.hidden {
+    display: none;
+}
+
 /*Start Screen CSS */
 #start-container {
     position: relative;
     text-align: center;
     border: 5px solid black;
-    background-image: url(../images/backgrounds/start-screen.png);
+    background-image: url(../images/backgrounds/start-screen-2.png);
     background-position: center;
     height: 100vh;
     width: 100%;
@@ -53,7 +56,7 @@ audio {
 
 /*Character Select CSS */
 #character-select-container {
-    position: relative;
+    position: absolute;
     height: 100vh;
     width: 100%;
     background-color: #111116;
@@ -63,14 +66,19 @@ audio {
     overflow: auto;
 }
 
+#character-select-container h2 {
+    color: white;
+}
+
+#character-select-container p {
+    color: white;
+    margin-top: 3%;
+}
+
 #character-select-nav {
     display: flex;
     justify-content: space-between;
     margin: 1%;
-}
-
-#character-select-container h2 {
-    color: white;
 }
 
 #character-select-carousel {
@@ -88,15 +96,6 @@ audio {
     width: 400px;
 }
 
-.hidden {
-    display: none;
-}
-
-#character-select-container {
-    position: absolute;
-    text-align: center;
-}
-
 #character-name-input {
     color: white;
     margin: auto;
@@ -105,26 +104,30 @@ audio {
     width: 30%;
 }
 
-#character-select-container p {
-    color: white;
-    margin-top: 3%;
+/* Main page CSS */
+#body {
+    background-image: url(/assets/images/backgrounds/rpg-main-sky.jpg);
 }
 
-/* Main page CSS */
 #main-page-nav {
     display: flex;
     justify-content: space-between;
+}
+
+#main-nav-btns {
+    width: 25%;
+    text-align: left;
+}
+
+#music {
+    width: 25%;
+    padding-left: 1%;
 }
 
 #mainGame-Main {
     display: flex;
     width: 100%;
     height: 80vh;
-    background-color: rgb(82, 57, 94);
-}
-
-#main-nav-btns{
-    font-size: 1.5vh;
 }
 
 /* Character and Inventory Sections */
@@ -146,12 +149,13 @@ audio {
 #character-progress * {
     height: inherit;
 }
+
 /* borders */
 #character-progress,
 #inventory-weapon {
     background-color: rgba(187, 160, 193, 0.675);
     margin: 3%;
-    border: 3px solid black;
+    border: 3px solid rgb(82, 57, 94);
     padding: 3%;
 }
 /* Character section */
@@ -160,6 +164,7 @@ audio {
     display: flex;
     justify-content: center;
 }
+
 #name {
     position: absolute;
     left: 0;
@@ -247,7 +252,7 @@ hr {
     background-color: antiquewhite;
     width: 10vw;
     left: 5%;
-    border: rgb(77, 54, 37) solid 3px;
+    border: 3px solid rgb(82, 57, 94);
     padding: 1px;
 }
 
@@ -277,6 +282,9 @@ hr {
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 
@@ -288,16 +296,15 @@ hr {
     background-image: url(../images/backgrounds/sun-shinning-through.png);
     border: #000 solid 5px;
     background-size: contain;
-    margin: auto;
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(5, auto);
-    height: 80%;
+    width: 96%;
     aspect-ratio: 3/2;
 }
 
 #gameScreenGrid div {
     position: relative;
-    /* border: #000000 solid 1px; */
     text-align: center;
     display: flex;
     justify-content: center;
@@ -442,7 +449,7 @@ label {
     padding: 3%;
     margin: 3%;
     height: 96%;
-    border: 3px solid black;
+    border: 3px solid rgb(82, 57, 94);
     background-color: rgba(187, 160, 193, 0.675);
 }
 
@@ -458,21 +465,14 @@ label {
     margin-bottom: 5px;
 }
 
-#main-back-btn {
-    height: 100%;
-    width: 35%;
-    font-size: 0.75vw;
-    border-style: solid;
-}
-
 #main-continue-btn {
+    margin-left: 15%;
     height: 100%;
     width: 50%;
     font-size: 0.75vw;
 }
 
 /* End Game CSS*/
-
 #quote-container {
 	padding: 15px;
 }
@@ -534,13 +534,23 @@ label {
     position: absolute;
 }
 
-
 footer {
     height: 8vh;
     text-align: center;
     padding: 20px;
 }
+
+#dev-links a {
+    color: rgb(4, 68, 42);
+}
+
 main {
     margin: 0 auto;
     text-align: center;
 }
+
+@media (max-width: 1024px) { 
+    #main-nav-btns{
+        font-size: 1.5vh;
+    }
+  }
