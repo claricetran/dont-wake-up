@@ -105,23 +105,45 @@
 		"next": "scene-1-12"
 	},
 	"scene-1-12": {
-		"place": "tunnel",
+		"place": "forest",
 		"story": [
-			""
+			"Your wandering has brought you to a cliffside.",
+			"In the cliffside, is a cave.",
+			"You enter the cave. If there's a chance Mr. Oinks is in there, he needs you."
 		],
-		"game": "troll",
-		"next": ["scene-1-13", ""]
+		"next": "scene-1-13"
 	},
 	"scene-1-13": {
 		"place": "tunnel",
-		"story": [
-			"You've defeated the troll. No one gets in the way of you and your mission to find Mr. Oinks"
-		],
-		"next": "scene-1-14"
+		"story": [""],
+		"game": "troll",
+		"next": ["scene-1-14", ""]
 	},
 	"scene-1-14": {
+		"place": "tunnel",
+		"story": [
+			"You've defeated the troll. No one gets in the way of you and your mission to find Mr. Oinks.",
+			"You walk out into the forest once more. The search for Mr. Oinks continues."
+		],
+		"dialog": ["Player: \"I'll find you Mr. Oinks.\""],
+		"next": "scene-1-14"
+	},
+	"scene-1-15": {
 		"place": "swamp",
-		"story": ["Out of the tunnel you've meandered your way to a swamp."],
-		"next": "ty-for-playing"
+		"story": [""],
+		"game": "witch",
+		"next": "scene-1-16"
+	},
+	"scene-1-16": {
+		"place": "swamp",
+		"story": ["The swamp witch is defeated."],
+		"dialog": ["Player: \"Get pwned, witch!\""],
+		"next": "scene-1-17"
+	},
+	"scene-1-17": {
+		"place": "peace",
+		"story": [
+			"Thank you, Player:, for playing the Don't Wake Up demo. We hope to add more to the story to get Mr. Oinks back to you. For now you get to wake up and see your scores so far."
+		]
 	}
 }
