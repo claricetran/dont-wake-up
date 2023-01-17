@@ -959,5 +959,5 @@ fetch("./assets/JSON/story.json")
 	.then((res) => res.json())
 	.then((data) => {
 		tale = data;
-		// initGame();
+		initGame();
 	});

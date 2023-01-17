@@ -285,7 +285,8 @@ hr {
 }
 /* game grid layout */
 #gameScreenGrid {
-    background-image: url(../images/village.png);
+    background-image: url(../images/backgrounds/sun-shinning-through.png);
+    border: #000 solid 5px;
     background-size: contain;
     margin: auto;
     display: grid;
