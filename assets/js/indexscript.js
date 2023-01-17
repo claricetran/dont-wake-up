@@ -6,7 +6,7 @@ var requestURL = "https://api.parser.name/?api_key=" + apiKey + "&endpoint=gener
 // Document selectors
 var startContainer = document.getElementById("start-container");
 var characterSelectContainer = document.getElementById("character-select-container");
-var characterNameInput = document.querySelector("#character-name");
+var characterNameInput = document.querySelector("#character-name-input-field");
 var randomizeBtn = document.getElementById("randomize-btn");
 var startBtn = document.getElementById("start-btn");
 var loadBtn = document.getElementById("load-btn");

@@ -147,6 +147,17 @@ function gameLose() {
 	}, 3000);
 }
 
+function checkGameWin(){
+    if (taleTracker == taleArray.length -1)
+    {
+        calculateScore();
+        localStorage.setItem("gameStatus", "win");
+        localStorage.setItem("score", playerScore);
+        location.href = "./endGame.html"
+        
+    }
+}
+
 function printMessage(destination, message, speed) {
 	destination.innerHTML = "";
 	var i = 0;
@@ -755,6 +766,7 @@ function loadOptions() {
 }
 
 mainGameContinueBtn.addEventListener("click", () => {
+    checkGameWin();
 	// When not playing the game
 	if (!gameIsPlaying && allowNextDialogue) {
 		// if the current scene does not have a game
@@ -971,5 +983,5 @@ fetch("./assets/JSON/story.json")
 	.then((res) => res.json())
 	.then((data) => {
 		tale = data;
-		// initGame();
+		initGame();
 	});
