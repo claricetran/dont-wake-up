@@ -87,6 +87,7 @@ function calculateScore() {
 	var levelScore = adventurerLevel * 1000;
 	var livesScore = adventurerLives * 100;
 	playerScore = levelScore + livesScore;
+    console.log(playerScore)
 }
 
 // Music controls
