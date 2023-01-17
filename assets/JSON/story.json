@@ -24,14 +24,17 @@
 			"Woman: \"Have you tried the local butcher's? He gets fresh pigs every day.\"",
 			"Player: \"WHERE?\""
 		],
+		"next": "scene-1-2-1"
+	},
+	"scene-1-2-1": {
+		"place": "url(./assets/images/backgrounds/village.png)",
+		"story": ["The woman points you in the right direction."],
+		"dialog": ["Player: \"THANK YOU!\""],
 		"next": "scene-1-3"
 	},
 	"scene-1-3": {
 		"place": "url(./assets/images/backgrounds/butcher.png)",
-		"story": [
-			"The woman points you in the right direction.",
-			"You burst into the butcher's shop."
-		],
+		"story": ["You burst into the butcher's shop."],
 		"dialog": [
 			"Player: \"MR. OINKS?\"",
 			"Butcher: \"'fraid that's not my name. I can help ya if yer lookin fer someone else in town.\"",
@@ -67,7 +70,7 @@
 	"scene-1-6": {
 		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": [
-			"Find as many words as you can in the time given! If the timer runs out before getting at least 5 words you lose a life. Any extra words give you extra XP!"
+			"Find as many words as you can in the time given related to the butcher! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP!"
 		],
 		"game": "hangman",
 		"next": ["scene-1-8", "scene-1-9"]
@@ -126,6 +129,32 @@
 			"You walk out into the forest once more. The search for Mr. Oinks continues."
 		],
 		"dialog": ["Player: \"I'll find you Mr. Oinks.\""],
+		"next": "scene-1-14-1"
+	},
+	"scene-1-14-1": {
+		"place": "",
+		"story": ["Your search has been long.", "You grow weary and decide to make camp."],
+		"next": "scene-1-14-2"
+	},
+	"scene-1-14-2": {
+		"place": "",
+		"story": [
+			"Find as many words as you can in the time given related to the forest! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP!"
+		],
+		"game": "hangman 2",
+		"next": ["scene-1-14-3", ""]
+	},
+	"scene-1-14-3": {
+		"place": "url(./assets/images/backgrounds/forest.png)",
+		"story": [
+			"You've gathered enough to last you through the night and make quick camp to cook your findings."
+		],
+		"dialog": ["Player: \"Maybe I should have nabbed some meat at the buctcher's.\""],
+		"next": "scene-1-14-4"
+	},
+	"scene-1-14-4": {
+		"place": "url(./assets/images/backgrounds/swamp.png)",
+		"story": ["After a quick meal, you resume your journey."],
 		"next": "scene-1-15"
 	},
 	"scene-1-15": {
@@ -143,7 +172,7 @@
 	"scene-1-17": {
 		"place": "url(./assets/images/backgrounds/sun-shining-through.png)",
 		"story": [
-			"Thank you, Player:, for playing the Don't Wake Up demo. We hope to add more to the story to get Mr. Oinks back to you. For now you get to wake up and see your scores so far."
+			"Thank you, Player, for playing the Don't Wake Up demo. We hope to add more to the story to get Mr. Oinks back to you. For now you get to wake up and see your scores so far."
 		]
 	}
 }
