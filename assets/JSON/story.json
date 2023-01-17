@@ -107,11 +107,10 @@
 	"scene-1-12": {
 		"place": "tunnel",
 		"story": [
-			"In your wandering you've found yourself staring down a tunnel.",
-			"You enter thinking perhaps Mr. Oinks was taken by some sort of beast."
+			""
 		],
 		"game": "troll",
-		"next": "scene-1-13"
+		"next": ["scene-1-13", ""]
 	},
 	"scene-1-13": {
 		"place": "tunnel",
