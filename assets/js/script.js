@@ -54,7 +54,9 @@ function savePlayerInfo() {
 
 // Clear player character save and return to start page
 function restartGame() {
-	localStorage.clear(playerCharacter);
+	localStorage.clear("playerCharacter");
+    localStorage.clear("gameStatus");
+    localStorage.clear("score");
 	location.href = "./index.html";
 }
 
@@ -95,7 +97,11 @@ musicEl.volume = 0.1;
 musicEl.loop = true;
 
 // Header On-Click Events
-saveBtn.addEventListener("click", savePlayerInfo);
+saveBtn.addEventListener("click", function(){
+    if(!gameIsPlaying){
+        savePlayerInfo
+    }
+});
 resetBtn.addEventListener("click", restartGame);
 titleBtn.addEventListener("click", function () {
 	location.href = "./index.html";
@@ -220,7 +226,6 @@ var enemyWinDialogue;
 var indexToReplay;
 
 function playCombat(index) {
-	saveBtn.classList.add("is-disabled");
 
 	indexToReplay = index;
 	backgroundImg = combatVersion[index].backgroundImg;
@@ -363,7 +368,6 @@ function startCombat(indexToReplay) {
 			mainGameContinueBtn.setAttribute("class", "nes-btn");
 			divB3.appendChild(messageEl);
 			gameIsPlaying = false;
-			saveBtn.classList.remove("is-disabled");
 			playerHealth.setAttribute("value", adventurerHealth);
 			allowGameReset = true;
 			gameWin = true;
@@ -586,7 +590,6 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 					gameIsPlaying = false;
 					console.log("Game is Playing: " + gameIsPlaying);
 					wordEl.remove();
-					saveBtn.classList.remove("is-disabled");
 					playerHealth.setAttribute("value", adventurerHealth);
 					allowGameReset = true;
 					clearMiniGame();

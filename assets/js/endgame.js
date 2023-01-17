@@ -90,6 +90,9 @@ function submitScore(){
     {
         newScore.username = nameInput.value;
     }
+    localStorage.clear("playerCharacter");
+    localStorage.clear("gameStatus");
+    localStorage.clear("score");
     location.href = "./scores.html";
     allScores.push(newScore);
     localStorage.setItem("allScores", JSON.stringify(allScores));

@@ -120,7 +120,10 @@ function generateName(){
   // Event listeners
 startBtn.addEventListener("click", showCharacterSelect);
 loadBtn.addEventListener("click", function(){
-    location.href = "./mainGame.html"
+    if(localStorage.getItem("playerCharacter") != null){
+        location.href = "./mainGame.html"
+    }
+    
 });
 backBtn.addEventListener("click", returnToTitle);
 randomizeBtn.addEventListener("click", generateName);
