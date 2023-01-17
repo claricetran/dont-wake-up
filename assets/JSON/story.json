@@ -70,7 +70,7 @@
 	"scene-1-6": {
 		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": [
-			"Find as many words as you can in the time given related to the butcher! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP!"
+			"Find as many words as you can in the time given related to the butcher! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP! Beware, your health bar is will decrease for each incorrect keystroke. Don't spam your keyboard. ☜(ﾟヮﾟ☜)"
 		],
 		"game": "hangman",
 		"next": ["scene-1-8", "scene-1-9"]
@@ -143,7 +143,7 @@
 	"scene-1-14-2": {
 		"place": "url(./assets/images/backgrounds/forest.png)",
 		"story": [
-			"Find as many words as you can in the time given related to the forest! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP!"
+			"Find as many words as you can in the time given related to the forest! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP! Beware, your health bar is will decrease for each incorrect keystroke. Don't spam your keyboard. ☜(ﾟヮﾟ☜)"
 		],
 		"game": "hangman 2",
 		"next": ["scene-1-14-3", ""]
@@ -170,10 +170,21 @@
 	"scene-1-16": {
 		"place": "url(./assets/images/backgrounds/swamp.png)",
 		"story": ["The swamp witch is defeated."],
-		"dialog": ["Player: \"Get pwned, witch!\""],
+		"dialog": [
+			"Witch: \"Have mercyyyyyyyyy.\"",
+			"Player: \"Why should I? You're the one who attacked me!\"",
+			"Witch: \"I'm just used to people coming to my swamp and attacking me so I thought I was defending myself.\"",
+			"Player: \"I'm just looking for my pig, Mr. Oinks.\"",
+			"Witch: \"I might have something in my hut that can help us find it.\""
+		],
 		"next": "scene-1-17"
 	},
 	"scene-1-17": {
+		"place": "url(./assets/images/backgrounds/witchesHut.png)",
+		"story": ["The witch leads you to her hut. Hopefully she has no tricks up her sleeve."],
+		"next": "scene-1-18"
+	},
+	"scene-1-18": {
 		"place": "url(./assets/images/backgrounds/sun-shining-through.png)",
 		"story": [
 			"Thank you, Player, for playing the Don't Wake Up demo. We hope to add more to the story to get Mr. Oinks back to you. For now you get to wake up and see your scores so far."
