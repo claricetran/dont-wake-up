@@ -279,6 +279,10 @@ hr {
     flex-direction: column;
 }
 
+
+.next-disabled {
+    pointer-events: none;
+}
 /* game grid layout */
 #gameScreenGrid {
     background-image: url(../images/village.png);
