@@ -8,9 +8,13 @@ var playerXP = document.getElementById("xp");
 var heartOne = document.getElementById("1");
 var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
-
+var saveBtn = document.getElementById("save-btn");
+var resetBtn = document.getElementById("restart-btn");
+var titleBtn = document.getElementById("title-btn");
 var musicEl = document.getElementById("music");
-// Retrieving values from local storage and displaying them in character display panel
+
+// Retrieving values from local storage
+var adventurerID = playerCharacter.id;
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
 var adventurerLevel = playerCharacter.level;
@@ -18,7 +22,9 @@ var adventurerHealth = playerCharacter.health;
 var adventurerDamage = playerCharacter.damage;
 var adventurerXP = playerCharacter.xp;
 var adventurerLives = playerCharacter.lives;
+var playerScore = 0;
 
+// Display to character panel
 playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
@@ -29,20 +35,28 @@ playerXP.setAttribute("max", 100);
 
 displayLives();
 
-// music controls
-musicEl.volume = 0.1;
-musicEl.loop = true;
+// Save player information to local storage
+function savePlayerInfo() {
+	var playerCharacterSave = {
+		id: adventurerID,
+		characterName: adventurerName,
+		health: adventurerHealth,
+		damage: adventurerDamage,
+		xp: adventurerXP,
+		level: adventurerLevel,
+		lives: adventurerLives,
+		src: adventurerImg,
+	};
+	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
+}
 
-// Restart Button On-Click
-var resetBtn = document.getElementById("restartBtn");
-resetBtn.addEventListener("click", restartGame);
-
+// Clear player character save and return to start page
 function restartGame() {
-	localStorage.clear();
+	localStorage.clear(playerCharacter);
 	location.href = "./index.html";
 }
 
-// change heart classes based on lives
+// Change heart classes based on lives
 function displayLives() {
 	if (adventurerLives == 2.5) {
 		heartThree.classList.add("is-half");
@@ -67,7 +81,24 @@ function displayLives() {
 	}
 }
 
-// main game elements
+function calculateScore() {
+	var levelScore = adventurerLevel * 1000;
+	var livesScore = adventurerLives * 100;
+	playerScore = levelScore + livesScore;
+}
+
+// Music controls
+musicEl.volume = 0.1;
+musicEl.loop = true;
+
+// Header On-Click Events
+saveBtn.addEventListener("click", savePlayerInfo);
+resetBtn.addEventListener("click", restartGame);
+titleBtn.addEventListener("click", function () {
+	location.href = "./index.html";
+});
+
+// Main game document selectors
 var mainGameBackBtn = document.getElementById("main-back-btn");
 var mainGameContinueBtn = document.getElementById("main-continue-btn");
 var dialogueTextEl = document.getElementById("dialogueText");
@@ -127,183 +158,211 @@ function printMessage(destination, message, speed) {
 	}, speed);
 }
 
-function playTrollCombat() {
-	playCombat(
-		"url(./assets/images/backgrounds/cave.png)",
-		"You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel",
-		"troll-lord-appearing",
-		"troll-lord",
-		"How dare you try to pass through my Kingdom!!",
-		"Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
-		20,
-		20,
-		"The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win."
-	);
-}
+var combatVersion = [
+	{
+		backgroundImg: "url(./assets/images/backgrounds/cave.png)",
+		begginingText:
+			"You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel",
+		enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
+		enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
+		dialogue: "How dare you try to pass through my Kingdom!!",
+		story: "Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
+		enemyHealthPoints: 20,
+		enemyDamagePoints: 20,
+		enemyWinDialogue:
+			"The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win.",
+	},
+	{
+		backgroundImg: "url(./assets/images/backgrounds/swamp.png)",
+		begginingText:
+			"You wander through the forest as the ground begins to get soggy. with every step your feet get more soaked and the air starts to fill with a putrid smell and a greenish fog emerges from all wround you...",
+		enemyFileNameWithCloud: "./assets/images/characters/Swamp-witch-appearing.png",
+		enemyFileNameNoCloud: "./assets/images/characters/Swamp-witch.png",
+		dialogue: "You dare come close to the dreaded swamp witch? You will get what you deserve!",
+		story: "Oh no! The Witch is challenging you to a battle! In order to continue you need to defeat her",
+		enemyHealthPoints: 50,
+		enemyDamagePoints: 15,
+		enemyWinDialogue:
+			"He that fights and runs away, May turn and fight another day; But he that is in battle slain, Will never rise to fight again.",
+	},
+];
 
-function playCombat(
-	backgroundImg,
-	begginingText,
-	enemyAppear,
-	enemyAfter,
-	dialogue,
-	story,
-	enemyHealthPoints,
-	enemyDamagePoints,
-	enemyWinDialogue
-) {
+var backgroundImg;
+var begginingText;
+var enemyFileNameWithCloud;
+var enemyFileNameNoCloud;
+var dialogue;
+var story;
+var enemyHealthPoints;
+var enemyDamagePoints;
+var enemyWinDialogue;
+
+function playCombat(index) {
+	var index = index;
+	backgroundImg = combatVersion[index].backgroundImg;
+	begginingText = combatVersion[index].begginingText;
+	enemyFileNameWithCloud = combatVersion[index].enemyFileNameWithCloud;
+	enemyFileNameNoCloud = combatVersion[index].enemyFileNameNoCloud;
+	dialogue = combatVersion[index].dialogue;
+	story = combatVersion[index].story;
+	enemyHealthPoints = combatVersion[index].enemyHealthPoints;
+	enemyDamagePoints = combatVersion[index].enemyDamagePoints;
+	enemyWinDialogue = combatVersion[index].enemyWinDialogue;
+
+	// Setting health back to saved health at start of game
 	adventurerHealth = playerCharacter.health;
 	playerHealth.setAttribute("value", adventurerHealth);
+	// Console logging states
 	gameIsPlaying = true;
 	console.log("Game is Playing: " + gameIsPlaying);
 	console.log("Combat Game Start");
+
 	gameGridEl.style.backgroundImage = backgroundImg;
-	allowNextDialogue = false;
 	printMessage(storyTextPEl, begginingText, 30);
 	mainGameContinueBtn.setAttribute("class", "nes-btn");
+
 	mainGameContinueBtn.addEventListener("click", function () {
 		if (allowNextDialogue && allowNextGame && gameIsPlaying) {
 			mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
-			startCombatGame();
+			startCombatGame(index);
+			makeEnemyAppear();
+			// makes sure the game doesn't restart when continue is clicked at the end
 			allowNextGame = false;
 		}
 	});
+}
 
-	function startCombatGame() {
-		console.log("Enemy Appears");
-		var startBtn = document.createElement("button");
-		startBtn.setAttribute("class", "nes-btn");
-		startBtn.textContent = "Fight!";
-		dialogueBtnContainer.appendChild(startBtn);
-		makeEnemyAppear(enemyAppear, enemyAfter);
-		printMessage(dialogueTextEl, dialogue, 30);
-		printMessage(storyTextPEl, story, 30);
-		var messageEl = document.createElement("h2");
-		messageEl.setAttribute("id", "combatMessage");
-		allowNextDialogue = false;
-		startBtn.addEventListener("click", function (event) {
-			event.preventDefault();
-			if (allowNextDialogue) {
-				printMessage(
-					storyTextPEl,
-					" Click on the enemy to deal damage once the game starts.",
-					30
-				);
-				startBtn.remove();
-				allowNextGame = true;
-				countdownTime = 4;
-				messageEl.textContent = "Ready?";
-				divB3.appendChild(messageEl);
-				countdown = setInterval(function () {
-					countdownTime--;
-					messageEl.textContent = countdownTime;
-					if (countdownTime < 0) {
-						clearInterval(countdown);
-						messageEl.textContent = "Attack!";
-					}
-				}, 1000);
-				setTimeout(function () {
-					startCombat();
-				}, 4000);
-			}
-		});
-	}
+function startCombatGame(index) {
+	var startBtn = document.createElement("button");
+	startBtn.setAttribute("class", "nes-btn");
+	startBtn.textContent = "Fight!";
+	dialogueBtnContainer.appendChild(startBtn);
 
-	function startCombat() {
-		console.log("Fighting Started");
-		var messageEl = document.getElementById("combatMessage");
-		messageEl.remove();
-		var enemyHealth = enemyHealthPoints;
-		var enemyHealthProgress = document.createElement("progress");
-		enemyHealthProgress.setAttribute("class", "nes-progress is-success");
-		enemyHealthProgress.setAttribute("id", "enemyHealthBar");
-		enemyHealthProgress.setAttribute("value", enemyHealth);
-		enemyHealthProgress.setAttribute("max", enemyHealth);
-		divC3.appendChild(enemyHealthProgress);
-		var targetEnemyEl = document.getElementById("targetEnemy");
-		targetEnemyEl.addEventListener("click", function () {
-			enemyHealth--;
-			enemyHealthProgress.setAttribute("value", enemyHealth);
-		});
-		timerInterval = setInterval(function () {
-			if (enemyHealth > 0) {
-				adventurerHealth = adventurerHealth - enemyDamagePoints;
-				playerHealth.setAttribute("value", adventurerHealth);
-			} else {
-				addXPToTotal(adventurerHealth);
-				console.log("Player Won");
-				clearInterval(timerInterval);
-				enemyHealthProgress.remove();
-				targetEnemyEl.remove();
-				messageEl.textContent = "Victory!";
-				printMessage(dialogueTextEl, "Aaargh...", 30);
-				var endMessage =
-					"You defeated the enemy and gained " +
-					adventurerHealth +
-					" XP! You are able to continue!";
-				printMessage(storyTextPEl, endMessage, 30);
-				mainGameContinueBtn.setAttribute("class", "nes-btn");
-				divB3.appendChild(messageEl);
-				gameIsPlaying = false;
-				clearMiniGame();
-			}
-			if (adventurerHealth <= 0) {
-				if (adventurerHealth == 0) {
-					gameLose();
+	printMessage(dialogueTextEl, dialogue, 30);
+	printMessage(storyTextPEl, story, 30);
+
+	var messageEl = document.createElement("h2");
+	messageEl.setAttribute("id", "combatMessage");
+
+	startBtn.addEventListener("click", function (event) {
+		event.preventDefault();
+		if (allowNextDialogue) {
+			printMessage(
+				storyTextPEl,
+				" Click on the enemy to deal damage once the game starts.",
+				30
+			);
+			startBtn.remove();
+			allowNextGame = true;
+			countdownTime = 4;
+			messageEl.textContent = "Ready?";
+			divB3.appendChild(messageEl);
+			countdown = setInterval(function () {
+				countdownTime--;
+				messageEl.textContent = countdownTime;
+				if (countdownTime < 0) {
+					clearInterval(countdown);
+					messageEl.textContent = "Attack!";
 				}
-				console.log("Player Lost");
-				adventurerLives = adventurerLives - 0.5;
-				displayLives();
-				clearInterval(timerInterval);
-				enemyHealthProgress.remove();
-				messageEl.textContent = "Defeated";
-				printMessage(dialogueTextEl, enemyWinDialogue, 30);
-				divB3.appendChild(messageEl);
-				var restartBtn = document.createElement("button");
-				restartBtn.setAttribute("class", "nes-btn");
-				restartBtn.textContent = "Try again";
-				dialogueBtnContainer.appendChild(restartBtn);
-				allowNextDialogue = false;
-				restartBtn.addEventListener("click", function (event) {
-					event.preventDefault();
-					if (allowNextDialogue) {
-						console.log("Player is restarting mini game");
-						dialogueTextEl.textContent = "";
-						restartBtn.remove();
-						resetMiniGameGrid();
-						playCombat(
-							backgroundImg,
-							begginingText,
-							enemyAppear,
-							enemyAfter,
-							dialogue,
-							story,
-							enemyHealthPoints,
-							enemyWinDialogue
-						);
-					}
-				});
-			}
-		}, 1000);
-	}
-
-	function makeEnemyAppear(enemyFileName, newFileName) {
-		var enemyEl = document.createElement("img");
-		enemyEl.src = "./assets/images/characters/" + enemyFileName + ".png";
-
-		var divContainer = document.getElementById("e3");
-		divContainer.appendChild(enemyEl);
-
-		var nextEnemyEl = document.createElement("img");
-		nextEnemyEl.src = "./assets/images/characters/" + newFileName + ".png";
-		nextEnemyEl.setAttribute("id", "targetEnemy");
-		divContainer.appendChild(nextEnemyEl);
-		enemyEl.setAttribute("class", "fade-out-image");
-		function changeImage() {
-			enemyEl.remove();
+			}, 1000);
+			setTimeout(function () {
+				startCombat(index);
+			}, 4000);
 		}
-		setTimeout(changeImage, 4500);
+	});
+}
+
+function makeEnemyAppear() {
+	// Console logging states
+	console.log("Enemy Appears");
+
+	// creating first image with cloud
+	var enemyEl = document.createElement("img");
+	enemyEl.setAttribute("src", enemyFileNameWithCloud);
+	enemyEl.setAttribute("class", "fade-out-image");
+	// creating image that will stay once the one with clouds is gone
+	var nextEnemyEl = document.createElement("img");
+	nextEnemyEl.setAttribute("id", "targetEnemy");
+	nextEnemyEl.setAttribute("src", enemyFileNameNoCloud);
+
+	var divContainer = document.getElementById("e3");
+	divContainer.appendChild(enemyEl);
+	divContainer.appendChild(nextEnemyEl);
+
+	function changeImage() {
+		enemyEl.remove();
 	}
+	setTimeout(changeImage, 4500);
+}
+
+function startCombat(index) {
+	// Console logging states
+	console.log("Fighting Started");
+	// removing the start message
+	var messageEl = document.getElementById("combatMessage");
+	messageEl.remove();
+	// creating enemy health bar
+	var enemyHealth = enemyHealthPoints;
+	var enemyHealthProgress = document.createElement("progress");
+	enemyHealthProgress.setAttribute("class", "nes-progress is-success");
+	enemyHealthProgress.setAttribute("id", "enemyHealthBar");
+	enemyHealthProgress.setAttribute("value", enemyHealth);
+	enemyHealthProgress.setAttribute("max", enemyHealth);
+	divC3.appendChild(enemyHealthProgress);
+	// Adding event listener to defeat enemy
+	var targetEnemyEl = document.getElementById("targetEnemy");
+	targetEnemyEl.addEventListener("click", function () {
+		enemyHealth--;
+		enemyHealthProgress.setAttribute("value", enemyHealth);
+	});
+	timerInterval = setInterval(function () {
+		if (enemyHealth > 0) {
+			adventurerHealth = adventurerHealth - enemyDamagePoints;
+			playerHealth.setAttribute("value", adventurerHealth);
+		} else {
+			addXPToTotal(adventurerHealth);
+			console.log("Player Won");
+			clearInterval(timerInterval);
+			enemyHealthProgress.remove();
+			targetEnemyEl.remove();
+			messageEl.textContent = "Victory!";
+			printMessage(dialogueTextEl, "Aaargh...", 30);
+			var endMessage =
+				"You defeated the enemy and gained " +
+				adventurerHealth +
+				" XP! You are able to continue!";
+			printMessage(storyTextPEl, endMessage, 30);
+			mainGameContinueBtn.setAttribute("class", "nes-btn");
+			divB3.appendChild(messageEl);
+			gameIsPlaying = false;
+			clearMiniGame();
+		}
+		if (adventurerHealth <= 0) {
+			console.log("Player Lost");
+			adventurerLives = adventurerLives - 0.5;
+			displayLives();
+			clearInterval(timerInterval);
+			enemyHealthProgress.remove();
+			messageEl.textContent = "Defeated";
+			printMessage(dialogueTextEl, enemyWinDialogue, 30);
+			divB3.appendChild(messageEl);
+			var restartBtn = document.createElement("button");
+			restartBtn.setAttribute("class", "nes-btn");
+			restartBtn.textContent = "Try again";
+			dialogueBtnContainer.appendChild(restartBtn);
+			allowNextDialogue = false;
+			restartBtn.addEventListener("click", function (event) {
+				event.preventDefault();
+				if (allowNextDialogue) {
+					console.log("Player is restarting mini game");
+					dialogueTextEl.textContent = "";
+					restartBtn.remove();
+					resetMiniGameGrid();
+					playCombat(index);
+				}
+			});
+		}
+	}, 1000);
 }
 
 var RPGwordPool = [
@@ -621,8 +680,9 @@ function loadScene() {
 		if (taleArray[taleTracker][1].game == "hangman") {
 			playHangman(RPGwordPool, 35, 6);
 		} else if (taleArray[taleTracker][1].game == "troll") {
-			// TODO: put troll play combat function here
+			playCombat(0);
 		} else if (taleArray[taleTracker][1].game == "witch") {
+			playCombat(1);
 		}
 	}
 }
