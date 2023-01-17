@@ -1,475 +1,474 @@
 body {
-    background-color: rgb(82, 57, 94);
+	background-color: rgb(82, 57, 94);
 }
 
 header {
-    height: 9vh;
-    text-align: center;
-    padding: 20px;
+	height: 9vh;
+	text-align: center;
+	padding: 20px;
 }
 
 audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
-    background-color: rgba(123, 82, 133, 0.675);
-    color: #000;
+	background-color: rgba(123, 82, 133, 0.675);
+	color: #000;
 }
 
 audio {
-    height: 30px;
+	height: 30px;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 /*Start Screen CSS */
 #start-container {
-    position: relative;
-    text-align: center;
-    border: 5px solid black;
-    background-image: url(../images/backgrounds/start-screen-2.png);
-    background-position: center;
-    height: 100vh;
-    width: 100%;
+	position: relative;
+	text-align: center;
+	border: 5px solid black;
+	background-image: url(../images/backgrounds/start-screen-2.png);
+	background-position: center;
+	height: 100vh;
+	width: 100%;
 }
 
 #start-info {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	transform: translate(-50%, -50%);
 }
 
 #start-container h2 {
-    color: white;
+	color: white;
 }
 
 #warning-modal {
-    height: 300px;
-    width: 100%;
+	height: 300px;
+	width: 100%;
 }
 
 #modal-content {
-    background-color: black;
-    color: white;
+	background-color: black;
+	color: white;
 }
 
 /*Character Select CSS */
 #character-select-container {
-    position: absolute;
-    height: 100vh;
-    width: 100%;
-    background-color: #111116;
-    background-image: url(../images/backgrounds/forest-character-select.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: auto;
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+	background-color: #111116;
+	background-image: url(../images/backgrounds/forest-character-select.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: auto;
 }
 
 #character-select-container h2 {
-    color: white;
+	color: white;
 }
 
 #character-select-container p {
-    color: white;
-    margin-top: 3%;
+	color: white;
+	margin-top: 3%;
 }
 
 #character-select-nav {
-    display: flex;
-    justify-content: space-between;
-    margin: 1%;
+	display: flex;
+	justify-content: space-between;
+	margin: 1%;
 }
 
 #character-select-carousel {
-    margin: auto;
-    padding: 50px;
-    background-color: rgba(19, 35, 37, 0.801);
-    box-shadow: 0 0 10px 10px rgba(19, 35, 37, 0.801);
-    background-size: 100% 130%;
-    width: 40%;
+	margin: auto;
+	padding: 50px;
+	background-color: rgba(19, 35, 37, 0.801);
+	box-shadow: 0 0 10px 10px rgba(19, 35, 37, 0.801);
+	background-size: 100% 130%;
+	width: 40%;
 }
 
 .carousel-inner {
-    margin: auto;
-    height: 400px;
-    width: 400px;
+	margin: auto;
+	height: 400px;
+	width: 400px;
 }
 
 #character-name-input {
-    color: white;
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 30%;
+	color: white;
+	margin: auto;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	width: 30%;
 }
 
 /* Main page CSS */
 #body {
-    background-image: url(/assets/images/backgrounds/rpg-main-sky.jpg);
+	background-image: url(/assets/images/backgrounds/rpg-main-sky.jpg);
 }
 
 #main-page-nav {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 #main-nav-btns {
-    width: 25%;
-    text-align: left;
+	width: 25%;
+	text-align: left;
 }
 
 #music {
-    width: 25%;
-    padding-left: 1%;
+	width: 25%;
+	padding-left: 1%;
 }
 
 #mainGame-Main {
-    display: flex;
-    width: 100%;
-    height: 80vh;
+	display: flex;
+	width: 100%;
+	height: 80vh;
 }
 
 /* Character and Inventory Sections */
 #leftSideMain {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
 }
 
 /*Character and progress section */
 #character-progress {
-    margin: 3%;
-    border: 3px solid black;
-    height: fit-content;
-    max-height: 70%;
+	margin: 3%;
+	border: 3px solid black;
+	height: fit-content;
+	max-height: 70%;
 }
 
 #character-progress * {
-    height: inherit;
+	height: inherit;
 }
 
 /* borders */
 #character-progress,
 #inventory-weapon {
-    background-color: rgba(187, 160, 193, 0.675);
-    margin: 3%;
-    border: 3px solid rgb(82, 57, 94);
-    padding: 3%;
+	background-color: rgba(187, 160, 193, 0.675);
+	margin: 3%;
+	border: 3px solid rgb(82, 57, 94);
+	padding: 3%;
 }
 /* Character section */
 #character-display {
-    position: relative;
-    display: flex;
-    justify-content: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
 #name {
-    position: absolute;
-    left: 0;
-    margin: 10px;
+	position: absolute;
+	left: 0;
+	margin: 10px;
 }
 
 /* Lives positioning */
 #lives {
-    position: absolute;
-    right: 0;
+	position: absolute;
+	right: 0;
 }
 
 #character-display p {
-    position: absolute;
-    left: 0;
-    margin: 10px;
-    font-size: 0.9vw;
+	position: absolute;
+	left: 0;
+	margin: 10px;
+	font-size: 0.9vw;
 }
 
 /* Character image*/
 #character-display img {
-    margin: 0 auto;
-    max-width: 100%;
-    max-height: 100%;
-    height: 30vh;
+	margin: 0 auto;
+	max-width: 100%;
+	max-height: 100%;
+	height: 30vh;
 }
 
 hr {
-    border-color: #000000;
-    width: 90%;
+	border-color: #000000;
+	width: 90%;
 }
 
 #progress-bars {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    margin: 20px auto 0px;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	width: 95%;
+	margin: 20px auto 0px;
+	justify-content: center;
 }
 
 #progress-bars * {
-    display: flex;
+	display: flex;
 }
 
 #progress-bars .stat-titles {
-    font-size: 0.8vw;
-    width: 10vw;
-    justify-content: flex-end;
+	font-size: 0.8vw;
+	width: 10vw;
+	justify-content: flex-end;
 }
 
 #health,
 #xp,
 #currLevel {
-    font-size: 0.8vw;
-    height: 1.5vh;
-    width: 75%;
+	font-size: 0.8vw;
+	height: 1.5vh;
+	width: 75%;
 }
 
 /* Inventory and Weapon Section */
 #inventory-weapon {
-    overflow: auto;
+	overflow: auto;
 }
 
 #inventory-weapon p {
-    text-align: center;
-    margin: 5px;
+	text-align: center;
+	margin: 5px;
 }
 
 #inventory {
-    padding: 3%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    align-items: center;
+	padding: 3%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+	align-items: center;
 }
 
 #inventory img {
-    margin: 5px;
+	margin: 5px;
 }
 
 #healthPotionIntructions {
-    display: none;
-    position: absolute;
-    font-size: 0.9vh;
-    background-color: antiquewhite;
-    width: 10vw;
-    left: 5%;
-    border: 3px solid rgb(82, 57, 94);
-    padding: 1px;
+	display: none;
+	position: absolute;
+	font-size: 0.9vh;
+	background-color: antiquewhite;
+	width: 10vw;
+	left: 5%;
+	border: 3px solid rgb(82, 57, 94);
+	padding: 1px;
 }
 
 #healthPotion:hover + #healthPotionIntructions {
-    display: flex;
+	display: flex;
 }
 
 #weapon {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 #weapon img {
-    width: 9vw;
-    object-fit: contain;
-    align-self: flex-start;
-    flex-wrap: wrap;
+	width: 9vw;
+	object-fit: contain;
+	align-self: flex-start;
+	flex-wrap: wrap;
 }
 
 #weapon div {
-    flex: 1 1 auto;
+	flex: 1 1 auto;
 }
 
 /* gameplay section */
 #middleMain {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
 }
 
-
 .next-disabled {
-    pointer-events: none;
+	pointer-events: none;
 }
 /* game grid layout */
 #gameScreenGrid {
-    background-image: url(../images/backgrounds/sun-shinning-through.png);
-    border: #000 solid 5px;
-    background-size: contain;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    width: 96%;
-    aspect-ratio: 3/2;
+	background-image: url(../images/backgrounds/sun-shining-through.png);
+	border: #000 solid 5px;
+	background-size: contain;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+	width: 96%;
+	aspect-ratio: 3/2;
 }
 
 #gameScreenGrid div {
-    position: relative;
-    text-align: center;
-    display: flex;
-    justify-content: center;
+	position: relative;
+	text-align: center;
+	display: flex;
+	justify-content: center;
 }
 
 #gameScreenGrid img {
-    position: absolute;
-    align-self: flex-end;
-    width: 300%;
-    bottom: -50%;
-    height: auto;
+	position: absolute;
+	align-self: flex-end;
+	width: 300%;
+	bottom: -50%;
+	height: auto;
 }
 
 /* game layout */
 #miniGameTilte,
 #wordToFind {
-    position: absolute;
-    color: white;
-    width: 250%;
-    background-color: black;
-    font-size: 0.9vw;
-    top: 50%;
+	position: absolute;
+	color: white;
+	width: 250%;
+	background-color: black;
+	font-size: 0.9vw;
+	top: 50%;
 }
 
 #hangmanStartBtn {
-    position: absolute;
-    font-size: 0.9vw;
-    top: 50%;
+	position: absolute;
+	font-size: 0.9vw;
+	top: 50%;
 }
 
 #wordsFound {
-    position: absolute;
-    color: white;
-    top: 10%;
-    background-color: black;
-    font-size: 0.9vw;
+	position: absolute;
+	color: white;
+	top: 10%;
+	background-color: black;
+	font-size: 0.9vw;
 }
 
 #timeLeft {
-    position: absolute;
-    top: 10%;
-    left: -50%;
-    color: white;
-    text-align: left;
-    background-color: black;
-    font-size: 0.8vw;
+	position: absolute;
+	top: 10%;
+	left: -50%;
+	color: white;
+	text-align: left;
+	background-color: black;
+	font-size: 0.8vw;
 }
 
 /* Combat mini games */
 #enemyHealthBar {
-    position: absolute;
-    height: 25%;
-    width: 200%;
-    top: -100%
+	position: absolute;
+	height: 25%;
+	width: 200%;
+	top: -100%;
 }
 
 #targetEnemy {
-    cursor: url(../images/sword.png), none;
+	cursor: url(../images/sword.png), none;
 }
 
 #combatMessage {
-    position: absolute;
-    text-align: center;
-    align-self: flex-start;
-    color: white;
-    background-color: black;
+	position: absolute;
+	text-align: center;
+	align-self: flex-start;
+	color: white;
+	background-color: black;
 }
 
 .fade-out-image {
-    animation: fadeOut 5s;
+	animation: fadeOut 5s;
 }
 
 @keyframes fadeOut {
-    100% {
-        opacity: 0;
-    }
-    0% {
-        opacity: 1;
-    }
+	100% {
+		opacity: 0;
+	}
+	0% {
+		opacity: 1;
+	}
 }
 
 /* dialogue box layout */
 #gameDialogueBox {
-    height: 20%;
-    width: 98%;
-    width: 98%;
-    margin: 0;
+	height: 20%;
+	width: 98%;
+	width: 98%;
+	margin: 0;
 }
 
 #gameDialogueBox p {
-    height: 80%;
-    overflow: hidden;
-    font-size: 0.7vw;
-    margin: 0;
+	height: 80%;
+	overflow: hidden;
+	font-size: 0.7vw;
+	margin: 0;
 }
 
 #dialogueBtnContainer button {
-    position: absolute;
-    bottom: 5%;
+	position: absolute;
+	bottom: 5%;
 }
 
 #dialogueBtnContainer img {
-    height: 3vh;
-    opacity: 70%;
+	height: 3vh;
+	opacity: 70%;
 }
 
 #dialogueBtnContainer img:hover {
-    opacity: 100%;
+	opacity: 100%;
 }
 
 #dialogueBtnContainer img:active {
-    position: relative;
-    top: 5px;
+	position: relative;
+	top: 5px;
 }
 
 #dialogueBtnContainer {
-    display: flex;
-    justify-content: space-evenly;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 label {
-    font-size: 0.6vw;
-    width: 50%;
+	font-size: 0.6vw;
+	width: 50%;
 }
 
 #dialogueBtnContainer button {
-    padding: 5px;
-    width: 20%;
-    font-size: 0.6vw;
-    background-color: rgba(105, 75, 112, 0.236);
+	padding: 5px;
+	width: 20%;
+	font-size: 0.6vw;
+	background-color: rgba(105, 75, 112, 0.236);
 }
 
 /* Right Side CSS*/
 #rightSideMain {
-    width: 25%;
+	width: 25%;
 }
 
 #main-story-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 3%;
-    margin: 3%;
-    height: 96%;
-    border: 3px solid rgb(82, 57, 94);
-    background-color: rgba(187, 160, 193, 0.675);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 3%;
+	margin: 3%;
+	height: 96%;
+	border: 3px solid rgb(82, 57, 94);
+	background-color: rgba(187, 160, 193, 0.675);
 }
 
 #mainStoryText {
-    font-size: 0.9vw;
+	font-size: 0.9vw;
 }
 
 #main-story-btns {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 6vh;
-    margin-bottom: 5px;
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 6vh;
+	margin-bottom: 5px;
 }
 
 #main-continue-btn {
-    margin-left: 15%;
-    height: 100%;
-    width: 50%;
-    font-size: 0.75vw;
+	margin-left: 15%;
+	height: 100%;
+	width: 50%;
+	font-size: 0.75vw;
 }
 
 /* End Game CSS*/
@@ -478,15 +477,15 @@ label {
 }
 
 #lose-image {
-    margin-top: 15px;
-    height: 550px;
-    box-shadow: 0 0 10px 10px rgba(7, 103, 116, 0.801);
+	margin-top: 15px;
+	height: 550px;
+	box-shadow: 0 0 10px 10px rgba(7, 103, 116, 0.801);
 }
 
 #character-name {
-    margin: auto;
-    width: 30%;
-    margin-bottom: 1%;
+	margin: auto;
+	width: 30%;
+	margin-bottom: 1%;
 }
 
 #credits-container {
@@ -524,33 +523,33 @@ label {
 	width: 90%;
 }
 
-#score-board ul{
+#score-board ul {
 	list-style-type: none;
 }
 
-#scores-btns{
-    bottom: 15%;
-    left: 36%;
-    position: absolute;
+#scores-btns {
+	bottom: 15%;
+	left: 36%;
+	position: absolute;
 }
 
 footer {
-    height: 8vh;
-    text-align: center;
-    padding: 20px;
+	height: 8vh;
+	text-align: center;
+	padding: 20px;
 }
 
 #dev-links a {
-    color: rgb(4, 68, 42);
+	color: rgb(4, 68, 42);
 }
 
 main {
-    margin: 0 auto;
-    text-align: center;
+	margin: 0 auto;
+	text-align: center;
 }
 
-@media (max-width: 1024px) { 
-    #main-nav-btns{
-        font-size: 1.5vh;
-    }
-  }
+@media (max-width: 1024px) {
+	#main-nav-btns {
+		font-size: 1.5vh;
+	}
+}
