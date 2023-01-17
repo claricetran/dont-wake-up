@@ -18,27 +18,26 @@ Bored or stressed? Take some time to play a mellow, story driven rpg game. Simpl
 
 ## Credits
 
-**Developers**  
+**Developers**
 
-Savannah Miller: https://github.com/VisualViolet  
+Savannah Miller: https://github.com/VisualViolet
+
+Clarice Tran: https://github.com/claricetran
 
 Maya Cohen (Project Manager): https://github.com/Mayalynn96
 
-**NES CSS** (CSS Framework): https://nostalgic-css.github.io/NES.css/  
+**NES CSS** (CSS Framework): https://nostalgic-css.github.io/NES.css/
 
-**Midjourney AI** (Art): https://midjourney.com/home/?callbackUrl=%2Fapp%2F  
+**Midjourney AI** (Art): https://midjourney.com/home/?callbackUrl=%2Fapp%2F
 
-**Reroll** (Characters): https://reroll.co/  
+**Reroll** (Characters): https://reroll.co/
 
-**API Ninja's** (Quote API): https://api-ninjas.com/api/quotes  
+**API Ninja's** (Quote API): https://api-ninjas.com/api/quotes
 
-**Ninble BV** (Name Parser API): https://parser.name/api/  
+**Ninble BV** (Name Parser API): https://parser.name/api/
 
-**PGN Music** (Music): https://pgnmusic.com/  
-
+**PGN Music** (Music): https://pgnmusic.com/
 
 ## License
 
 Please view the license in the repo for more information.
-
-
