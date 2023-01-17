@@ -4,7 +4,7 @@ body {
 }
 
 header {
-    height: 12vh;
+    height: 9vh;
     text-align: center;
     padding: 20px;
 }
@@ -473,10 +473,11 @@ label {
 /* End Game CSS*/
 
 #quote-container {
-	padding: 20px;
+	padding: 15px;
 }
 
 #lose-image {
+    margin-top: 15px;
     height: 550px;
     box-shadow: 0 0 10px 10px rgba(7, 103, 116, 0.801);
 }
