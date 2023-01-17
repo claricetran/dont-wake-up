@@ -161,22 +161,22 @@ function printMessage(destination, message, speed) {
 }
 
 // Health potion function
-healthPotionEl.addEventListener("click", function(){
-    if(!gameIsPlaying && adventurerHealth < playerHealth.max){
-        adventurerHealth = adventurerHealth + 10
-        playerHealth.setAttribute("value", adventurerHealth);
-    }
-})
+healthPotionEl.addEventListener("click", function () {
+	if (!gameIsPlaying && adventurerHealth < playerHealth.max) {
+		adventurerHealth = adventurerHealth + 10;
+		playerHealth.setAttribute("value", adventurerHealth);
+	}
+});
 
 var combatVersion = [
 	{
 		backgroundImg: "url(./assets/images/backgrounds/cave.png)",
 		begginingText:
-			"You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel",
+			"You finally reach the end of the cave and gasp with relief when you notice the starry night at the end of the tunnel",
 		enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
 		enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
-		dialogue: "How dare you try to pass through my Kingdom!!",
-		story: "Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
+		dialogue: "How dare you try to pass through my kingdom!!",
+		story: "Oh no! You ran into an enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
 		enemyHealthPoints: 20,
 		enemyDamagePoints: 20,
 		enemyWinDialogue:
@@ -185,11 +185,11 @@ var combatVersion = [
 	{
 		backgroundImg: "url(./assets/images/backgrounds/swamp.png)",
 		begginingText:
-			"You wander through the forest as the ground begins to get soggy. with every step your feet get more soaked and the air starts to fill with a putrid smell and a greenish fog emerges from all wround you...",
+			"You wander through the forest. The ground begins to get soggy. With every step your feet get more soaked and the air starts to fill with a putrid smell. A greenish fog emerges from all wround you...",
 		enemyFileNameWithCloud: "./assets/images/characters/Swamp-witch-appearing.png",
 		enemyFileNameNoCloud: "./assets/images/characters/Swamp-witch.png",
 		dialogue: "You dare come close to the dreaded swamp witch? You will get what you deserve!",
-		story: "Oh no! The Witch is challenging you to a battle! In order to continue you need to defeat her",
+		story: "Oh no! The Witch is challenging you to a battle! In order to continue, you need to defeat her.",
 		enemyHealthPoints: 50,
 		enemyDamagePoints: 15,
 		enemyWinDialogue:
@@ -308,58 +308,61 @@ function makeEnemyAppear() {
 }
 
 function startCombat(indexToReplay) {
-    // Console logging states
-    console.log("Fighting Started")
-    // removing the start message
-    var messageEl = document.getElementById("combatMessage")
-    messageEl.remove()
-    // creating enemy health bar
-    var enemyHealth = enemyHealthPoints
-    var enemyHealthProgress = document.createElement("progress")
-    enemyHealthProgress.setAttribute("class", "nes-progress is-success")
-    enemyHealthProgress.setAttribute("id", "enemyHealthBar")
-    enemyHealthProgress.setAttribute("value", enemyHealth)
-    enemyHealthProgress.setAttribute("max", enemyHealth)
-    divC3.appendChild(enemyHealthProgress)
-    // Adding event listener to defeat enemy
-    var targetEnemyEl = document.getElementById("targetEnemy")
-    targetEnemyEl.addEventListener("click", function () {
-        enemyHealth--
-        enemyHealthProgress.setAttribute("value", enemyHealth)
-    })
-    var timePlayed = 0
-    timerInterval = setInterval(function () {
-        if (enemyHealth > 0) {
-            timePlayed++
-            adventurerHealth = adventurerHealth - enemyDamagePoints
-            playerHealth.setAttribute("value", adventurerHealth);
-        } else {
-            var figthTimeTotal = playerHealth.max/enemyDamagePoints
-            var xpGainedCombat = Math.floor((figthTimeTotal/timePlayed)*enemyHealthPoints*2)
-            addXPToTotal(xpGainedCombat)
-            console.log("Player Won")
-            clearInterval(timerInterval)
-            enemyHealthProgress.remove()
-            targetEnemyEl.remove()
-            messageEl.textContent = "Victory!"
-            allowNextDialogue = false;
-            printMessage(dialogueTextEl, "Aaargh...", 30)
-            var endMessage = "You defeated the enemy and gained " + xpGainedCombat + " XP! You are able to continue!"
-            printMessage(storyTextPEl, endMessage, 30)
-            mainGameContinueBtn.setAttribute("class", "nes-btn")
-            divB3.appendChild(messageEl)
-            gameIsPlaying = false
-            saveBtn.classList.remove("is-disabled")
-            playerHealth.setAttribute("value", adventurerHealth)
-            allowGameReset = true;
-            gameWin = true;
-            clearMiniGame()
-        }
-        if (adventurerHealth <= 0) {
-            console.log("Player Lost")
-            adventurerLives = adventurerLives - 0.5
-            displayLives()
-            clearInterval(timerInterval)
+	// Console logging states
+	console.log("Fighting Started");
+	// removing the start message
+	var messageEl = document.getElementById("combatMessage");
+	messageEl.remove();
+	// creating enemy health bar
+	var enemyHealth = enemyHealthPoints;
+	var enemyHealthProgress = document.createElement("progress");
+	enemyHealthProgress.setAttribute("class", "nes-progress is-success");
+	enemyHealthProgress.setAttribute("id", "enemyHealthBar");
+	enemyHealthProgress.setAttribute("value", enemyHealth);
+	enemyHealthProgress.setAttribute("max", enemyHealth);
+	divC3.appendChild(enemyHealthProgress);
+	// Adding event listener to defeat enemy
+	var targetEnemyEl = document.getElementById("targetEnemy");
+	targetEnemyEl.addEventListener("click", function () {
+		enemyHealth--;
+		enemyHealthProgress.setAttribute("value", enemyHealth);
+	});
+	var timePlayed = 0;
+	timerInterval = setInterval(function () {
+		if (enemyHealth > 0) {
+			timePlayed++;
+			adventurerHealth = adventurerHealth - enemyDamagePoints;
+			playerHealth.setAttribute("value", adventurerHealth);
+		} else {
+			var figthTimeTotal = playerHealth.max / enemyDamagePoints;
+			var xpGainedCombat = Math.floor((figthTimeTotal / timePlayed) * enemyHealthPoints * 2);
+			addXPToTotal(xpGainedCombat);
+			console.log("Player Won");
+			clearInterval(timerInterval);
+			enemyHealthProgress.remove();
+			targetEnemyEl.remove();
+			messageEl.textContent = "Victory!";
+			allowNextDialogue = false;
+			printMessage(dialogueTextEl, "Aaargh...", 30);
+			var endMessage =
+				"You defeated the enemy and gained " +
+				xpGainedCombat +
+				" XP! You are able to continue!";
+			printMessage(storyTextPEl, endMessage, 30);
+			mainGameContinueBtn.setAttribute("class", "nes-btn");
+			divB3.appendChild(messageEl);
+			gameIsPlaying = false;
+			saveBtn.classList.remove("is-disabled");
+			playerHealth.setAttribute("value", adventurerHealth);
+			allowGameReset = true;
+			gameWin = true;
+			clearMiniGame();
+		}
+		if (adventurerHealth <= 0) {
+			console.log("Player Lost");
+			adventurerLives = adventurerLives - 0.5;
+			displayLives();
+			clearInterval(timerInterval);
 			if (adventurerLives == 0) {
 				gameLose();
 			}

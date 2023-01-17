@@ -142,6 +142,8 @@
 	},
 	"scene-1-17": {
 		"place": "peace",
-		"story": ["Thank you, Player:, for playing the Don't Wake Up demo."]
+		"story": [
+			"Thank you, Player:, for playing the Don't Wake Up demo. We hope to add more to the story to get Mr. Oinks back to you. For now you get to wake up and see your scores so far."
+		]
 	}
 }
