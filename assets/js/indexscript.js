@@ -16,6 +16,11 @@ var modal = document.getElementById("warning-modal");
 var modalClose = document.getElementsByClassName("close")[0];
 var noBtn = document.getElementById("modal-close");
 var yesBtn = document.getElementById("modal-continue");
+var scoreBtn = document.getElementById("scores-btn");
+
+scoreBtn.addEventListener("click", function(){
+    location.href = "./scores.html"
+})
 
 // Character object array
 var characterOptions = [
@@ -120,7 +125,10 @@ function generateName(){
   // Event listeners
 startBtn.addEventListener("click", showCharacterSelect);
 loadBtn.addEventListener("click", function(){
-    location.href = "./mainGame.html"
+    if(localStorage.getItem("playerCharacter") != null){
+        location.href = "./mainGame.html"
+    }
+    
 });
 backBtn.addEventListener("click", returnToTitle);
 randomizeBtn.addEventListener("click", generateName);

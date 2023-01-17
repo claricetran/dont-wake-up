@@ -127,7 +127,7 @@
 		"next": ["scene-1-14", ""]
 	},
 	"scene-1-14": {
-		"place": "url(./assets/images/backgrounds/green-night-forest.png)",
+		"place": "url(./assets/images/backgrounds/forest.png)",
 		"story": [
 			"You've defeated the troll. No one gets in the way of you and your mission to find Mr. Oinks.",
 			"You walk out into the forest once more. The search for Mr. Oinks continues."
@@ -158,7 +158,7 @@
 	},
 	"scene-1-14-4": {
 		"place": "url(./assets/images/backgrounds/swamp.png)",
-		"story": ["After a quick meal, you resume your journey."],
+		"story": ["The next morning, you resume your journey."],
 		"next": "scene-1-15"
 	},
 	"scene-1-15": {

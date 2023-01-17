@@ -1,5 +1,12 @@
+#endGameBody, #scoreBody{
+    background-image: url(../images/backgrounds/end-screen.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 body {
-	background-color: rgb(82, 57, 94);
+	background-color: #05040a;
 }
 
 header {
@@ -29,6 +36,8 @@ audio {
 	border: 5px solid black;
 	background-image: url(../images/backgrounds/start-screen-2.png);
 	background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 	height: 100vh;
 	width: 100%;
 }
@@ -106,7 +115,7 @@ audio {
 
 /* Main page CSS */
 #body {
-	background-image: url(/assets/images/backgrounds/rpg-main-sky.jpg);
+	background-image: url(../images/backgrounds/rpg-main-sky.jpg);
 }
 
 #main-page-nav {
@@ -292,14 +301,14 @@ hr {
 }
 /* game grid layout */
 #gameScreenGrid {
-	background-image: url(../images/backgrounds/sun-shining-through.png);
-	border: #000 solid 5px;
-	background-size: contain;
-	margin: 0;
-	display: grid;
-	grid-template-columns: repeat(5, auto);
-	width: 96%;
-	aspect-ratio: 3/2;
+    background-image: url(../images/backgrounds/sun-shining-through.png);
+    border: #000 solid 5px;
+    background-size: cover;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    width: 96%;
+    aspect-ratio: 3/2;
 }
 
 #gameScreenGrid div {
@@ -472,8 +481,28 @@ label {
 }
 
 /* End Game CSS*/
+#endGameBody header, #endGameBody footer {
+    color: white;
+    height: 15vh;
+}
+
+#endPageMain {
+    padding: 1%;
+    color: white;
+    height: 70vh;
+}
+
+#final-score{
+    padding: 1%;
+}
+
+#score-btn{
+    padding: 0.5%;
+    margin-bottom: 2%;
+}
+
 #quote-container {
-	padding: 15px;
+	padding: 1%;
 }
 
 #lose-image {
@@ -511,13 +540,14 @@ label {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: rgba(187, 160, 193, 0.675);
+	
 	height: 80vh;
 	width: 60%;
 	padding: 30px;
 }
 
 #score-board {
+    background-color: rgba(187, 160, 193, 0.675);
 	border: 3px solid black;
 	height: 90%;
 	width: 90%;

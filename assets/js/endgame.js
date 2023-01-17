@@ -2,8 +2,10 @@
 var category = "dreams";
 var gameStatus = localStorage.getItem("gameStatus");
 var score = localStorage.getItem("score");
+var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
 var newScore = {
     username: "unknown",
+    characterName: playerCharacter.characterName,
     score: score
 }
 
@@ -90,6 +92,9 @@ function submitScore(){
     {
         newScore.username = nameInput.value;
     }
+    localStorage.clear("playerCharacter");
+    localStorage.clear("gameStatus");
+    localStorage.clear("score");
     location.href = "./scores.html";
     allScores.push(newScore);
     localStorage.setItem("allScores", JSON.stringify(allScores));

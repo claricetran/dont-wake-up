@@ -50,11 +50,14 @@ function savePlayerInfo() {
 		currScene: taleTracker,
 	};
 	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
+    console.log("save")
 }
 
 // Clear player character save and return to start page
 function restartGame() {
-	localStorage.clear(playerCharacter);
+	localStorage.clear("playerCharacter");
+    localStorage.clear("gameStatus");
+    localStorage.clear("score");
 	location.href = "./index.html";
 }
 
@@ -85,8 +88,8 @@ function displayLives() {
 
 function calculateScore() {
 	var levelScore = adventurerLevel * 1000;
-	var livesScore = adventurerLives * 100;
-	playerScore = levelScore + livesScore;
+	var livesScore = adventurerLives * 250;
+	playerScore = levelScore + livesScore + adventurerHealth + adventurerXP;
     console.log(playerScore)
 }
 
@@ -95,7 +98,12 @@ musicEl.volume = 0.1;
 musicEl.loop = true;
 
 // Header On-Click Events
-saveBtn.addEventListener("click", savePlayerInfo);
+saveBtn.addEventListener("click", function(){
+    if(!gameIsPlaying){
+        savePlayerInfo()
+    }
+});
+
 resetBtn.addEventListener("click", restartGame);
 titleBtn.addEventListener("click", function () {
 	location.href = "./index.html";
@@ -123,6 +131,7 @@ var allowNextGame = true;
 var allowGameReset = false;
 var gameIsPlaying = false;
 var gameWin = false;
+var inCombat = false;
 
 dialogueNextBtn.style.visibility = "hidden";
 mainGameBackBtn.style.visibility = "hidden";
@@ -220,8 +229,8 @@ var enemyWinDialogue;
 var indexToReplay;
 
 function playCombat(index) {
-	saveBtn.classList.add("is-disabled");
 
+    inCombat = true 
 	indexToReplay = index;
 	backgroundImg = combatVersion[index].backgroundImg;
 	begginingText = combatVersion[index].begginingText;
@@ -245,12 +254,13 @@ function playCombat(index) {
 	mainGameContinueBtn.setAttribute("class", "nes-btn");
 
 	mainGameContinueBtn.addEventListener("click", function () {
-		if (allowNextDialogue && allowNextGame && gameIsPlaying) {
+		if (allowNextDialogue && allowNextGame && gameIsPlaying && inCombat) {
 			mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
 			startCombatGame(indexToReplay);
 			makeEnemyAppear();
 			// makes sure the game doesn't restart when continue is clicked at the end
 			allowNextGame = false;
+            inCombat = false;
 		}
 	});
 }
@@ -363,7 +373,6 @@ function startCombat(indexToReplay) {
 			mainGameContinueBtn.setAttribute("class", "nes-btn");
 			divB3.appendChild(messageEl);
 			gameIsPlaying = false;
-			saveBtn.classList.remove("is-disabled");
 			playerHealth.setAttribute("value", adventurerHealth);
 			allowGameReset = true;
 			gameWin = true;
@@ -631,7 +640,6 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 					gameIsPlaying = false;
 					console.log("Game is Playing: " + gameIsPlaying);
 					wordEl.remove();
-					saveBtn.classList.remove("is-disabled");
 					playerHealth.setAttribute("value", adventurerHealth);
 					allowGameReset = true;
 					clearMiniGame();
