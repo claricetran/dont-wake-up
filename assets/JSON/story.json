@@ -1,6 +1,6 @@
 {
 	"scene-1-0": {
-		"place": "forest",
+		"place": "url(./assets/images/backgrounds/mrOinksFirstAppearance.png)",
 		"story": [
 			"You open your eyes to a forest. Tall trees surround you and you hear a little scuffle behind you. You turn around to see a small, chubby pig."
 		],
@@ -8,13 +8,13 @@
 		"next": "scene-1-1"
 	},
 	"scene-1-1": {
-		"place": "forest",
+		"place": "url(./assets/images/backgrounds/skyThroughForest.png)",
 		"story": ["That cute pig you named Mr. Oinks gets snatched away in a blur."],
 		"dialog": ["Player: Mr. Oinks???"],
 		"next": "scene-1-2"
 	},
 	"scene-1-2": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/village.png)",
 		"story": [
 			"You search desparately for Mr. Oinks and stumble upon a nearby village. You shout and plead for help finding him."
 		],
@@ -27,7 +27,7 @@
 		"next": "scene-1-3"
 	},
 	"scene-1-3": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": [
 			"The woman points you in the right direction.",
 			"You burst into the butcher's shop."
@@ -42,7 +42,7 @@
 		"next": "scene-1-4"
 	},
 	"scene-1-4": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": ["The butcher is offended."],
 		"dialog": [
 			"Butcher: \"Oh no. I ain’t trustin no one that bursts into my shop accusin me of thievery and murderin loved ones. I have a heart ya know.\""
@@ -54,7 +54,7 @@
 		"next": "scene-1-5"
 	},
 	"scene-1-5": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"dialog": [
 			"Butcher: \"If you can guess the words I'm thinkin of in a minute you can have a peek.\""
 		],
@@ -65,7 +65,7 @@
 		"next": ["scene-1-6", "scene-1-7"]
 	},
 	"scene-1-6": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": [
 			"Find as many words as you can in the time given! If the timer runs out before getting at least 5 words you loose a life. Any extra words give you extra XP !"
 		],
@@ -73,17 +73,17 @@
 		"next": ["scene-1-8", "scene-1-9"]
 	},
 	"scene-1-7": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": ["You sneak around the back. Mr. Oinks might be there."],
 		"next": "scene-1-11"
 	},
 	"scene-1-8": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": ["You beat the butcher's game and he leads you to the pigs."],
 		"next": "scene-1-11"
 	},
 	"scene-1-9": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": ["You lost the butcher's game."],
 		"dialog": [
 			"Butcher: 'Fraid a deal's a deal, now git outta my shop before ya scaree away my loyal customers."
@@ -91,13 +91,13 @@
 		"next": "scene-1-10"
 	},
 	"scene-1-10": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png",
 		"story": ["You sneak around the back anyways. Mr. Oinks might be there."],
 		"dialog": ["Player: Mr. Oinks, you there?"],
 		"next": "scene-1-11"
 	},
 	"scene-1-11": {
-		"place": "village",
+		"place": "url(./assets/images/backgrounds/butcher.png",
 		"story": [
 			"You take a look, but Mr. Oinks could not be found.",
 			"There isn't much left to search in the village. Saddened once more, you go on your way, calling Mr. Oinks occasionally hoping for his squeal in reply."
@@ -105,23 +105,45 @@
 		"next": "scene-1-12"
 	},
 	"scene-1-12": {
-		"place": "tunnel",
+		"place": "url(./assets/images/backgrounds/green-night-forest.png)",
 		"story": [
-			""
+			"Your wandering has brought you to a cliffside.",
+			"In the cliffside, is a cave.",
+			"You enter the cave. If there's a chance Mr. Oinks is in there, he needs you."
 		],
-		"game": "troll",
-		"next": ["scene-1-13", ""]
+		"next": "scene-1-13"
 	},
 	"scene-1-13": {
-		"place": "tunnel",
-		"story": [
-			"You've defeated the troll. No one gets in the way of you and your mission to find Mr. Oinks"
-		],
-		"next": "scene-1-14"
+		"place": "",
+		"story": [""],
+		"game": "troll",
+		"next": ["scene-1-14", ""]
 	},
 	"scene-1-14": {
-		"place": "swamp",
-		"story": ["Out of the tunnel you've meandered your way to a swamp."],
-		"next": "ty-for-playing"
+		"place": "url(./assets/images/backgrounds/forest.png)",
+		"story": [
+			"You've defeated the troll. No one gets in the way of you and your mission to find Mr. Oinks.",
+			"You walk out into the forest once more. The search for Mr. Oinks continues."
+		],
+		"dialog": ["Player: \"I'll find you Mr. Oinks.\""],
+		"next": "scene-1-15"
+	},
+	"scene-1-15": {
+		"place": "",
+		"story": [""],
+		"game": "witch",
+		"next": ["scene-1-16", ""]
+	},
+	"scene-1-16": {
+		"place": "url(./assets/images/backgrounds/swamp.png)",
+		"story": ["The swamp witch is defeated."],
+		"dialog": ["Player: \"Get pwned, witch!\""],
+		"next": "scene-1-17"
+	},
+	"scene-1-17": {
+		"place": "url(./assets/images/backgrounds/sun-shining-through.png)",
+		"story": [
+			"Thank you, Player:, for playing the Don't Wake Up demo. We hope to add more to the story to get Mr. Oinks back to you. For now you get to wake up and see your scores so far."
+		]
 	}
 }
