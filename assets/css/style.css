@@ -483,6 +483,12 @@ label {
     box-shadow: 0 0 10px 10px rgba(7, 103, 116, 0.801);
 }
 
+#character-name {
+    margin: auto;
+    width: 30%;
+    margin-bottom: 1%;
+}
+
 #credits-container {
 	overflow: hidden;
 }
@@ -520,6 +526,12 @@ label {
 
 #score-board ul{
 	list-style-type: none;
+}
+
+#scores-btns{
+    bottom: 15%;
+    left: 36%;
+    position: absolute;
 }
 
 

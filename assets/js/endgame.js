@@ -1,6 +1,15 @@
 // Global variables
 var category = "dreams";
 var gameStatus = localStorage.getItem("gameStatus");
+var score = localStorage.getItem("score");
+var newScore = {
+    username: "unknown",
+    score: score
+}
+
+var allScoresString = localStorage.getItem("allScores");
+var allScores = JSON.parse(allScoresString) ||[];
+
 
 // Document selectors
 var quoteEl = document.getElementById("quote");
@@ -14,6 +23,8 @@ var scoreBtn = document.getElementById("score-btn");
 var winLossMessage = document.getElementById("win-loss-message");
 var winContent = document.getElementById("win-content");
 var loseContent = document.getElementById("lose-content");
+var finalScore = document.getElementById("final-score");
+var nameInput = document.getElementById("character-name");
 
 winLossContent();
 // api call to set endgame quote
@@ -47,6 +58,7 @@ function winLossContent(){
         winContent.classList.remove("hidden");
         loseContent.classList.add("hidden");
         winLossMessage.innerText = "Congratulations! You made it through the night and completed the story";
+        finalScore.innerText = score;
     }
     else
     {
@@ -67,8 +79,20 @@ function returnToPage(){
     creditsContainer.classList.add("hidden");
 }
 
+
+
 function submitScore(){
-    location.href = "./scores.html"
+    if (nameInput.value == "")
+    {
+        newScore.username = "unknown"
+    }
+    else
+    {
+        newScore.username = nameInput.value;
+    }
+    location.href = "./scores.html";
+    allScores.push(newScore);
+    localStorage.setItem("allScores", JSON.stringify(allScores));
 }
 
 function backToSleep(){
