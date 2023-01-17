@@ -69,7 +69,7 @@ function displayLives() {
 	} else if (adventurerLives == 1) {
 		heartThree.classList.add("is-transparent");
 		heartTwo.classList.add("is-transparent");
-	} else if (adventurerLevel == 0.5) {
+	} else if (adventurerLives == 0.5) {
 		heartThree.classList.add("is-transparent");
 		heartTwo.classList.add("is-transparent");
 		heartOne.classList.add("is-half");
@@ -161,13 +161,12 @@ function printMessage(destination, message, speed) {
 }
 
 // Health potion function
-healthPotionEl.addEventListener("click", function () {
-	if (!gameIsPlaying && adventurerHealth < playerHealth.max) {
-		adventurerHealth = adventurerHealth + 10;
-		playerHealth.setAttribute("value", adventurerHealth);
-		console.log(playerHealth);
-	}
-});
+healthPotionEl.addEventListener("click", function(){
+    if(!gameIsPlaying && adventurerHealth < playerHealth.max){
+        adventurerHealth = adventurerHealth + 10
+        playerHealth.setAttribute("value", adventurerHealth);
+    }
+})
 
 var combatVersion = [
 	{
@@ -309,57 +308,58 @@ function makeEnemyAppear() {
 }
 
 function startCombat(indexToReplay) {
-	// Console logging states
-	console.log("Fighting Started");
-	// removing the start message
-	var messageEl = document.getElementById("combatMessage");
-	messageEl.remove();
-	// creating enemy health bar
-	var enemyHealth = enemyHealthPoints;
-	var enemyHealthProgress = document.createElement("progress");
-	enemyHealthProgress.setAttribute("class", "nes-progress is-success");
-	enemyHealthProgress.setAttribute("id", "enemyHealthBar");
-	enemyHealthProgress.setAttribute("value", enemyHealth);
-	enemyHealthProgress.setAttribute("max", enemyHealth);
-	divC3.appendChild(enemyHealthProgress);
-	// Adding event listener to defeat enemy
-	var targetEnemyEl = document.getElementById("targetEnemy");
-	targetEnemyEl.addEventListener("click", function () {
-		enemyHealth--;
-		enemyHealthProgress.setAttribute("value", enemyHealth);
-	});
-	timerInterval = setInterval(function () {
-		if (enemyHealth > 0) {
-			adventurerHealth = adventurerHealth - enemyDamagePoints;
-			playerHealth.setAttribute("value", adventurerHealth);
-		} else {
-			addXPToTotal(adventurerHealth);
-			console.log("Player Won");
-			clearInterval(timerInterval);
-			enemyHealthProgress.remove();
-			targetEnemyEl.remove();
-			messageEl.textContent = "Victory!";
-			allowNextDialogue = false;
-			printMessage(dialogueTextEl, "Aaargh...", 30);
-			var endMessage =
-				"You defeated the enemy and gained " +
-				adventurerHealth +
-				" XP! You are able to continue!";
-			printMessage(storyTextPEl, endMessage, 30);
-			mainGameContinueBtn.setAttribute("class", "nes-btn");
-			divB3.appendChild(messageEl);
-			gameIsPlaying = false;
-			saveBtn.classList.remove("is-disabled");
-			playerHealth.setAttribute("value", adventurerHealth);
-			allowGameReset = true;
-			gameWin = true;
-			clearMiniGame();
-		}
-		if (adventurerHealth <= 0) {
-			console.log("Player Lost");
-			adventurerLives = adventurerLives - 0.5;
-			displayLives();
-			clearInterval(timerInterval);
+    // Console logging states
+    console.log("Fighting Started")
+    // removing the start message
+    var messageEl = document.getElementById("combatMessage")
+    messageEl.remove()
+    // creating enemy health bar
+    var enemyHealth = enemyHealthPoints
+    var enemyHealthProgress = document.createElement("progress")
+    enemyHealthProgress.setAttribute("class", "nes-progress is-success")
+    enemyHealthProgress.setAttribute("id", "enemyHealthBar")
+    enemyHealthProgress.setAttribute("value", enemyHealth)
+    enemyHealthProgress.setAttribute("max", enemyHealth)
+    divC3.appendChild(enemyHealthProgress)
+    // Adding event listener to defeat enemy
+    var targetEnemyEl = document.getElementById("targetEnemy")
+    targetEnemyEl.addEventListener("click", function () {
+        enemyHealth--
+        enemyHealthProgress.setAttribute("value", enemyHealth)
+    })
+    var timePlayed = 0
+    timerInterval = setInterval(function () {
+        if (enemyHealth > 0) {
+            timePlayed++
+            adventurerHealth = adventurerHealth - enemyDamagePoints
+            playerHealth.setAttribute("value", adventurerHealth);
+        } else {
+            var figthTimeTotal = playerHealth.max/enemyDamagePoints
+            var xpGainedCombat = Math.floor((figthTimeTotal/timePlayed)*enemyHealthPoints*2)
+            addXPToTotal(xpGainedCombat)
+            console.log("Player Won")
+            clearInterval(timerInterval)
+            enemyHealthProgress.remove()
+            targetEnemyEl.remove()
+            messageEl.textContent = "Victory!"
+            allowNextDialogue = false;
+            printMessage(dialogueTextEl, "Aaargh...", 30)
+            var endMessage = "You defeated the enemy and gained " + xpGainedCombat + " XP! You are able to continue!"
+            printMessage(storyTextPEl, endMessage, 30)
+            mainGameContinueBtn.setAttribute("class", "nes-btn")
+            divB3.appendChild(messageEl)
+            gameIsPlaying = false
+            saveBtn.classList.remove("is-disabled")
+            playerHealth.setAttribute("value", adventurerHealth)
+            allowGameReset = true;
+            gameWin = true;
+            clearMiniGame()
+        }
+        if (adventurerHealth <= 0) {
+            console.log("Player Lost")
+            adventurerLives = adventurerLives - 0.5
+            displayLives()
+            clearInterval(timerInterval)
 			if (adventurerLives == 0) {
 				gameLose();
 			}
@@ -959,5 +959,5 @@ fetch("./assets/JSON/story.json")
 	.then((res) => res.json())
 	.then((data) => {
 		tale = data;
-		initGame();
+		// initGame();
 	});
