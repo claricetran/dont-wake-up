@@ -10,7 +10,7 @@ var heartTwo = document.getElementById("2");
 var heartThree = document.getElementById("3");
 var saveBtn = document.getElementById("save-btn");
 var resetBtn = document.getElementById("restart-btn");
-var titleBtn = document.getElementById("title-btn")
+var titleBtn = document.getElementById("title-btn");
 var musicEl = document.getElementById("music");
 
 // Retrieving values from local storage
@@ -36,55 +36,55 @@ playerXP.setAttribute("max", 100);
 displayLives();
 
 // Save player information to local storage
-function savePlayerInfo(){
-    var playerCharacterSave = {
-        "id": adventurerID,
-        "characterName": adventurerName,
-        "health": adventurerHealth,
-        "damage": adventurerDamage,
-        "xp": adventurerXP,
-        "level": adventurerLevel,
-        "lives": adventurerLives,
-        "src": adventurerImg
-    }
-    localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
+function savePlayerInfo() {
+	var playerCharacterSave = {
+		id: adventurerID,
+		characterName: adventurerName,
+		health: adventurerHealth,
+		damage: adventurerDamage,
+		xp: adventurerXP,
+		level: adventurerLevel,
+		lives: adventurerLives,
+		src: adventurerImg,
+	};
+	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
 }
 
 // Clear player character save and return to start page
 function restartGame() {
-    localStorage.clear(playerCharacter);
-    location.href = "./index.html";
+	localStorage.clear(playerCharacter);
+	location.href = "./index.html";
 }
 
 // Change heart classes based on lives
 function displayLives() {
-    if (adventurerLives == 2.5) {
-        heartThree.classList.add("is-half");
-    } else if (adventurerLives == 2) {
-        heartThree.classList.add("is-transparent");
-    } else if (adventurerLives == 1.5) {
-        heartThree.classList.add("is-transparent");
-        heartTwo.classList.add("is-half");
-    } else if (adventurerLives == 1) {
-        heartThree.classList.add("is-transparent");
-        heartTwo.classList.add("is-transparent");
-    } else if (adventurerLevel == 0.5) {
-        heartThree.classList.add("is-transparent");
-        heartTwo.classList.add("is-transparent");
-        heartOne.classList.add("is-half");
-    } else if (adventurerLives == 0) {
-        heartThree.classList.add("is-transparent");
-        heartTwo.classList.add("is-transparent");
-        heartOne.classList.add("is-transparent");
-    } else {
-        // leave heart classes as they are
-    }
+	if (adventurerLives == 2.5) {
+		heartThree.classList.add("is-half");
+	} else if (adventurerLives == 2) {
+		heartThree.classList.add("is-transparent");
+	} else if (adventurerLives == 1.5) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-half");
+	} else if (adventurerLives == 1) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-transparent");
+	} else if (adventurerLevel == 0.5) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-transparent");
+		heartOne.classList.add("is-half");
+	} else if (adventurerLives == 0) {
+		heartThree.classList.add("is-transparent");
+		heartTwo.classList.add("is-transparent");
+		heartOne.classList.add("is-transparent");
+	} else {
+		// leave heart classes as they are
+	}
 }
 
-function calculateScore(){
-    var levelScore = adventurerLevel * 1000;
-    var livesScore =  adventurerLives * 100;
-    playerScore = levelScore + livesScore;
+function calculateScore() {
+	var levelScore = adventurerLevel * 1000;
+	var livesScore = adventurerLives * 100;
+	playerScore = levelScore + livesScore;
 }
 
 // Music controls
@@ -94,10 +94,9 @@ musicEl.loop = true;
 // Header On-Click Events
 saveBtn.addEventListener("click", savePlayerInfo);
 resetBtn.addEventListener("click", restartGame);
-titleBtn.addEventListener("click", function(){
-    location.href = "./index.html";
-})
-
+titleBtn.addEventListener("click", function () {
+	location.href = "./index.html";
+});
 
 // Main game document selectors
 var mainGameBackBtn = document.getElementById("main-back-btn");
@@ -119,9 +118,8 @@ var divC3 = document.getElementById("c3");
 var allowNextDialogue = false;
 var allowNextGame = true;
 var gameIsPlaying = false;
+var gameWin = false;
 
-yesEl.style.display = "none";
-noEl.style.display = "none";
 dialogueNextBtn.style.visibility = "hidden";
 mainGameBackBtn.style.visibility = "hidden";
 yesEl.style.visibility = "hidden";
@@ -131,51 +129,63 @@ var tale;
 var taleArray;
 // Track where user's story index is - starts at 0 on init. Needs to be saved to local storage on saves, also needs to load and be updated when reloading saved game.
 var taleTracker;
-var sceneIndex;
+var storyIndex;
 var dialogIndex;
 var miniGame = "none";
 
 // var continueButtonState = false;
 // var dialogButtonState = false;
 
+// when the user has no more advnturer hearts they
+function gameLose() {
+	setTimeout(() => {
+		localStorage.setItem("showscore", "0");
+		location.href = "./endGame.html";
+	}, 3000);
+}
+
 function printMessage(destination, message, speed) {
-    destination.innerHTML = "";
-    var i = 0;
-    var interval = setInterval(function () {
-        destination.innerHTML += message.charAt(i);
-        allowNextDialogue = false;
-        i++;
-        if (i >= message.length) {
-            allowNextDialogue = true;
-            clearInterval(interval);
-        }
-    }, speed);
+	destination.innerHTML = "";
+	var i = 0;
+	var interval = setInterval(function () {
+		destination.innerHTML += message.charAt(i);
+		allowNextDialogue = false;
+		i++;
+		if (i >= message.length) {
+			allowNextDialogue = true;
+			clearInterval(interval);
+		}
+	}, speed);
 }
 
 var combatVersion = [
-    {
-        backgroundImg: "url(./assets/images/backgrounds/cave.png)",
-        begginingText: "You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel",
-        enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
-        enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
-        dialogue: "How dare you try to pass through my Kingdom!!",
-        story: "Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
-        enemyHealthPoints: 20,
-        enemyDamagePoints: 20,
-        enemyWinDialogue: "The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win."
-    },
-    {
-        backgroundImg: "url(./assets/images/backgrounds/swamp.png)",
-        begginingText: "You wander through the forest as the ground begins to get soggy. with every step your feet get more soaked and the air starts to fill with a putrid smell and a greenish fog emerges from all wround you...",
-        enemyFileNameWithCloud: "./assets/images/characters/Swamp-witch-appearing.png",
-        enemyFileNameNoCloud: "./assets/images/characters/Swamp-witch.png",
-        dialogue: "You dare come close to the dreaded swamp witch? You will get what you deserve!",
-        story: "Oh no! The Witch is challenging you to a battle! In order to continue you need to defeat her",
-        enemyHealthPoints: 50,
-        enemyDamagePoints: 15,
-        enemyWinDialogue: "He that fights and runs away, May turn and fight another day; But he that is in battle slain, Will never rise to fight again."
-    }
-]
+	{
+		backgroundImg: "url(./assets/images/backgrounds/cave.png)",
+		begginingText:
+			"You finally reach the end of the cave and gasp with relive when you notice the stary night at the end of the tunnel",
+		enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
+		enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
+		dialogue: "How dare you try to pass through my Kingdom!!",
+		story: "Oh no! You ran into and Enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
+		enemyHealthPoints: 20,
+		enemyDamagePoints: 20,
+		enemyWinDialogue:
+			"The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win.",
+	},
+	{
+		backgroundImg: "url(./assets/images/backgrounds/swamp.png)",
+		begginingText:
+			"You wander through the forest as the ground begins to get soggy. with every step your feet get more soaked and the air starts to fill with a putrid smell and a greenish fog emerges from all wround you...",
+		enemyFileNameWithCloud: "./assets/images/characters/Swamp-witch-appearing.png",
+		enemyFileNameNoCloud: "./assets/images/characters/Swamp-witch.png",
+		dialogue: "You dare come close to the dreaded swamp witch? You will get what you deserve!",
+		story: "Oh no! The Witch is challenging you to a battle! In order to continue you need to defeat her",
+		enemyHealthPoints: 50,
+		enemyDamagePoints: 15,
+		enemyWinDialogue:
+			"He that fights and runs away, May turn and fight another day; But he that is in battle slain, Will never rise to fight again.",
+	},
+];
 
 var backgroundImg;
 var begginingText;
@@ -187,626 +197,709 @@ var enemyHealthPoints;
 var enemyDamagePoints;
 var enemyWinDialogue;
 
-playCombat(1)
-
 function playCombat(index) {
-    var index = index
-    backgroundImg = combatVersion[index].backgroundImg;
-    begginingText = combatVersion[index].begginingText;
-    enemyFileNameWithCloud = combatVersion[index].enemyFileNameWithCloud;
-    enemyFileNameNoCloud = combatVersion[index].enemyFileNameNoCloud;
-    dialogue = combatVersion[index].dialogue;
-    story = combatVersion[index].story;
-    enemyHealthPoints = combatVersion[index].enemyHealthPoints;
-    enemyDamagePoints = combatVersion[index].enemyDamagePoints;
-    enemyWinDialogue = combatVersion[index].enemyWinDialogue;
+	var index = index;
+	backgroundImg = combatVersion[index].backgroundImg;
+	begginingText = combatVersion[index].begginingText;
+	enemyFileNameWithCloud = combatVersion[index].enemyFileNameWithCloud;
+	enemyFileNameNoCloud = combatVersion[index].enemyFileNameNoCloud;
+	dialogue = combatVersion[index].dialogue;
+	story = combatVersion[index].story;
+	enemyHealthPoints = combatVersion[index].enemyHealthPoints;
+	enemyDamagePoints = combatVersion[index].enemyDamagePoints;
+	enemyWinDialogue = combatVersion[index].enemyWinDialogue;
 
-    // Setting health back to saved health at start of game
-    adventurerHealth = playerCharacter.health;
-    playerHealth.setAttribute("value", adventurerHealth);
-    // Console logging states
-    gameIsPlaying = true
-    console.log("Game is Playing: " + gameIsPlaying)
-    console.log("Combat Game Start")
+	// Setting health back to saved health at start of game
+	adventurerHealth = playerCharacter.health;
+	playerHealth.setAttribute("value", adventurerHealth);
+	// Console logging states
+	gameIsPlaying = true;
+	console.log("Game is Playing: " + gameIsPlaying);
+	console.log("Combat Game Start");
 
-    gameGridEl.style.backgroundImage = backgroundImg
-    printMessage(storyTextPEl, begginingText, 30);
-    mainGameContinueBtn.setAttribute("class", "nes-btn");
+	gameGridEl.style.backgroundImage = backgroundImg;
+	printMessage(storyTextPEl, begginingText, 30);
+	mainGameContinueBtn.setAttribute("class", "nes-btn");
 
-
-
-    mainGameContinueBtn.addEventListener("click", function () {
-        if (allowNextDialogue && allowNextGame && gameIsPlaying) {
-            mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
-            startCombatGame(index)
-            makeEnemyAppear()
-            // makes sure the game doesn't restart when continue is clicked at the end
-            allowNextGame = false;
-        }
-    })
+	mainGameContinueBtn.addEventListener("click", function () {
+		if (allowNextDialogue && allowNextGame && gameIsPlaying) {
+			mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
+			startCombatGame(index);
+			makeEnemyAppear();
+			// makes sure the game doesn't restart when continue is clicked at the end
+			allowNextGame = false;
+		}
+	});
 }
 
 function startCombatGame(index) {
-    var startBtn = document.createElement("button")
-    startBtn.setAttribute("class", "nes-btn")
-    startBtn.textContent = "Fight!"
-    dialogueBtnContainer.appendChild(startBtn)
+	var startBtn = document.createElement("button");
+	startBtn.setAttribute("class", "nes-btn");
+	startBtn.textContent = "Fight!";
+	dialogueBtnContainer.appendChild(startBtn);
 
-    printMessage(dialogueTextEl, dialogue, 30)
-    printMessage(storyTextPEl, story, 30)
+	printMessage(dialogueTextEl, dialogue, 30);
+	printMessage(storyTextPEl, story, 30);
 
-    var messageEl = document.createElement("h2")
-    messageEl.setAttribute("id", "combatMessage")
+	var messageEl = document.createElement("h2");
+	messageEl.setAttribute("id", "combatMessage");
 
-    startBtn.addEventListener("click", function (event) {
-        event.preventDefault()
-        if (allowNextDialogue) {
-            printMessage(storyTextPEl, " Click on the enemy to deal damage once the game starts.", 30)
-            startBtn.remove()
-            allowNextGame = true
-            countdownTime = 4
-            messageEl.textContent = "Ready?"
-            divB3.appendChild(messageEl)
-            countdown = setInterval(function () {
-                countdownTime--
-                messageEl.textContent = countdownTime
-                if (countdownTime < 0) {
-                    clearInterval(countdown)
-                    messageEl.textContent = "Attack!"
-                }
-            }, 1000)
-            setTimeout(function () {
-                startCombat(index)
-            }, 4000)
-        }
-    })
+	startBtn.addEventListener("click", function (event) {
+		event.preventDefault();
+		if (allowNextDialogue) {
+			printMessage(
+				storyTextPEl,
+				" Click on the enemy to deal damage once the game starts.",
+				30
+			);
+			startBtn.remove();
+			allowNextGame = true;
+			countdownTime = 4;
+			messageEl.textContent = "Ready?";
+			divB3.appendChild(messageEl);
+			countdown = setInterval(function () {
+				countdownTime--;
+				messageEl.textContent = countdownTime;
+				if (countdownTime < 0) {
+					clearInterval(countdown);
+					messageEl.textContent = "Attack!";
+				}
+			}, 1000);
+			setTimeout(function () {
+				startCombat(index);
+			}, 4000);
+		}
+	});
 }
 
 function makeEnemyAppear() {
-    // Console logging states
-    console.log("Enemy Appears")
+	// Console logging states
+	console.log("Enemy Appears");
 
-    // creating first image with cloud
-    var enemyEl = document.createElement("img")
-    enemyEl.setAttribute("src", enemyFileNameWithCloud)
-    enemyEl.setAttribute("class", "fade-out-image")
-    // creating image that will stay once the one with clouds is gone
-    var nextEnemyEl = document.createElement("img")
-    nextEnemyEl.setAttribute("id", "targetEnemy")
-    nextEnemyEl.setAttribute("src", enemyFileNameNoCloud)
+	// creating first image with cloud
+	var enemyEl = document.createElement("img");
+	enemyEl.setAttribute("src", enemyFileNameWithCloud);
+	enemyEl.setAttribute("class", "fade-out-image");
+	// creating image that will stay once the one with clouds is gone
+	var nextEnemyEl = document.createElement("img");
+	nextEnemyEl.setAttribute("id", "targetEnemy");
+	nextEnemyEl.setAttribute("src", enemyFileNameNoCloud);
 
-    var divContainer = document.getElementById("e3")
-    divContainer.appendChild(enemyEl)
-    divContainer.appendChild(nextEnemyEl)
+	var divContainer = document.getElementById("e3");
+	divContainer.appendChild(enemyEl);
+	divContainer.appendChild(nextEnemyEl);
 
-    function changeImage() {
-        enemyEl.remove()
-    }
-    setTimeout(changeImage, 4500)
+	function changeImage() {
+		enemyEl.remove();
+	}
+	setTimeout(changeImage, 4500);
 }
 
 function startCombat(index) {
-    // Console logging states
-    console.log("Fighting Started")
-    // removing the start message
-    var messageEl = document.getElementById("combatMessage")
-    messageEl.remove()
-    // creating enemy health bar
-    var enemyHealth = enemyHealthPoints
-    var enemyHealthProgress = document.createElement("progress")
-    enemyHealthProgress.setAttribute("class", "nes-progress is-success")
-    enemyHealthProgress.setAttribute("id", "enemyHealthBar")
-    enemyHealthProgress.setAttribute("value", enemyHealth)
-    enemyHealthProgress.setAttribute("max", enemyHealth)
-    divC3.appendChild(enemyHealthProgress)
-    // Adding event listener to defeat enemy
-    var targetEnemyEl = document.getElementById("targetEnemy")
-    targetEnemyEl.addEventListener("click", function () {
-        enemyHealth--
-        enemyHealthProgress.setAttribute("value", enemyHealth)
-    })
-    timerInterval = setInterval(function () {
-        if (enemyHealth > 0) {
-            adventurerHealth = adventurerHealth - enemyDamagePoints
-            playerHealth.setAttribute("value", adventurerHealth);
-        } else {
-            addXPToTotal(adventurerHealth)
-            console.log("Player Won")
-            clearInterval(timerInterval)
-            enemyHealthProgress.remove()
-            targetEnemyEl.remove()
-            messageEl.textContent = "Victory!"
-            printMessage(dialogueTextEl, "Aaargh...", 30)
-            var endMessage = "You defeated the enemy and gained " + adventurerHealth + " XP! You are able to continue!"
-            printMessage(storyTextPEl, endMessage, 30)
-            mainGameContinueBtn.setAttribute("class", "nes-btn")
-            divB3.appendChild(messageEl)
-            gameIsPlaying = false
-            clearMiniGame()
-        }
-        if (adventurerHealth <= 0) {
-            console.log("Player Lost")
-            adventurerLives = adventurerLives - 0.5
-            displayLives()
-            clearInterval(timerInterval)
-            enemyHealthProgress.remove()
-            messageEl.textContent = "Defeated"
-            printMessage(dialogueTextEl, enemyWinDialogue, 30)
-            divB3.appendChild(messageEl)
-            var restartBtn = document.createElement("button")
-            restartBtn.setAttribute("class", "nes-btn")
-            restartBtn.textContent = "Try again"
-            dialogueBtnContainer.appendChild(restartBtn)
-            allowNextDialogue = false;
-            restartBtn.addEventListener("click", function (event) {
-                event.preventDefault()
-                if (allowNextDialogue) {
-                    console.log("Player is restarting mini game")
-                    dialogueTextEl.textContent = ""
-                    restartBtn.remove()
-                    resetMiniGameGrid()
-                    playCombat(index)
-                }
-            })
-
-        }
-    }, 1000);
+	// Console logging states
+	console.log("Fighting Started");
+	// removing the start message
+	var messageEl = document.getElementById("combatMessage");
+	messageEl.remove();
+	// creating enemy health bar
+	var enemyHealth = enemyHealthPoints;
+	var enemyHealthProgress = document.createElement("progress");
+	enemyHealthProgress.setAttribute("class", "nes-progress is-success");
+	enemyHealthProgress.setAttribute("id", "enemyHealthBar");
+	enemyHealthProgress.setAttribute("value", enemyHealth);
+	enemyHealthProgress.setAttribute("max", enemyHealth);
+	divC3.appendChild(enemyHealthProgress);
+	// Adding event listener to defeat enemy
+	var targetEnemyEl = document.getElementById("targetEnemy");
+	targetEnemyEl.addEventListener("click", function () {
+		enemyHealth--;
+		enemyHealthProgress.setAttribute("value", enemyHealth);
+	});
+	timerInterval = setInterval(function () {
+		if (enemyHealth > 0) {
+			adventurerHealth = adventurerHealth - enemyDamagePoints;
+			playerHealth.setAttribute("value", adventurerHealth);
+		} else {
+			addXPToTotal(adventurerHealth);
+			console.log("Player Won");
+			clearInterval(timerInterval);
+			enemyHealthProgress.remove();
+			targetEnemyEl.remove();
+			messageEl.textContent = "Victory!";
+			printMessage(dialogueTextEl, "Aaargh...", 30);
+			var endMessage =
+				"You defeated the enemy and gained " +
+				adventurerHealth +
+				" XP! You are able to continue!";
+			printMessage(storyTextPEl, endMessage, 30);
+			mainGameContinueBtn.setAttribute("class", "nes-btn");
+			divB3.appendChild(messageEl);
+			gameIsPlaying = false;
+			clearMiniGame();
+		}
+		if (adventurerHealth <= 0) {
+			console.log("Player Lost");
+			adventurerLives = adventurerLives - 0.5;
+			displayLives();
+			clearInterval(timerInterval);
+			enemyHealthProgress.remove();
+			messageEl.textContent = "Defeated";
+			printMessage(dialogueTextEl, enemyWinDialogue, 30);
+			divB3.appendChild(messageEl);
+			var restartBtn = document.createElement("button");
+			restartBtn.setAttribute("class", "nes-btn");
+			restartBtn.textContent = "Try again";
+			dialogueBtnContainer.appendChild(restartBtn);
+			allowNextDialogue = false;
+			restartBtn.addEventListener("click", function (event) {
+				event.preventDefault();
+				if (allowNextDialogue) {
+					console.log("Player is restarting mini game");
+					dialogueTextEl.textContent = "";
+					restartBtn.remove();
+					resetMiniGameGrid();
+					playCombat(index);
+				}
+			});
+		}
+	}, 1000);
 }
 
 var RPGwordPool = [
-    "elves",
-    "human",
-    "dwarf",
-    "castle",
-    "forest",
-    "dragon",
-    "princess",
-    "witch",
-    "troll",
+	"elves",
+	"human",
+	"dwarf",
+	"castle",
+	"forest",
+	"dragon",
+	"princess",
+	"witch",
+	"troll",
 ];
-
-// playHangman(RPGwordPool, 35, 6)
 
 // Hangman Game function
 function playHangman(chosenWordPool, totalTime, nbrOfWords) {
-    adventurerHealth = playerCharacter.health;
-    yesEl.style.display = "none";
-    noEl.style.display = "none";
-    mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
-    printMessage(storyTextPEl, "Find as many words as you can in the time given! If the timer runs out before getting at least 5 words you loose a life. Any extra words give you extra XP !", 20)
-    adventurerHealth = playerCharacter.health;
-    playerHealth.setAttribute("value", adventurerHealth);
-    console.log("Hangman Game Start")
-    gameIsPlaying = true
-    console.log("Game is Playing: " + gameIsPlaying)
-    // hangman game elements
-    var wordPool = chosenWordPool
-    var randomWord;
-    var maskedWord = [];
-    var timeLeft = totalTime;
-    var wordsFound = 0;
+	adventurerHealth = playerCharacter.health;
+	yesEl.style.display = "none";
+	noEl.style.display = "none";
+	mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
+	//instructions removed as they're printed in the story now
+	adventurerHealth = playerCharacter.health;
+	playerHealth.setAttribute("value", adventurerHealth);
+	console.log("Hangman Game Start");
+	gameIsPlaying = true;
+	console.log("Game is Playing: " + gameIsPlaying);
+	// hangman game elements
+	var wordPool = chosenWordPool;
+	var randomWord;
+	var maskedWord = [];
+	var timeLeft = totalTime;
+	var wordsFound = 0;
 
-    // generating hangman game element
-    var miniGameTitle = document.createElement("p");
-    miniGameTitle.textContent = "The Hangman Game";
-    miniGameTitle.setAttribute("id", "miniGameTilte")
+	// generating hangman game element
+	var miniGameTitle = document.createElement("p");
+	miniGameTitle.textContent = "The Hangman Game";
+	miniGameTitle.setAttribute("id", "miniGameTilte");
 
-    var wordEl = document.createElement("p");
-    wordEl.setAttribute("id", "wordToFind");
+	var wordEl = document.createElement("p");
+	wordEl.setAttribute("id", "wordToFind");
 
-    var startMiniGameBtn = document.createElement("button");
-    startMiniGameBtn.textContent = "Start!";
-    startMiniGameBtn.setAttribute("id", "hangmanStartBtn");
+	var startMiniGameBtn = document.createElement("button");
+	startMiniGameBtn.textContent = "Start!";
+	startMiniGameBtn.setAttribute("id", "hangmanStartBtn");
 
-    divB3.appendChild(miniGameTitle);
-    divC3.appendChild(wordEl);
-    divC3.appendChild(startMiniGameBtn);
+	divB3.appendChild(miniGameTitle);
+	divC3.appendChild(wordEl);
+	divC3.appendChild(startMiniGameBtn);
 
-    // generating hangman words found element
-    var wordsFoundEl = document.createElement("p");
-    wordsFoundEl.setAttribute("id", "wordsFound");
-    wordsFoundEl.textContent = "0/" + nbrOfWords + " words";
+	// generating hangman words found element
+	var wordsFoundEl = document.createElement("p");
+	wordsFoundEl.setAttribute("id", "wordsFound");
+	wordsFoundEl.textContent = "0/" + nbrOfWords + " words";
 
-    divA1.appendChild(wordsFoundEl);
+	divA1.appendChild(wordsFoundEl);
 
-    var timeLeftEl = document.createElement("p");
-    timeLeftEl.setAttribute("id", "timeLeft");
-    timeLeftEl.textContent = "Time Left: " + timeLeft + " seconds";
+	var timeLeftEl = document.createElement("p");
+	timeLeftEl.setAttribute("id", "timeLeft");
+	timeLeftEl.textContent = "Time Left: " + timeLeft + " seconds";
 
-    divA5.appendChild(timeLeftEl);
+	divA5.appendChild(timeLeftEl);
 
-    startMiniGameBtn.addEventListener("click", function () {
-        mainGameBackBtn.setAttribute("class", "nes-btn is-disabled");
-        startHangmanGame();
-        randomizer();
-        wordEl.textContent = maskedWord.join(" ");
-        startMiniGameBtn.style.display = "none";
-    });
+	startMiniGameBtn.addEventListener("click", function () {
+		mainGameBackBtn.setAttribute("class", "nes-btn is-disabled");
+		startHangmanGame();
+		randomizer();
+		wordEl.textContent = maskedWord.join(" ");
+		startMiniGameBtn.style.display = "none";
+	});
 
-    function randomizer() {
-        console.log("Randomizing word")
-        maskedWord = [];
-        randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
-        for (var i = 0; i < randomWord.length; i++) {
-            maskedWord.push("_");
-            wordEl.textContent = maskedWord.join(" ");
-        }
-    }
+	function randomizer() {
+		console.log("Randomizing word");
+		maskedWord = [];
+		randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
+		for (var i = 0; i < randomWord.length; i++) {
+			maskedWord.push("_");
+			wordEl.textContent = maskedWord.join(" ");
+		}
+	}
 
-    var key;
+	var key;
 
-    function letterInWord() {
-        if (!randomWord.includes(key)) {
-            adventurerHealth = adventurerHealth - 1
-            console.log(adventurerHealth)
-            playerHealth.setAttribute("value", adventurerHealth);
-        }
-        for (var i = 0; i < randomWord.length; i++) {
-            if (randomWord[i] === key) {
-                maskedWord.splice([i], 1, randomWord[i]);
-                wordEl.textContent = maskedWord.join(" ");
-                if (!maskedWord.includes("_")) {
-                    wordsFound++;
-                    wordsFoundEl.textContent = wordsFound + "/" + nbrOfWords + " words";
-                    setTimeout(randomizer(), 1000);
-                    return;
-                }
-            }
-        }
-    }
+	function letterInWord() {
+		if (!randomWord.includes(key)) {
+			adventurerHealth = adventurerHealth - 1;
+			console.log(adventurerHealth);
+			playerHealth.setAttribute("value", adventurerHealth);
+		}
+		for (var i = 0; i < randomWord.length; i++) {
+			if (randomWord[i] === key) {
+				maskedWord.splice([i], 1, randomWord[i]);
+				wordEl.textContent = maskedWord.join(" ");
+				if (!maskedWord.includes("_")) {
+					wordsFound++;
+					wordsFoundEl.textContent = wordsFound + "/" + nbrOfWords + " words";
+					setTimeout(randomizer(), 1000);
+					return;
+				}
+			}
+		}
+	}
 
-    document.addEventListener("keydown", keydownAction);
+	document.addEventListener("keydown", keydownAction);
 
-    function keydownAction(event) {
-        key = event.key.toLowerCase();
-        return letterInWord();
-    }
+	function keydownAction(event) {
+		key = event.key.toLowerCase();
+		return letterInWord();
+	}
 
-
-    function startHangmanGame() {
-        console.log("Countdown starts time to find words")
-        timeLeft = 30;
-        timerInterval = setInterval(function () {
-            timeLeft--;
-            timeLeftEl.textContent = "Time Left: " + timeLeft + " seconds";
-            if (timeLeft <= 0 || adventurerHealth <= 0) {
-                clearInterval(timerInterval);
-                randomWord = "";
-                maskedWord = [];
-                if (wordsFound < nbrOfWords) {
-                    console.log("Player lost")
-                    var loosingText;
-                    if (adventurerHealth > 0) {
-                        loosingText = "You did not make it in time! you only found " + wordsFound + " out of " + nbrOfWords + " words. You lost half a life...";
-                        wordEl.textContent = "Time is up!";
-                    } else {
-                        loosingText = "You ran out of health and died. You lost half a life...";
-                        wordEl.textContent = "You died...";
-                    }
-                    adventurerLives = adventurerLives - 0.5
-                    displayLives()
-                    printMessage(dialogueTextEl, loosingText, 30)
-                    mainGameBackBtn.setAttribute("class", "nes-btn");
-                    var restartBtn = document.createElement("button")
-                    restartBtn.setAttribute("class", "nes-btn")
-                    restartBtn.textContent = "Try again"
-                    dialogueBtnContainer.appendChild(restartBtn)
-                    allowNextDialogue = false;
-                    restartBtn.addEventListener("click", function (event) {
-                        event.preventDefault()
-                        if (allowNextDialogue) {
-                            console.log("Player restarted mini game")
-                            restartBtn.remove()
-                            wordEl.remove()
-                            resetMiniGameGrid()
-                            playHangman(chosenWordPool, totalTime, nbrOfWords)
-                        }
-                    })
-                } else {
-                    if (wordsFound === nbrOfWords) {
-                        console.log("Player won but no extra words")
-                        var winningMessage = "You have successfully found all " + nbrOfWords + " words! Congratulations! You gained 100 XP";
-                        addXPToTotal(100)
-                    } else {
-                        console.log("Player won with extra words")
-                        var addXP = (wordsFound - nbrOfWords) * 10 + 100;
-                        var extraWords = wordsFound - nbrOfWords;
-                        addXPToTotal(addXP)
-                        var winningMessage = "You have successfully found all " + nbrOfWords + " words and " + extraWords + " extra words! Congratulations! You gained " + addXP + " XP.";
-                    }
-                    printMessage(dialogueTextEl, winningMessage, 30)
-                    mainGameContinueBtn.setAttribute("class", "nes-btn");
-                    gameIsPlaying = false
-                    console.log("Game is Playing: " + gameIsPlaying)
-                    wordEl.remove()
-                    clearMiniGame()
-                }
-            }
-        }, 1000);
-    }
+	function startHangmanGame() {
+		console.log("Countdown starts time to find words");
+		timeLeft = 30;
+		timerInterval = setInterval(function () {
+			timeLeft--;
+			timeLeftEl.textContent = "Time Left: " + timeLeft + " seconds";
+			// end of try when time is 0 or when health bar is less than 0
+			if (timeLeft <= 0 || adventurerHealth <= 0) {
+				clearInterval(timerInterval);
+				randomWord = "";
+				maskedWord = [];
+				if (wordsFound < nbrOfWords) {
+					console.log("Player lost");
+					var loosingText;
+					if (adventurerHealth > 0) {
+						loosingText =
+							"You did not make it in time! you only found " +
+							wordsFound +
+							" out of " +
+							nbrOfWords +
+							" words. You lost half a life...";
+						wordEl.textContent = "Time is up!";
+					} else {
+						loosingText = "You ran out of health and died. You lost half a life...";
+						wordEl.textContent = "You died...";
+					}
+					adventurerLives = adventurerLives - 0.5;
+					displayLives();
+					if (adventurerLives == 0) {
+						gameLose();
+					}
+					printMessage(dialogueTextEl, loosingText, 30);
+					mainGameBackBtn.setAttribute("class", "nes-btn");
+					var restartBtn = document.createElement("button");
+					restartBtn.setAttribute("class", "nes-btn");
+					restartBtn.textContent = "Try again";
+					dialogueBtnContainer.appendChild(restartBtn);
+					allowNextDialogue = false;
+					restartBtn.addEventListener("click", function (event) {
+						event.preventDefault();
+						if (allowNextDialogue) {
+							console.log("Player restarted mini game");
+							restartBtn.remove();
+							wordEl.remove();
+							resetMiniGameGrid();
+							playHangman(chosenWordPool, totalTime, nbrOfWords);
+						}
+					});
+				} else {
+					if (wordsFound === nbrOfWords) {
+						console.log("Player won but no extra words");
+						var winningMessage =
+							"You have successfully found all " +
+							nbrOfWords +
+							" words! Congratulations! You gained 100 XP";
+						addXPToTotal(100);
+						gameWin = true;
+					} else {
+						console.log("Player won with extra words");
+						var addXP = (wordsFound - nbrOfWords) * 10 + 100;
+						var extraWords = wordsFound - nbrOfWords;
+						addXPToTotal(addXP);
+						var winningMessage =
+							"You have successfully found all " +
+							nbrOfWords +
+							" words and " +
+							extraWords +
+							" extra words! Congratulations! You gained " +
+							addXP +
+							" XP.";
+						gameWin = true;
+					}
+					printMessage(storyTextPEl, winningMessage, 30);
+					mainGameContinueBtn.setAttribute("class", "nes-btn");
+					gameIsPlaying = false;
+					console.log("Game is Playing: " + gameIsPlaying);
+					wordEl.remove();
+					clearMiniGame();
+				}
+			}
+		}, 1000);
+	}
 }
 
 // General Mini game functions
 
 // reset mini game Grid
 function resetMiniGameGrid() {
-    for (var i = 0; i < gameGridEl.children.length; i++) {
-        var itemsToClear = gameGridEl.children[i].children
-        if (itemsToClear.length > 0) {
-            itemsToClear[itemsToClear.length - 1].remove()
-        }
-    }
+	for (var i = 0; i < gameGridEl.children.length; i++) {
+		var itemsToClear = gameGridEl.children[i].children;
+		if (itemsToClear.length > 0) {
+			itemsToClear[itemsToClear.length - 1].remove();
+		}
+	}
 }
 // clearMini Games
 function clearMiniGame() {
-    mainGameContinueBtn.addEventListener("click", function () {
-        if (!gameIsPlaying) {
-            console.log("Mini Game is over and next story is starting")
-            dialogueTextEl.textContent = ""
-            storyTextPEl.textContent = ""
-            resetMiniGameGrid()
-        }
-    })
+	mainGameContinueBtn.addEventListener("click", function () {
+		if (!gameIsPlaying && hasGame(taleArray[taleTracker][1].game) == true) {
+			console.log("Mini Game is over and next story is starting");
+			clearDialog();
+			clearStory();
+			resetMiniGameGrid();
+		}
+	});
 }
 // adding xp and leveling up player
 function addXPToTotal(amountOfXp) {
-    console.log(amountOfXp + "XP gained")
-    adventurerXP = adventurerXP + amountOfXp
-    playerXP.setAttribute("value", adventurerXP)
+	console.log(amountOfXp + "XP gained");
+	adventurerXP = adventurerXP + amountOfXp;
+	playerXP.setAttribute("value", adventurerXP);
 
-    if (adventurerXP >= playerXP.max) {
-        var levelUps = Math.floor(adventurerXP / playerXP.max)
-        adventurerXP = adventurerXP - (playerXP.max * levelUps)
-        playerXP.setAttribute("value", adventurerXP)
-        adventurerLevel = adventurerLevel + levelUps
-        playerLevel.textContent = adventurerLevel
-        console.log("Player Leveled up " + levelUps)
-    }
+	if (adventurerXP >= playerXP.max) {
+		var levelUps = Math.floor(adventurerXP / playerXP.max);
+		adventurerXP = adventurerXP - playerXP.max * levelUps;
+		playerXP.setAttribute("value", adventurerXP);
+		adventurerLevel = adventurerLevel + levelUps;
+		playerLevel.textContent = adventurerLevel;
+		console.log("Player Leveled up " + levelUps);
+	}
 }
 
 // Clears the dialog text
 function clearDialog() {
-    dialogueTextEl.innerText = "";
+	dialogueTextEl.innerText = "";
 }
 
 // Clears the story text
 function clearStory() {
-    storyTextPEl.innerText = "";
+	storyTextPEl.innerText = "";
 }
 
 //checks the scene for story
 function hasStory() {
-    console.log("Checking story: " + taleTracker);
-    if (taleArray[taleTracker][1].story !== undefined) {
-        console.log("has story");
-        return true;
-    } else {
-        console.log("no story");
-        return false;
-    }
+	console.log("Checking story: " + taleTracker);
+	if (taleArray[taleTracker][1].story !== undefined) {
+		console.log("has story");
+		return true;
+	} else {
+		console.log("no story");
+		return false;
+	}
 }
 
-//checks the scene for a dialog
+//checks the current scene for a dialog
 function hasDialog() {
-    if (taleArray[taleTracker][1].dialog !== undefined) {
-        return true;
-    } else {
-        return false;
-    }
+	if (taleArray[taleTracker][1].dialog !== undefined) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 // checks if there's options in the scene
 function hasOptions() {
-    if (taleArray[taleTracker][1].options !== undefined) {
-        return true;
-    } else {
-        return false;
-    }
+	if (taleArray[taleTracker][1].options !== undefined) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function showOptions(state) {
-    if (state) {
-        yesEl.style.visibility = "visible";
-        noEl.style.visibility = "visible";
-    } else {
-        yesEl.style.visibility = "hidden";
-        noEl.style.visibility = "hidden";
-    }
+	if (state) {
+		yesEl.style.visibility = "visible";
+		noEl.style.visibility = "visible";
+	} else {
+		yesEl.style.visibility = "hidden";
+		noEl.style.visibility = "hidden";
+	}
 }
 
 // checks the scene for a game
 function hasGame(game) {
-    if (game != undefined) {
-        return true;
-    } else {
-        return false;
-    }
+	if (game != undefined) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 // Load the story to the story section
 //TODO: changing background function should be called in here.
 function loadScene() {
-    console.log(hasStory());
-    if (hasStory()) {
-        printMessage(storyTextPEl, taleArray[taleTracker][1].story[sceneIndex], 30);
-    }
-    if (hasStory() == false || sceneIndex == taleArray[taleTracker][1].story.length - 1) {
-        console.log("enable disabled because end of story or no story, load dialog");
-        enableContinue(false);
-        clearDialog();
-        setTimeout(() => {
-            loadDialog();
-            showDialogButton(true);
-        }, 3000);
-    }
+	console.log(hasStory());
+	// if there is a story to the scene then load the scene
+	if (hasStory()) {
+		console.log("pm in load scene a");
+		printMessage(storyTextPEl, taleArray[taleTracker][1].story[storyIndex], 30);
+	}
+	// if there's a dialog to the scene AND there's no story or the story has reached the end, then load the dialog. Dialog will always be loaded after the story if there is onne.
+	if (
+		hasDialog() == true &&
+		(hasStory() == false || storyIndex == taleArray[taleTracker][1].story.length - 1)
+	) {
+		console.log("enable disabled because end of story or no story, load dialog");
+		enableContinue(false);
+		clearDialog();
+		setTimeout(() => {
+			loadDialog();
+			showDialogButton(true);
+		}, 3000);
+	}
+	// if there is a game to play, check what type of game it is and play it.
+	if (hasGame(taleArray[taleTracker][1].game) == true) {
+		if (taleArray[taleTracker][1].game == "hangman") {
+			playHangman(RPGwordPool, 35, 6);
+		} else if (taleArray[taleTracker][1].game == "troll") {
+			playCombat(0);
+		} else if (taleArray[taleTracker][1].game == "witch") {
+			playCombat(1);
+		}
+	}
 }
 
 function loadDialog() {
-    if (hasOptions() == true) {
-        printMessage(
-            dialogueTextEl,
-            taleArray[taleTracker][1].dialog[dialogIndex].replace("Player:", adventurerName + ":"),
-            30
-        );
-
-        setTimeout(() => {
-            loadOptions();
-            showOptions(true);
-            showDialogButton(true);
-        }, 3000);
-    } else {
-        printMessage(
-            dialogueTextEl,
-            taleArray[taleTracker][1].dialog[dialogIndex].replace("Player:", adventurerName + ":"),
-            30
-        );
-    }
+	// if there are options ot the story
+	if (hasOptions() == true) {
+		// load the dialog first
+		console.log("pm in load dialog a");
+		printMessage(
+			dialogueTextEl,
+			taleArray[taleTracker][1].dialog[dialogIndex].replace("Player:", adventurerName + ":"),
+			30
+		);
+		//load the options after 3 seconds
+		setTimeout(() => {
+			loadOptions();
+			showOptions(true);
+			showDialogButton(true);
+		}, 3000);
+	} else {
+		// if there's no options then just load the dialog
+		console.log("pm in load dialog b");
+		printMessage(
+			dialogueTextEl,
+			taleArray[taleTracker][1].dialog[dialogIndex].replace("Player:", adventurerName + ":"),
+			30
+		);
+	}
 }
 
+// give the options the values based on the JSON.
 function loadOptions() {
-    yesEl.children[1].innerText = taleArray[taleTracker][1].options.one.replace(
-        "Player:",
-        adventurerName + ":"
-    );
-    noEl.children[1].innerText = taleArray[taleTracker][1].options.two.replace(
-        "Player:",
-        adventurerName + ":"
-    );
+	yesEl.children[1].innerText = taleArray[taleTracker][1].options.one.replace(
+		"Player:",
+		adventurerName + ":"
+	);
+	noEl.children[1].innerText = taleArray[taleTracker][1].options.two.replace(
+		"Player:",
+		adventurerName + ":"
+	);
 }
 
 mainGameContinueBtn.addEventListener("click", () => {
-    if (!gameIsPlaying) {
-        sceneIndex++;
-        console.log(
-            "update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
-        );
-        console.log(sceneIndex + 1 == taleArray[taleTracker][1].story.length);
-        if (sceneIndex < taleArray[taleTracker][1].story.length) {
-            clearStory();
-            loadScene();
-        } else if (sceneIndex + 1 == taleArray[taleTracker][1].story.length) {
-            enableContinue(false);
-            clearDialog();
-            loadDialog();
-            showDialogButton(true);
-        }
-    }
+	// When not playing the game
+	if (!gameIsPlaying) {
+		// if the current scene does not have a game
+		if (hasGame(taleArray[taleTracker][1].game) == false) {
+			console.log(
+				"update continue button taleTracker: " +
+					taleTracker +
+					" storyI: " +
+					storyIndex +
+					" dialogI: " +
+					dialogIndex
+			);
+
+			storyIndex++;
+			if (storyIndex == taleArray[taleTracker][1].story.length) {
+				if (
+					//storyIndex == taleArray[taleTracker][1].story.length &&
+					hasDialog() == true
+				) {
+					enableContinue(false);
+					clearDialog();
+					loadDialog();
+					showDialogButton(true);
+				} else if (
+					//storyIndex == taleArray[taleTracker][1].story.length &&
+					hasDialog() == false
+				) {
+					taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
+					clearStory();
+					storyIndex = 0;
+					dialogIndex = 0;
+					loadScene();
+				}
+			} else {
+				clearStory();
+				loadScene();
+			}
+		} else if (hasGame(taleArray[taleTracker][1].game) == true) {
+			console.log("game end, scene update");
+			if (gameWin) {
+				taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
+			} else {
+				taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
+			}
+			gameWin = false;
+			storyIndex = 0;
+			dialogIndex = 0;
+			loadScene();
+		}
+	}
 });
 
 // taleTracker ++ changed to taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
 // Load the dialog to the dialog section
 dialogueNextBtn.addEventListener("click", () => {
-    if (!gameIsPlaying) {
-        // if (hasOptions() == false || dialogIndex + 1 < taleArray[taleTracker][1].dialog.length) {
-        //     console.log("no options OR not at scene where options are needed yet");
-        // clear options on click in case there are any
-        showOptions(false);
-        // }
-        console.log("dialog button clicked");
-        dialogIndex++;
-        clearDialog();
-        if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
-            console.log(
-                "update taleTracker: " +
-                taleTracker +
-                " storyI: " +
-                sceneIndex +
-                " dialogI: " +
-                dialogIndex
-            );
-            loadDialog();
-            if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
-                console.log("Options? " + hasOptions());
-                showDialogButton(false);
-                //checks if the next scene has a game
-                if (hasGame(taleArray[taleTracker + 1][1].game) == true) {
-                    // if user chooses to play the game
-                    console.log("next story has game is true");
-                    // TODO: The if statement here is getting messed up when trying to go to the next scene. the taleTracker is not getting updated properly at lines 420 and 424 based on user selection.
-                    if (yesEl.children[0].checked == true) {
-                        // clearStory();
-                        // clearDialog();
-                        // enableContinue(false);
-                        // showDialogButton(false);
-                        // showOptions(false);
-
-                        console.log("at 424: " + taleTracker);
-                        taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
-                    } else if (noEl.children[0].checked == true) {
-                        // if user chooses to not play the game
-                        console.log("at 434:" + taleTracker);
-                        taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
-                    } else {
-                        taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
-                    }
-                } else {
-                    // if there's no game
-                    console.log("at 439:" + taleTracker);
-                    console.log(
-                        taleTracker + " " + Object.keys(tale).indexOf(taleArray[taleTracker][1].next)
-                    );
-                    //
-                    taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
-                }
-                sceneIndex = 0;
-                dialogIndex = 0;
-                console.log(
-                    "next scene should be enabled. taleTracker: " +
-                    taleTracker +
-                    " storyI: " +
-                    sceneIndex +
-                    " dialogI: " +
-                    dialogIndex
-                );
-                setTimeout(() => {
-                    enableContinue(true);
-                    clearStory();
-                    loadScene();
-                }, 3000);
-            }
-        } else {
-            setTimeout(() => {
-                showDialogButton(false);
-                console.log("at 465:" + taleTracker);
-                console.log(Object.keys(tale).indexOf(taleArray[taleTracker][1].next));
-                taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
-
-                sceneIndex = 0;
-                dialogIndex = 0;
-                console.log(
-                    "next scene should be enabled. taleTracker: " +
-                    taleTracker +
-                    " storyI: " +
-                    sceneIndex +
-                    " dialogI: " +
-                    dialogIndex
-                );
-                enableContinue(true);
-                clearStory();
-                loadScene();
-            }, 3000);
-        }
-    }
+	if (!gameIsPlaying) {
+		// if (hasOptions() == false || dialogIndex + 1 < taleArray[taleTracker][1].dialog.length) {
+		//     console.log("no options OR not at scene where options are needed yet");
+		// clear options on click in case there are any
+		showOptions(false);
+		// }
+		console.log("dialog button clicked");
+		dialogIndex++;
+		clearDialog();
+		if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
+			console.log(
+				"update taleTracker: " +
+					taleTracker +
+					" storyI: " +
+					storyIndex +
+					" dialogI: " +
+					dialogIndex
+			);
+			loadDialog();
+			if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
+				console.log("Options? " + hasOptions());
+				showDialogButton(false);
+				//checks if the next scene has a game
+				if (hasGame(taleArray[taleTracker + 1][1].game) == true) {
+					// if user chooses to play the game
+					console.log("next story has game is true");
+					if (yesEl.children[0].checked == true) {
+						console.log("at 424: " + taleTracker);
+						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
+					} else if (noEl.children[0].checked == true) {
+						// if user chooses to not play the game
+						console.log("at 434:" + taleTracker);
+						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
+					} else {
+						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
+					}
+				} else {
+					// if there's no game
+					console.log("at 439:" + taleTracker);
+					console.log(
+						taleTracker +
+							" " +
+							Object.keys(tale).indexOf(taleArray[taleTracker][1].next)
+					);
+					//
+					taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
+				}
+				storyIndex = 0;
+				dialogIndex = 0;
+				console.log(
+					"next scene should be enabled. taleTracker: " +
+						taleTracker +
+						" storyI: " +
+						storyIndex +
+						" dialogI: " +
+						dialogIndex
+				);
+				setTimeout(() => {
+					enableContinue(true);
+					clearStory();
+					loadScene();
+				}, 3000);
+			}
+		} else {
+			setTimeout(() => {
+				showDialogButton(false);
+				console.log("at 465:" + taleTracker);
+				console.log(Object.keys(tale).indexOf(taleArray[taleTracker][1].next));
+				if (hasGame(taleArray[taleTracker + 1][1].game) == true) {
+					// if user chooses to play the game
+					console.log("next story has game is true");
+					if (yesEl.children[0].checked == true) {
+						console.log("at 424: " + taleTracker);
+						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
+					} else if (noEl.children[0].checked == true) {
+						// if user chooses to not play the game
+						console.log("at 434:" + taleTracker);
+						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
+					}
+				} else {
+					taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
+				}
+				storyIndex = 0;
+				dialogIndex = 0;
+				console.log(
+					"next scene should be enabled. taleTracker: " +
+						taleTracker +
+						" storyI: " +
+						storyIndex +
+						" dialogI: " +
+						dialogIndex
+				);
+				enableContinue(true);
+				clearStory();
+				loadScene();
+			}, 3000);
+		}
+	}
 });
 
 // Hides or shows the dialog button depending on if it is true/false
 function showDialogButton(state) {
-    if (state) {
-        dialogueNextBtn.style.visibility = "visible";
-    } else {
-        dialogueNextBtn.style.visibility = "hidden";
-    }
+	if (state) {
+		dialogueNextBtn.style.visibility = "visible";
+	} else {
+		dialogueNextBtn.style.visibility = "hidden";
+	}
 }
 
 // enable/disable continue button in story section based on true false
 function enableContinue(state) {
-    if (state) {
-        mainGameContinueBtn.classList.remove("is-disabled");
-        mainGameContinueBtn.disabled = false;
-    } else {
-        mainGameContinueBtn.classList.add("is-disabled");
-        mainGameContinueBtn.disabled = true;
-    }
+	if (state) {
+		mainGameContinueBtn.classList.remove("is-disabled");
+		mainGameContinueBtn.disabled = false;
+	} else {
+		mainGameContinueBtn.classList.add("is-disabled");
+		mainGameContinueBtn.disabled = true;
+	}
 }
 
 // TODO: update background image based on location.
@@ -814,29 +907,30 @@ function enableContinue(state) {
 
 // First load of the game.
 function initGame() {
-    taleArray = Object.entries(tale);
-    taleTracker = 0;
-    console.log(taleArray);
-    // clear dialog and story to load new prompts
-    clearDialog();
-    clearStory();
-    //call updateBackgroundImage(); here
-    //check if there is a story for the scene then proceed to print the text and use continue button as needed.
-    sceneIndex = 0;
-    dialogIndex = 0;
-    printMessage(storyTextPEl, taleArray[taleTracker][1].story[sceneIndex], 30);
-    enableContinue(false);
-    setTimeout(() => {
-        clearDialog();
-        loadDialog();
-        showDialogButton(true);
-    }, 5000);
+	taleArray = Object.entries(tale);
+	taleTracker = 0;
+	console.log(taleArray);
+	// clear dialog and story to load new prompts
+	clearDialog();
+	clearStory();
+	//call updateBackgroundImage(); here
+	//check if there is a story for the scene then proceed to print the text and use continue button as needed.
+	storyIndex = 0;
+	dialogIndex = 0;
+	console.log("pm in initgame");
+	printMessage(storyTextPEl, taleArray[taleTracker][1].story[storyIndex], 30);
+	enableContinue(false);
+	setTimeout(() => {
+		clearDialog();
+		loadDialog();
+		showDialogButton(true);
+	}, 5000);
 }
 
 // Game is started after story json data is grabbed.
 fetch("./assets/JSON/story.json")
-    .then((res) => res.json())
-    .then((data) => {
-        tale = data;
-        // initGame();
-    });
+	.then((res) => res.json())
+	.then((data) => {
+		tale = data;
+		initGame();
+	});
