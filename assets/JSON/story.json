@@ -70,7 +70,7 @@
 	"scene-1-6": {
 		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": [
-			"Find as many words as you can in the time given related to the butcher! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP! Beware, your health bar is will decrease for each incorrect keystroke. Don't spam your keyboard. ☜(ﾟヮﾟ☜)"
+			"Find as many words as you can in the time given related to the butcher! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP! Beware, your health bar will decrease for each incorrect keystroke. Don't spam your keyboard. ☜(ﾟヮﾟ☜)"
 		],
 		"game": "hangman",
 		"next": ["scene-1-8", "scene-1-9"]
@@ -143,7 +143,7 @@
 	"scene-1-14-2": {
 		"place": "url(./assets/images/backgrounds/forest.png)",
 		"story": [
-			"Find as many words as you can in the time given related to the forest! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP! Beware, your health bar is will decrease for each incorrect keystroke. Don't spam your keyboard. ☜(ﾟヮﾟ☜)"
+			"Find as many words as you can in the time given related to the forest! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP! Beware, your health bar will decrease for each incorrect keystroke. Don't spam your keyboard. ☜(ﾟヮﾟ☜)"
 		],
 		"game": "hangman 2",
 		"next": ["scene-1-14-3", ""]
