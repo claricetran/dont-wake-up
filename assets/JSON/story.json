@@ -67,7 +67,7 @@
 	"scene-1-6": {
 		"place": "url(./assets/images/backgrounds/butcher.png)",
 		"story": [
-			"Find as many words as you can in the time given! If the timer runs out before getting at least 5 words you loose a life. Any extra words give you extra XP !"
+			"Find as many words as you can in the time given! If the timer runs out before getting at least 5 words you lose a life. Any extra words give you extra XP!"
 		],
 		"game": "hangman",
 		"next": ["scene-1-8", "scene-1-9"]

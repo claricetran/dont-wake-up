@@ -1,170 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
-        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
-        <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
-        <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        <title>Don't Wake Up</title>
-    </head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/nes.css@latest/css/nes.min.css"
+      rel="stylesheet"
+    />
 
-    <body id="body">
-        <header>
-            <nav id="main-page-nav">
-                <div id="main-nav-btns">
-                    <button type="button" class="nes-btn is-success" id="save-btn" >Save</button>
-                    <button type="button" class="nes-btn is-error" id="restart-btn">Restart</button>
-                    <button type="button" class="nes-btn" id="title-btn">Title</button>
-                </div>
-                <h2>Don't Wake Up</h2>
-                <audio id="music" controls autoplay muted>
-                    <source src="./assets/music/embers-in-the-wind.mp3" type="audio/mpeg" />
-                </audio>
-            </nav>
-        </header>
-        <div id="mainGame-Main">
-            <section id="leftSideMain">
-                <section id="character-progress">
-                    <section id="character-display">
-                        <!-- Set character limit for name (10) -->
-                        <p id="name"></p>
-                        <section id="lives">
-                            <!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
-                            <i class="nes-icon is-medium heart" id="1"></i
-                            ><i class="nes-icon is-medium heart" id="2"></i
-                            ><i class="nes-icon is-medium heart" id="3"></i>
-                        </section>
-                        <img alt="adventurer" id="adventurer" />
-                    </section>
-                    <hr />
-                    <!-- At certain HPs, the health bar will change from is-success(green) to is-warning(yellow) to is-error(red) -->
-                    <section id="progress-bars">
-                        <div>
-                            <p class="stat-titles">Health:</p>
-                            <progress
-                                id="health"
-                                class="nes-progress is-success"
-                                value="100"
-                                max="100"></progress>
-                        </div>
-                        <div>
-                            <p class="stat-titles">XP:</p>
-                            <progress id="xp" class="nes-progress" value="100" max="100"></progress>
-                        </div>
-                        <div>
-                            <p class="stat-titles">Level:</p>
-                            <p id="currLevel"></p>
-                        </div>
-                    </section>
-                </section>
-                <section id="inventory-weapon">
-                    <p>Inventory</p>
-                    <section id="inventory">
-                        <img
-                            id="healthPotion"
-                            class="nes-avatar is-large"
-                            alt="Gravatar image example"
-                            src="./assets/images/healthPotion.png"
-                            style="image-rendering: pixelated" />
-                            <p id="healthPotionIntructions">Click to gain 10 health Points. Disabled during mini-games, so make sure to heal up when needed!</p>
-                    </section>
-                    <hr />
-                    <p>Weapon</p>
-                    <section id="weapon">
-                        <img
-                            class="nes-avatar is-large"
-                            alt="Gravatar image example"
-                            src="./assets/images/sword.png"
-                            style="image-rendering: pixelated" />
-                        <div id="weapon-info">
-                            <!--name of weapon only-->
-                            <p id="weapon">Wand</p>
-                            <p>Attack +<span id="attack">0</span></p>
-                        </div>
-                    </section>
-                </section>
-            </section>
-            <section id="middleMain">
-                <div id="gameScreenGrid">
-                    <div id="a1"></div>
-                    <div id="a2"></div>
-                    <div id="a3"></div>
-                    <div id="a4"></div>
-                    <div id="a5"></div>
-                    <div id="b1"></div>
-                    <div id="b2"></div>
-                    <div id="b3"></div>
-                    <div id="b4"></div>
-                    <div id="b5"></div>
-                    <div id="c1"></div>
-                    <div id="c2"></div>
-                    <div id="c3"></div>
-                    <div id="c4"></div>
-                    <div id="c5"></div>
-                    <div id="d1"></div>
-                    <div id="d2"></div>
-                    <div id="d3"></div>
-                    <div id="d4"></div>
-                    <div id="d5"></div>
-                    <div id="e1"></div>
-                    <div id="e2"></div>
-                    <div id="e3"></div>
-                    <div id="e4"></div>
-                    <div id="e5"></div>
-                </div>
-                <div id="gameDialogueBox" class="nes-balloon from-right">
-                    <p id="dialogueText"></p>
-                    <form id="dialogueBtnContainer">
-                        <label id="yes">
-                            <input
-                                type="radio"
-                                class="nes-radio"
-                                name="answer"
-                                visibility="hidden"
-                                checked />
-                            <span>Yes</span>
-                        </label>
-                        <label id="no">
-                            <input
-                                type="radio"
-                                class="nes-radio"
-                                name="answer"
-                                visibility="hidden" />
-                            <span>No</span>
-                        </label>
-                        <img
-                            class="nes-pointer"
-                            id="dialogueBtn"
-                            src="./assets/images/dialogue-button.png"
-                            alt="Dialogue next button" />
-                    </form>
-                </div>
-            </section>
-            <section id="rightSideMain">
-                <div id="main-story-text">
-                    <p id="storyText"></p>
-                    <div id="main-story-btns">
-                        <button type="button" class="nes-btn" id="main-back-btn">Back</button>
-                        <button type="button" class="nes-btn is-disabled" id="main-continue-btn">
-                            Continue
-                        </button>
-                    </div>
-                </div>
-            </section>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Don't Wake Up</title>
+  </head>
+
+  <body id="body">
+    <header>
+      <nav id="main-page-nav">
+        <div id="main-nav-btns">
+          <button type="button" class="nes-btn is-success" id="save-btn">
+            Save
+          </button>
+          <button type="button" class="nes-btn is-error" id="restart-btn">
+            Restart
+          </button>
+          <button type="button" class="nes-btn" id="title-btn">Title</button>
         </div>
-        <footer>
-            <p>
-                &copy;
-                <a href="https://github.com/Mayalynn96">Maya</a>
-                <a href="https://github.com/claricetran">Clarice</a>
-                <a href="https://github.com/VisualViolet">Savannah</a>
+        <h2>Don't Wake Up</h2>
+        <audio id="music" controls autoplay>
+          <source
+            src="./assets/music/embers-in-the-wind.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+      </nav>
+    </header>
+    <div id="mainGame-Main">
+      <section id="leftSideMain">
+        <section id="character-progress">
+          <section id="character-display">
+            <!-- Set character limit for name (10) -->
+            <p id="name"></p>
+            <section id="lives">
+              <!--Should be loaded in js and if the screen gets smaller then make the hearts nes-icon is-small heart-->
+              <i class="nes-icon is-medium heart" id="1"></i
+              ><i class="nes-icon is-medium heart" id="2"></i
+              ><i class="nes-icon is-medium heart" id="3"></i>
+            </section>
+            <img alt="adventurer" id="adventurer" />
+          </section>
+          <hr />
+          <!-- At certain HPs, the health bar will change from is-success(green) to is-warning(yellow) to is-error(red) -->
+          <section id="progress-bars">
+            <div>
+              <p class="stat-titles">Health:</p>
+              <progress
+                id="health"
+                class="nes-progress is-success"
+                value="100"
+                max="100"
+              ></progress>
+            </div>
+            <div>
+              <p class="stat-titles">XP:</p>
+              <progress
+                id="xp"
+                class="nes-progress"
+                value="100"
+                max="100"
+              ></progress>
+            </div>
+            <div>
+              <p class="stat-titles">Level:</p>
+              <p id="currLevel"></p>
+            </div>
+          </section>
+        </section>
+        <section id="inventory-weapon">
+          <p>Inventory</p>
+          <section id="inventory">
+            <img
+              id="healthPotion"
+              class="nes-avatar is-large"
+              alt="Gravatar image example"
+              src="./assets/images/healthPotion.png"
+              style="image-rendering: pixelated"
+            />
+            <p id="healthPotionIntructions">
+              Click to gain 10 health Points. Disabled during mini-games, so
+              make sure to heal up when needed!
             </p>
-        </footer>
-        <script src="./assets/js/script.js"></script>
-    </body>
+          </section>
+          <hr />
+          <p>Weapon</p>
+          <br />
+          <section id="weapon">
+            <img
+              class="nes-avatar is-large"
+              alt="Gravatar image example"
+              src="./assets/images/sword.png"
+              style="image-rendering: pixelated"
+            />
+            <div id="weapon-info">
+              <p id="weapon">Sword</p>
+              <p>Attack +<span id="attack">0</span></p>
+            </div>
+          </section>
+        </section>
+      </section>
+      <section id="middleMain">
+        <div id="gameScreenGrid">
+          <div id="a1"></div>
+          <div id="a2"></div>
+          <div id="a3"></div>
+          <div id="a4"></div>
+          <div id="a5"></div>
+          <div id="b1"></div>
+          <div id="b2"></div>
+          <div id="b3"></div>
+          <div id="b4"></div>
+          <div id="b5"></div>
+          <div id="c1"></div>
+          <div id="c2"></div>
+          <div id="c3"></div>
+          <div id="c4"></div>
+          <div id="c5"></div>
+          <div id="d1"></div>
+          <div id="d2"></div>
+          <div id="d3"></div>
+          <div id="d4"></div>
+          <div id="d5"></div>
+          <div id="e1"></div>
+          <div id="e2"></div>
+          <div id="e3"></div>
+          <div id="e4"></div>
+          <div id="e5"></div>
+        </div>
+        <div id="gameDialogueBox" class="nes-balloon from-right">
+          <p id="dialogueText"></p>
+          <form id="dialogueBtnContainer">
+            <label id="yes">
+              <input
+                type="radio"
+                class="nes-radio"
+                name="answer"
+                visibility="hidden"
+                checked
+              />
+              <span>Yes</span>
+            </label>
+            <label id="no">
+              <input
+                type="radio"
+                class="nes-radio"
+                name="answer"
+                visibility="hidden"
+              />
+              <span>No</span>
+            </label>
+            <img
+              class="nes-pointer"
+              id="dialogueBtn"
+              src="./assets/images/dialogue-button.png"
+              alt="Dialogue next button"
+            />
+          </form>
+        </div>
+      </section>
+      <section id="rightSideMain">
+        <div id="main-story-text">
+          <p id="storyText"></p>
+          <div id="main-story-btns">
+            <button type="button" class="nes-btn" id="main-back-btn">
+              Back
+            </button>
+            <button
+              type="button"
+              class="nes-btn is-disabled"
+              id="main-continue-btn"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <p id="dev-links">
+        &copy;
+        <a href="https://github.com/Mayalynn96">Maya</a>
+        <a href="https://github.com/claricetran">Clarice</a>
+        <a href="https://github.com/VisualViolet">Savannah</a>
+      </p>
+    </footer>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
