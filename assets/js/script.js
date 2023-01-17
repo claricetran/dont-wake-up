@@ -182,7 +182,7 @@ var combatVersion = [
 	{
 		backgroundImg: "url(./assets/images/backgrounds/cave.png)",
 		begginingText:
-			"You finally reach the end of the cave and gasp with relief when you notice the starry night at the end of the tunnel",
+			"You finally reach the end of the cave and gasp with relief when you notice the starry night at the end of the tunnel.",
 		enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
 		enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
 		dialogue: "How dare you try to pass through my kingdom!!",
@@ -694,10 +694,10 @@ function hasGame(game) {
 }
 
 // Load the story to the story section
-//TODO: changing background function should be called in here.
 function loadScene() {
 	console.log(hasStory());
 	// if there is a story to the scene then load the scene
+	updateBackgroundImage();
 	if (hasStory()) {
 		console.log("pm in load scene a");
 		printMessage(storyTextPEl, taleArray[taleTracker][1].story[storyIndex], 30);
@@ -846,10 +846,10 @@ dialogueNextBtn.addEventListener("click", () => {
 				if (hasGame(taleArray[taleTracker + 1][1].game) == true) {
 					// if user chooses to play the game
 					console.log("next story has game is true");
-					if (yesEl.children[0].checked == true) {
+					if (hasOptions() == true && yesEl.children[0].checked == true) {
 						console.log("at 424: " + taleTracker);
 						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
-					} else if (noEl.children[0].checked == true) {
+					} else if (hasOptions() == true && noEl.children[0].checked == true) {
 						// if user chooses to not play the game
 						console.log("at 434:" + taleTracker);
 						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
@@ -891,15 +891,18 @@ dialogueNextBtn.addEventListener("click", () => {
 				if (hasGame(taleArray[taleTracker + 1][1].game) == true) {
 					// if user chooses to play the game
 					console.log("next story has game is true");
-					if (yesEl.children[0].checked == true) {
+					if (hasOptions() == true && yesEl.children[0].checked == true) {
 						console.log("at 424: " + taleTracker);
 						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
-					} else if (noEl.children[0].checked == true) {
+					} else if (hasOptions() == true && noEl.children[0].checked == true) {
 						// if user chooses to not play the game
 						console.log("at 434:" + taleTracker);
 						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[1]);
+					} else {
+						taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
 					}
 				} else {
+					console.log("at 906: " + taleTracker);
 					taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
 				}
 				storyIndex = 0;
@@ -940,25 +943,26 @@ function enableContinue(state) {
 	}
 }
 
-// TODO: update background image based on location.
-// function updateBackgroundImage(){}
+// update background image based on location.
+function updateBackgroundImage() {
+	if (taleArray[taleTracker][1].place != "") {
+		gameGridEl.style.backgroundImage = taleArray[taleTracker][1].place;
+	}
+}
 
 // First load of the game.
 function initGame() {
 	taleArray = Object.entries(tale);
-	savedData = JSON.parse(localStorage.getItem("playerCharacter"));
-	if (savedData.currScene != null) {
-		taleTracker = savedData.currScene;
-	} else {
-		taleTracker = 0;
-	}
-
 	console.log(taleArray);
 	// clear dialog and story to load new prompts
 	clearDialog();
 	clearStory();
-	//call updateBackgroundImage(); here
-	//check if there is a story for the scene then proceed to print the text and use continue button as needed.
+
+	if (playerCharacter.currScene != null) {
+		taleTracker = playerCharacter.currScene;
+	} else {
+		taleTracker = 0;
+	}
 	storyIndex = 0;
 	dialogIndex = 0;
 	console.log("pm in initgame");
