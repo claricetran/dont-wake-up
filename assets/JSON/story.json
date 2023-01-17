@@ -94,21 +94,25 @@
 		"next": "scene-1-10"
 	},
 	"scene-1-10": {
-		"place": "url(./assets/images/backgrounds/butcher.png",
+		"place": "url(./assets/images/backgrounds/PigsInPen.png",
 		"story": ["You sneak around the back anyways. Mr. Oinks might be there."],
 		"dialog": ["Player: Mr. Oinks, you there?"],
 		"next": "scene-1-11"
 	},
 	"scene-1-11": {
-		"place": "url(./assets/images/backgrounds/butcher.png",
+		"place": "url(./assets/images/backgrounds/PigsInPen.png",
+		"story": ["You take a look, but Mr. Oinks could not be found."],
+		"next": "scene-1-11-1"
+	},
+	"scene-1-11-1": {
+		"place": "url(./assets/images/backgrounds/pretty-Day-forest.png",
 		"story": [
-			"You take a look, but Mr. Oinks could not be found.",
 			"There isn't much left to search in the village. Saddened once more, you go on your way, calling Mr. Oinks occasionally hoping for his squeal in reply."
 		],
 		"next": "scene-1-12"
 	},
 	"scene-1-12": {
-		"place": "url(./assets/images/backgrounds/green-night-forest.png)",
+		"place": "url(./assets/images/backgrounds/Cliff.png)",
 		"story": [
 			"Your wandering has brought you to a cliffside.",
 			"In the cliffside, is a cave.",
@@ -117,13 +121,13 @@
 		"next": "scene-1-13"
 	},
 	"scene-1-13": {
-		"place": "",
+		"place": "url(./assets/images/backgrounds/cave.png)",
 		"story": [""],
 		"game": "troll",
 		"next": ["scene-1-14", ""]
 	},
 	"scene-1-14": {
-		"place": "url(./assets/images/backgrounds/forest.png)",
+		"place": "url(./assets/images/backgrounds/green-night-forest.png)",
 		"story": [
 			"You've defeated the troll. No one gets in the way of you and your mission to find Mr. Oinks.",
 			"You walk out into the forest once more. The search for Mr. Oinks continues."
@@ -132,12 +136,12 @@
 		"next": "scene-1-14-1"
 	},
 	"scene-1-14-1": {
-		"place": "",
+		"place": "url(./assets/images/backgrounds/forest.png)",
 		"story": ["Your search has been long.", "You grow weary and decide to make camp."],
 		"next": "scene-1-14-2"
 	},
 	"scene-1-14-2": {
-		"place": "",
+		"place": "url(./assets/images/backgrounds/forest.png)",
 		"story": [
 			"Find as many words as you can in the time given related to the forest! If the timer runs out before getting at least 6 words you lose a life. Any extra words give you extra XP!"
 		],
@@ -158,7 +162,7 @@
 		"next": "scene-1-15"
 	},
 	"scene-1-15": {
-		"place": "",
+		"place": "url(./assets/images/backgrounds/swamp.png)",
 		"story": [""],
 		"game": "witch",
 		"next": ["scene-1-16", ""]
