@@ -16,6 +16,11 @@ var modal = document.getElementById("warning-modal");
 var modalClose = document.getElementsByClassName("close")[0];
 var noBtn = document.getElementById("modal-close");
 var yesBtn = document.getElementById("modal-continue");
+var scoreBtn = document.getElementById("scores-btn");
+
+scoreBtn.addEventListener("click", function(){
+    location.href = "./scores.html"
+})
 
 // Character object array
 var characterOptions = [

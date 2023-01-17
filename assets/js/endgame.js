@@ -2,8 +2,10 @@
 var category = "dreams";
 var gameStatus = localStorage.getItem("gameStatus");
 var score = localStorage.getItem("score");
+var playerCharacter = JSON.parse(localStorage.getItem("playerCharacter"));
 var newScore = {
     username: "unknown",
+    characterName: playerCharacter.characterName,
     score: score
 }
 

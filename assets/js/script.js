@@ -88,8 +88,8 @@ function displayLives() {
 
 function calculateScore() {
 	var levelScore = adventurerLevel * 1000;
-	var livesScore = adventurerLives * 100;
-	playerScore = levelScore + livesScore;
+	var livesScore = adventurerLives * 250;
+	playerScore = levelScore + livesScore + adventurerHealth + adventurerXP;
     console.log(playerScore)
 }
 
@@ -131,6 +131,7 @@ var allowNextGame = true;
 var allowGameReset = false;
 var gameIsPlaying = false;
 var gameWin = false;
+var inCombat = false;
 
 dialogueNextBtn.style.visibility = "hidden";
 mainGameBackBtn.style.visibility = "hidden";
@@ -229,6 +230,7 @@ var indexToReplay;
 
 function playCombat(index) {
 
+    inCombat = true 
 	indexToReplay = index;
 	backgroundImg = combatVersion[index].backgroundImg;
 	begginingText = combatVersion[index].begginingText;
@@ -252,12 +254,13 @@ function playCombat(index) {
 	mainGameContinueBtn.setAttribute("class", "nes-btn");
 
 	mainGameContinueBtn.addEventListener("click", function () {
-		if (allowNextDialogue && allowNextGame && gameIsPlaying) {
+		if (allowNextDialogue && allowNextGame && gameIsPlaying && inCombat) {
 			mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
 			startCombatGame(indexToReplay);
 			makeEnemyAppear();
 			// makes sure the game doesn't restart when continue is clicked at the end
 			allowNextGame = false;
+            inCombat = false;
 		}
 	});
 }
