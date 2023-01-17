@@ -87,6 +87,7 @@ function calculateScore() {
 	var levelScore = adventurerLevel * 1000;
 	var livesScore = adventurerLives * 100;
 	playerScore = levelScore + livesScore;
+    console.log(playerScore)
 }
 
 // Music controls
@@ -945,20 +946,10 @@ function enableContinue(state) {
 // First load of the game.
 function initGame() {
 	taleArray = Object.entries(tale);
-	savedData = JSON.parse(localStorage.getItem("playerCharacter"));
-	if (savedData.currScene != null) {
-		taleTracker = savedData.currScene;
+	if (playerCharacter.currScene != null) {
+		taleTracker = playerCharacter.currScene;
 	} else {
 		taleTracker = 0;
-	}
-	if (savedData.lives != null) {
-		adventurerLives = savedData.adventurerLives;
-	}
-	if (savedData.level != null) {
-		adventurerLevel = savedData.level;
-	}
-	if (savedData.xp != null) {
-		adventurerXP = savedData.xp;
 	}
 	console.log(taleArray);
 	// clear dialog and story to load new prompts
