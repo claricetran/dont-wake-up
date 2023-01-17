@@ -240,6 +240,21 @@ hr {
     margin: 5px;
 }
 
+#healthPotionIntructions {
+    display: none;
+    position: absolute;
+    font-size: 0.9vh;
+    background-color: antiquewhite;
+    width: 10vw;
+    left: 5%;
+    border: rgb(77, 54, 37) solid 3px;
+    padding: 1px;
+}
+
+#healthPotion:hover + #healthPotionIntructions {
+    display: flex;
+}
+
 #weapon {
     display: flex;
     justify-content: center;
@@ -259,21 +274,20 @@ hr {
 /* gameplay section */
 #middleMain {
     width: 50%;
-}
-
-#middleMain {
-    width: 50%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* game grid layout */
 #gameScreenGrid {
     background-image: url(../images/village.png);
-    background-size: cover;
+    background-size: contain;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(5, auto);
-    height: 75%;
+    height: 80%;
+    aspect-ratio: 3/2;
 }
 
 #gameScreenGrid div {
@@ -287,8 +301,8 @@ hr {
 #gameScreenGrid img {
     position: absolute;
     align-self: flex-end;
-    width: 250%;
-    bottom: -60%;
+    width: 300%;
+    bottom: -50%;
     height: auto;
 }
 
@@ -364,8 +378,8 @@ hr {
 #gameDialogueBox {
     height: 20%;
     width: 98%;
-    background-color: blanchedalmond;
     width: 98%;
+    margin: 0;
 }
 
 #gameDialogueBox p {

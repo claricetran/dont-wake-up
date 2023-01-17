@@ -12,6 +12,7 @@ var saveBtn = document.getElementById("save-btn");
 var resetBtn = document.getElementById("restart-btn");
 var titleBtn = document.getElementById("title-btn")
 var musicEl = document.getElementById("music");
+var healthPotionEl = document.getElementById("healthPotion")
 
 // Retrieving values from local storage
 var adventurerID = playerCharacter.id;
@@ -145,6 +146,15 @@ function printMessage(destination, message, speed) {
     }, speed);
 }
 
+// Health potion function
+healthPotionEl.addEventListener("click", function(){
+    if(!gameIsPlaying && adventurerHealth < playerHealth.max){
+        adventurerHealth = adventurerHealth + 10
+        playerHealth.setAttribute("value", adventurerHealth);
+        console.log(playerHealth)
+    }
+})
+
 var combatVersion = [
     {
         backgroundImg: "url(./assets/images/backgrounds/cave.png)",
@@ -179,11 +189,12 @@ var story;
 var enemyHealthPoints;
 var enemyDamagePoints;
 var enemyWinDialogue;
-
-playCombat(1)
+var indexToReplay;
 
 function playCombat(index) {
-    var index = index
+    saveBtn.classList.add("is-disabled")
+
+    indexToReplay = index
     backgroundImg = combatVersion[index].backgroundImg;
     begginingText = combatVersion[index].begginingText;
     enemyFileNameWithCloud = combatVersion[index].enemyFileNameWithCloud;
@@ -195,8 +206,7 @@ function playCombat(index) {
     enemyWinDialogue = combatVersion[index].enemyWinDialogue;
 
     // Setting health back to saved health at start of game
-    adventurerHealth = playerCharacter.health;
-    playerHealth.setAttribute("value", adventurerHealth);
+
     // Console logging states
     gameIsPlaying = true
     console.log("Game is Playing: " + gameIsPlaying)
@@ -211,7 +221,7 @@ function playCombat(index) {
     mainGameContinueBtn.addEventListener("click", function () {
         if (allowNextDialogue && allowNextGame && gameIsPlaying) {
             mainGameContinueBtn.setAttribute("class", "nes-btn is-disabled");
-            startCombatGame(index)
+            startCombatGame(indexToReplay)
             makeEnemyAppear()
             // makes sure the game doesn't restart when continue is clicked at the end
             allowNextGame = false;
@@ -219,7 +229,8 @@ function playCombat(index) {
     })
 }
 
-function startCombatGame(index) {
+function startCombatGame(indexToReplay) {
+
     var startBtn = document.createElement("button")
     startBtn.setAttribute("class", "nes-btn")
     startBtn.textContent = "Fight!"
@@ -249,7 +260,7 @@ function startCombatGame(index) {
                 }
             }, 1000)
             setTimeout(function () {
-                startCombat(index)
+                startCombat(indexToReplay)
             }, 4000)
         }
     })
@@ -278,7 +289,7 @@ function makeEnemyAppear() {
     setTimeout(changeImage, 4500)
 }
 
-function startCombat(index) {
+function startCombat(indexToReplay) {
     // Console logging states
     console.log("Fighting Started")
     // removing the start message
@@ -309,12 +320,15 @@ function startCombat(index) {
             enemyHealthProgress.remove()
             targetEnemyEl.remove()
             messageEl.textContent = "Victory!"
+            allowNextDialogue = false;
             printMessage(dialogueTextEl, "Aaargh...", 30)
             var endMessage = "You defeated the enemy and gained " + adventurerHealth + " XP! You are able to continue!"
             printMessage(storyTextPEl, endMessage, 30)
             mainGameContinueBtn.setAttribute("class", "nes-btn")
             divB3.appendChild(messageEl)
             gameIsPlaying = false
+            saveBtn.classList.remove("is-disabled")
+            playerHealth.setAttribute("value", adventurerHealth)
             clearMiniGame()
         }
         if (adventurerHealth <= 0) {
@@ -335,10 +349,13 @@ function startCombat(index) {
                 event.preventDefault()
                 if (allowNextDialogue) {
                     console.log("Player is restarting mini game")
+                    playerCharacter.health = playerHealth.max
+                    adventurerHealth = playerCharacter.health;
+                    playerHealth.setAttribute("value", adventurerHealth);
                     dialogueTextEl.textContent = ""
                     restartBtn.remove()
                     resetMiniGameGrid()
-                    playCombat(index)
+                    playCombat(indexToReplay)
                 }
             })
 
@@ -358,10 +375,12 @@ var RPGwordPool = [
     "troll",
 ];
 
-// playHangman(RPGwordPool, 35, 6)
+// playHangman(RPGwordPool, 40, 5)
 
 // Hangman Game function
 function playHangman(chosenWordPool, totalTime, nbrOfWords) {
+    saveBtn.classList.add("is-disabled")
+
     adventurerHealth = playerCharacter.health;
     yesEl.style.display = "none";
     noEl.style.display = "none";
@@ -430,18 +449,17 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 
     function letterInWord() {
         if (!randomWord.includes(key)) {
-            adventurerHealth = adventurerHealth - 1
-            console.log(adventurerHealth)
+            adventurerHealth = adventurerHealth - 3
             playerHealth.setAttribute("value", adventurerHealth);
         }
         for (var i = 0; i < randomWord.length; i++) {
             if (randomWord[i] === key) {
                 maskedWord.splice([i], 1, randomWord[i]);
                 wordEl.textContent = maskedWord.join(" ");
-                if (!maskedWord.includes("_")) {
+                if (!maskedWord.includes("_") && adventurerHealth > 0) {
                     wordsFound++;
                     wordsFoundEl.textContent = wordsFound + "/" + nbrOfWords + " words";
-                    setTimeout(randomizer(), 1000);
+                    setTimeout(randomizer, 500);
                     return;
                 }
             }
@@ -512,6 +530,9 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
                     gameIsPlaying = false
                     console.log("Game is Playing: " + gameIsPlaying)
                     wordEl.remove()
+                    saveBtn.classList.remove("is-disabled")
+
+                    playerHealth.setAttribute("value", adventurerHealth)
                     clearMiniGame()
                 }
             }
@@ -533,7 +554,7 @@ function resetMiniGameGrid() {
 // clearMini Games
 function clearMiniGame() {
     mainGameContinueBtn.addEventListener("click", function () {
-        if (!gameIsPlaying) {
+        if (!gameIsPlaying && allowNextDialogue) {
             console.log("Mini Game is over and next story is starting")
             dialogueTextEl.textContent = ""
             storyTextPEl.textContent = ""
@@ -668,7 +689,7 @@ function loadOptions() {
 }
 
 mainGameContinueBtn.addEventListener("click", () => {
-    if (!gameIsPlaying) {
+    if (!gameIsPlaying && allowNextDialogue) {
         sceneIndex++;
         console.log(
             "update taleTracker: " + taleTracker + " storyI: " + sceneIndex + " dialogI: " + dialogIndex
@@ -689,7 +710,7 @@ mainGameContinueBtn.addEventListener("click", () => {
 // taleTracker ++ changed to taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next[0]);
 // Load the dialog to the dialog section
 dialogueNextBtn.addEventListener("click", () => {
-    if (!gameIsPlaying) {
+    if (!gameIsPlaying && allowNextDialogue) {
         // if (hasOptions() == false || dialogIndex + 1 < taleArray[taleTracker][1].dialog.length) {
         //     console.log("no options OR not at scene where options are needed yet");
         // clear options on click in case there are any
