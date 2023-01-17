@@ -47,6 +47,7 @@ function savePlayerInfo() {
 		level: adventurerLevel,
 		lives: adventurerLives,
 		src: adventurerImg,
+		currScene: taleTracker,
 	};
 	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
 }
@@ -144,6 +145,17 @@ function gameLose() {
 		localStorage.setItem("gameStatus", "lost");
 		location.href = "./endGame.html";
 	}, 3000);
+}
+
+function checkGameWin(){
+    if (taleTracker == taleArray.length -1)
+    {
+        calculateScore();
+        localStorage.setItem("gameStatus", "win");
+        localStorage.setItem("score", playerScore);
+        location.href = "./endGame.html"
+        
+    }
 }
 
 function printMessage(destination, message, speed) {
@@ -757,6 +769,7 @@ function loadOptions() {
 }
 
 mainGameContinueBtn.addEventListener("click", () => {
+    checkGameWin();
 	// When not playing the game
 	if (!gameIsPlaying && allowNextDialogue) {
 		// if the current scene does not have a game
@@ -813,11 +826,8 @@ mainGameContinueBtn.addEventListener("click", () => {
 // Load the dialog to the dialog section
 dialogueNextBtn.addEventListener("click", () => {
 	if (!gameIsPlaying && allowNextDialogue) {
-		// if (hasOptions() == false || dialogIndex + 1 < taleArray[taleTracker][1].dialog.length) {
-		//     console.log("no options OR not at scene where options are needed yet");
 		// clear options on click in case there are any
 		showOptions(false);
-		// }
 		console.log("dialog button clicked");
 		dialogIndex++;
 		clearDialog();
@@ -938,7 +948,21 @@ function enableContinue(state) {
 // First load of the game.
 function initGame() {
 	taleArray = Object.entries(tale);
-	taleTracker = 0;
+	savedData = JSON.parse(localStorage.getItem("playerCharacter"));
+	if (savedData.currScene != null) {
+		taleTracker = savedData.currScene;
+	} else {
+		taleTracker = 0;
+	}
+	if (savedData.lives != null) {
+		adventurerLives = savedData.adventurerLives;
+	}
+	if (savedData.level != null) {
+		adventurerLevel = savedData.level;
+	}
+	if (savedData.xp != null) {
+		adventurerXP = savedData.xp;
+	}
 	console.log(taleArray);
 	// clear dialog and story to load new prompts
 	clearDialog();
@@ -948,13 +972,13 @@ function initGame() {
 	storyIndex = 0;
 	dialogIndex = 0;
 	console.log("pm in initgame");
-	printMessage(storyTextPEl, taleArray[taleTracker][1].story[storyIndex], 30);
-	enableContinue(false);
-	setTimeout(() => {
-		clearDialog();
-		loadDialog();
-		showDialogButton(true);
-	}, 5000);
+	// printMessage(storyTextPEl, taleArray[taleTracker][1].story[storyIndex], 30);
+	loadScene();
+	if (taleTracker == 0) {
+		enableContinue(false);
+	} else {
+		enableContinue(true);
+	}
 }
 
 // Game is started after story json data is grabbed.
@@ -962,5 +986,5 @@ fetch("./assets/JSON/story.json")
 	.then((res) => res.json())
 	.then((data) => {
 		tale = data;
-		// initGame();
+		initGame();
 	});
