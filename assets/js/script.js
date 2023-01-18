@@ -15,7 +15,6 @@ var musicEl = document.getElementById("music");
 var healthPotionEl = document.getElementById("healthPotion");
 
 // Retrieving values from local storage
-
 var adventurerID = playerCharacter.id;
 var adventurerImg = playerCharacter.src;
 var adventurerName = playerCharacter.characterName;
@@ -24,26 +23,14 @@ var adventurerHealth = playerCharacter.health;
 var adventurerDamage = playerCharacter.damage;
 var adventurerXP = playerCharacter.xp;
 var adventurerLives = playerCharacter.lives;
-var adventurerHealthMax = playerCharacter.max;
 var playerScore = 0;
-
-if(playerCharacter.id === undefined){
-    adventurerID = "nameless";
-    adventurerImg ="assets/images/nameless.png";
-    adventurerLevel = 100;
-    adventurerHealth = 1000;
-    adventurerHealthMax = 1000;
-    adventurerDamage = 10;
-    adventurerXP = 0;
-    adventurerLives = 3;
-}
 
 // Display to character panel
 playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
 playerHealth.setAttribute("value", adventurerHealth);
-playerHealth.setAttribute("max", adventurerHealthMax);
+playerHealth.setAttribute("max", 250);
 playerXP.setAttribute("value", adventurerXP);
 playerXP.setAttribute("max", 100);
 
@@ -61,7 +48,6 @@ function savePlayerInfo() {
 		lives: adventurerLives,
 		src: adventurerImg,
 		currScene: taleTracker,
-        max: adventurerHealthMax,
 	};
 	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
     console.log("save")
@@ -207,8 +193,8 @@ var combatVersion = [
 		backgroundImg: "url(./assets/images/backgrounds/cave.png)",
 		begginingText:
 			"You finally reach the end of the cave and gasp with relief when you notice the starry night at the end of the tunnel.",
-		enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
-		enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
+		enemyFileNameWithCloud: "./assets/images/characters/Troll-lord-appearing.png",
+		enemyFileNameNoCloud: "./assets/images/characters/Troll-lord.png",
 		dialogue: "How dare you try to pass through my kingdom!!",
 		story: "Oh no! You ran into an enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
 		enemyHealthPoints: 20,
@@ -763,6 +749,7 @@ function hasGame(game) {
 
 // Load the story to the story section
 function loadScene() {
+	console.log(hasStory());
 	// if there is a story to the scene then load the scene
 	updateBackgroundImage();
 	if (hasStory()) {
