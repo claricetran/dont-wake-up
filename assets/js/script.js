@@ -190,11 +190,11 @@ healthPotionEl.addEventListener("click", function () {
 
 var combatVersion = [
 	{
-		backgroundImg: "url(./assets/images/backgrounds/cave.png)",
+		backgroundImg: "url(../images/backgrounds/cave.png)",
 		begginingText:
 			"You finally reach the end of the cave and gasp with relief when you notice the starry night at the end of the tunnel.",
-		enemyFileNameWithCloud: "./assets/images/characters/troll-lord-appearing.png",
-		enemyFileNameNoCloud: "./assets/images/characters/troll-lord.png",
+		enemyFileNameWithCloud: "../images/characters/troll-lord-appearing.png",
+		enemyFileNameNoCloud: "../images/characters/troll-lord.png",
 		dialogue: "How dare you try to pass through my kingdom!!",
 		story: "Oh no! You ran into an enemy. The Troll Lord isn't pleased to see a hero in his territory. If you want to pass, you will have to defeat him!",
 		enemyHealthPoints: 20,
@@ -203,11 +203,11 @@ var combatVersion = [
 			"The only reason a warrior is alive is to fight, and the only reason a warrior fights is to win.",
 	},
 	{
-		backgroundImg: "url(./assets/images/backgrounds/swamp.png)",
+		backgroundImg: "url(../images/backgrounds/swamp.png)",
 		begginingText:
 			"You wander through the forest. The ground begins to get soggy. With every step your feet get more soaked and the air starts to fill with a putrid smell. A greenish fog emerges from all wround you...",
-		enemyFileNameWithCloud: "./assets/images/characters/Swamp-witch-appearing.png",
-		enemyFileNameNoCloud: "./assets/images/characters/Swamp-witch.png",
+		enemyFileNameWithCloud: "../images/characters/Swamp-witch-appearing.png",
+		enemyFileNameNoCloud: "../images/characters/Swamp-witch.png",
 		dialogue: "You dare come close to the dreaded swamp witch? You will get what you deserve!",
 		story: "Oh no! The Witch is challenging you to a battle! In order to continue, you need to defeat her.",
 		enemyHealthPoints: 50,
