@@ -23,14 +23,26 @@ var adventurerHealth = playerCharacter.health;
 var adventurerDamage = playerCharacter.damage;
 var adventurerXP = playerCharacter.xp;
 var adventurerLives = playerCharacter.lives;
+var adventurerHealthMax = playerCharacter.max
 var playerScore = 0;
+
+if(playerCharacter.id === undefined){
+    adventurerID = "nameless";
+    adventurerImg ="assets/images/nameless.png";
+    adventurerLevel = 100;
+    adventurerHealth = 1000;
+    adventurerHealthMax = 1000;
+    adventurerDamage = 10;
+    adventurerXP = 0;
+    adventurerLives = 3;
+}
 
 // Display to character panel
 playerImage.setAttribute("src", adventurerImg);
 playerName.textContent = adventurerName;
 playerLevel.textContent = adventurerLevel;
 playerHealth.setAttribute("value", adventurerHealth);
-playerHealth.setAttribute("max", 250);
+playerHealth.setAttribute("max", adventurerHealthMax);
 playerXP.setAttribute("value", adventurerXP);
 playerXP.setAttribute("max", 100);
 
