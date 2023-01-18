@@ -32,7 +32,8 @@ var characterOptions = [
     "xp": 0,
     "level": 1,
     "lives": 3,
-    "src": "assets/images/female-witch.png"
+    "src": "assets/images/female-witch.png",
+    "max": 250
 },
 {
     "id": "adventurer",
@@ -42,7 +43,8 @@ var characterOptions = [
     "xp": 0,
     "level": 1,
     "lives": 3,
-    "src": "assets/images/male-adventurer.png"
+    "src": "assets/images/male-adventurer.png",
+    "max": 250
 },
 {
     "id": "fox",
@@ -52,7 +54,8 @@ var characterOptions = [
     "xp": 0,
     "level": 1,
     "lives": 3,
-    "src": "assets/images/fox-adventurer.png"
+    "src": "assets/images/fox-adventurer.png",
+    "max": 250
 }]
 
 // Navigate between start and character select containers on button click
