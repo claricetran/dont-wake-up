@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Don't Wake Up</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/nes.css@latest/css/nes.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body id="endGameBody">
+    <header>
+      <h2>Don't Wake Up</h2>
+    </header>
+    <main id="endPageMain">
+      <div id="win-loss-message">
+        <p>
+          You woke up before you could finish the story...
+        </p>
+      </div>
+      <div id="endpage-content">
+        <div id="win-content">
+          <h3">Your Final Score is</h3>
+          <h3 id="final-score"></h3>
+          <div class="nes-field" id="name-input">
+            <p>Enter your name:</p>
+            <label for="character-name"></label>
+            <input type="text" id="character-name" class="nes-input" />
+          </div>
+          <button type="submit" id="score-btn">Submit & See Scores 💯</button>
+          <hr />
+        </div>
+        <div id="lose-content" class="hidden">
+          <img id="lose-image" src="./assets/images/scary-bedroom.png">
+        </div>
+        <div id="quote-container">
+          <p id="quote"></p>
+          <p id="author"></p>
+        </div>
+      </div>
+
+      <div class="hidden" id="credits-container">
+        <div id="credits">
+          <p>
+            Developers:<br />
+            Maya Cohen, Clarice Tran, and Savannah Miller<br /><br />
+            Created For:<br />
+            University of Washington Coding Bootcamp Project 1<br /><br />
+            Music By:<br />
+            PGN Music<br /><br />
+            Background Art:<br />
+            Midjourney AI<br /><br />
+            Character Art:<br />
+            Reroll<br /><br />
+            API's:<br />
+            Quotes API by API Ninja's<br />
+            Name Parser API by Ninble BV<br /><br />
+            Framework By:<br />
+            NES CSS <i class="nes-logo"></i><br /><br />
+            Engergy Provided By:<br />
+            Coffee☕ <br /><br />
+            Special Thanks:<br />
+            To our partners and their support!<br />
+            Google<br />
+            Lo-fi Study Music🎵
+          </p>
+        </div>
+      </div>
+      <button id="sleep-btn">Go Back to Sleep 🛌</button>
+      <button id="credits-btn">Roll Credits 🎥</button>
+    </main>
+    <!-- hide footer on showing credits -->
+    <footer>
+      <p>
+        &copy;
+        <a href="https://github.com/Mayalynn96">Maya</a>
+        <a href="https://github.com/claricetran">Clarice</a>
+        <a href="https://github.com/VisualViolet">Savannah</a>
+      </p>
+    </footer>
+    <script src="./assets/js/endgame.js"></script>
+  </body>
+</html>
