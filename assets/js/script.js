@@ -60,6 +60,7 @@ function savePlayerInfo() {
 		lives: adventurerLives,
 		src: adventurerImg,
 		currScene: taleTracker,
+		max: adventurerHealthMax
 	};
 	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
 	console.log("save")
@@ -491,7 +492,7 @@ var timeLeft;
 var wordsFound = 0;
 var totalNumberOfWords =0;
 
-playHangman(forestWordPool, 30, 2)
+// playHangman(forestWordPool, 30, 2)
 
 // Hangman Game function
 function playHangman(chosenWordPool, totalTime, nbrOfWords) {
@@ -810,7 +811,7 @@ function loadScene() {
 		if (taleArray[taleTracker][1].game == "hangman") {
 			playHangman(butcherWordPool, 60, 3);
 		} else if (taleArray[taleTracker][1].game == "hangman 2") {
-			playHangman(forestWordPool, 60, 3);
+			playHangman(forestWordPool, 60, 6);
 		} else if (taleArray[taleTracker][1].game == "troll") {
 			playCombat(0);
 		} else if (taleArray[taleTracker][1].game == "witch") {
@@ -1073,5 +1074,5 @@ fetch("./assets/JSON/story.json")
 	.then((res) => res.json())
 	.then((data) => {
 		tale = data;
-		// initGame();
+		initGame();
 	});
