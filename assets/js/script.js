@@ -26,15 +26,15 @@ var adventurerLives = playerCharacter.lives;
 var adventurerHealthMax = playerCharacter.max
 var playerScore = 0;
 
-if(playerCharacter.id === undefined){
-    adventurerID = "nameless";
-    adventurerImg ="assets/images/nameless.png";
-    adventurerLevel = 100;
-    adventurerHealth = 1000;
-    adventurerHealthMax = 1000;
-    adventurerDamage = 10;
-    adventurerXP = 0;
-    adventurerLives = 3;
+if (playerCharacter.id === undefined) {
+	adventurerID = "nameless";
+	adventurerImg = "assets/images/nameless.png";
+	adventurerLevel = 100;
+	adventurerHealth = 1000;
+	adventurerHealthMax = 1000;
+	adventurerDamage = 10;
+	adventurerXP = 0;
+	adventurerLives = 3;
 }
 
 // Display to character panel
@@ -60,16 +60,17 @@ function savePlayerInfo() {
 		lives: adventurerLives,
 		src: adventurerImg,
 		currScene: taleTracker,
+		max: adventurerHealthMax
 	};
 	localStorage.setItem("playerCharacter", JSON.stringify(playerCharacterSave));
-    console.log("save")
+	console.log("save")
 }
 
 // Clear player character save and return to start page
 function restartGame() {
 	localStorage.clear("playerCharacter");
-    localStorage.clear("gameStatus");
-    localStorage.clear("score");
+	localStorage.clear("gameStatus");
+	localStorage.clear("score");
 	location.href = "./index.html";
 }
 
@@ -102,7 +103,7 @@ function calculateScore() {
 	var levelScore = adventurerLevel * 1000;
 	var livesScore = adventurerLives * 250;
 	playerScore = levelScore + livesScore + adventurerHealth + adventurerXP;
-    console.log(playerScore)
+	console.log(playerScore)
 }
 
 // Music controls
@@ -110,10 +111,10 @@ musicEl.volume = 0.1;
 musicEl.loop = true;
 
 // Header On-Click Events
-saveBtn.addEventListener("click", function(){
-    if(!gameIsPlaying){
-        savePlayerInfo()
-    }
+saveBtn.addEventListener("click", function () {
+	if (!gameIsPlaying) {
+		savePlayerInfo()
+	}
 });
 
 resetBtn.addEventListener("click", restartGame);
@@ -242,7 +243,7 @@ var indexToReplay;
 
 function playCombat(index) {
 
-    inCombat = true 
+	inCombat = true
 	indexToReplay = index;
 	backgroundImg = combatVersion[index].backgroundImg;
 	begginingText = combatVersion[index].begginingText;
@@ -272,7 +273,7 @@ function playCombat(index) {
 			makeEnemyAppear();
 			// makes sure the game doesn't restart when continue is clicked at the end
 			allowNextGame = false;
-            inCombat = false;
+			inCombat = false;
 		}
 	});
 }
@@ -482,6 +483,17 @@ var forestWordPool = [
 	"parsnip",
 ];
 
+let hangmanKeyOn = false;
+
+var wordPool;
+var randomWord;
+var maskedWord = [];
+var timeLeft;
+var wordsFound = 0;
+var totalNumberOfWords =0;
+
+// playHangman(forestWordPool, 30, 2)
+
 // Hangman Game function
 function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 	yesEl.style.display = "none";
@@ -494,11 +506,12 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 	gameIsPlaying = true;
 	console.log("Game is Playing: " + gameIsPlaying);
 	// hangman game elements
-	var wordPool = chosenWordPool;
-	var randomWord;
-	var maskedWord = [];
-	var timeLeft = totalTime;
-	var wordsFound = 0;
+	wordPool = chosenWordPool;
+	randomWord;
+	maskedWord = [];
+	timeLeft = totalTime;
+	wordsFound = 0;
+	totalNumberOfWords = nbrOfWords;
 
 	// generating hangman game element
 	var miniGameTitle = document.createElement("p");
@@ -530,6 +543,7 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 	divA5.appendChild(timeLeftEl);
 
 	startMiniGameBtn.addEventListener("click", function () {
+		hangmanKeyOn = true
 		mainGameBackBtn.setAttribute("class", "nes-btn is-disabled");
 		startHangmanGame(timeLeft);
 		randomizer();
@@ -537,54 +551,17 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 		startMiniGameBtn.style.display = "none";
 	});
 
-	function randomizer() {
-		console.log("Randomizing word");
-		maskedWord = [];
-		randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
-		for (var i = 0; i < randomWord.length; i++) {
-			maskedWord.push("_");
-			wordEl.textContent = maskedWord.join(" ");
-		}
-	}
-
-	var key;
-
-	function letterInWord() {
-		if (!randomWord.includes(key)) {
-			adventurerHealth = adventurerHealth - 3;
-			playerHealth.setAttribute("value", adventurerHealth);
-		}
-		for (var i = 0; i < randomWord.length; i++) {
-			if (randomWord[i] === key) {
-				maskedWord.splice([i], 1, randomWord[i]);
-				wordEl.textContent = maskedWord.join(" ");
-				if (!maskedWord.includes("_") && adventurerHealth > 0) {
-					wordsFound++;
-					wordsFoundEl.textContent = wordsFound + "/" + nbrOfWords + " words";
-					setTimeout(randomizer, 500);
-					return;
-				}
-			}
-		}
-	}
-
-	document.addEventListener("keydown", keydownAction);
-
-	function keydownAction(event) {
-		key = event.key.toLowerCase();
-		return letterInWord();
-	}
-
 	function startHangmanGame(timeLeft) {
 		console.log("Countdown starts time to find words");
 		timerInterval = setInterval(function () {
 			timeLeft--;
 			timeLeftEl.textContent = "Time Left: " + timeLeft + " seconds";
 			if (timeLeft <= 0 || adventurerHealth <= 0) {
+				hangmanKeyOn = false
 				clearInterval(timerInterval);
 				randomWord = "";
 				maskedWord = [];
-				if (wordsFound < nbrOfWords) {
+				if (wordsFound < nbrOfWords || adventurerHealth <= 0) {
 					console.log("Player lost");
 					var loosingText;
 					if (adventurerHealth > 0) {
@@ -661,11 +638,55 @@ function playHangman(chosenWordPool, totalTime, nbrOfWords) {
 	}
 }
 
+function randomizer() {
+	console.log("Randomizing word");
+	maskedWord = [];
+	randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
+	for (var i = 0; i < randomWord.length; i++) {
+		maskedWord.push("_");
+		let wordEl = document.getElementById("wordToFind")
+		wordEl.textContent = maskedWord.join(" ");
+	}
+}
+
+let key;
+
+function letterInWord(totalNumberOfWords) {
+	if (!randomWord.includes(key)) {
+		adventurerHealth = adventurerHealth - 3;
+		playerHealth.setAttribute("value", adventurerHealth);
+		console.log(adventurerHealth)
+	}
+	for (let i = 0; i < randomWord.length; i++) {
+		if (randomWord[i] === key) {
+			maskedWord.splice([i], 1, randomWord[i]);
+			let wordEl = document.getElementById("wordToFind")
+			wordEl.textContent = maskedWord.join(" ");
+			if (!maskedWord.includes("_") && adventurerHealth > 0) {
+				wordsFound++;
+				let wordsFoundEl = document.getElementById("wordsFound")
+				wordsFoundEl.textContent = wordsFound + "/" + totalNumberOfWords + " words";
+				setTimeout(randomizer, 500);
+				return;
+			}
+		}
+	}
+}
+
+document.addEventListener("keydown", keydownAction);
+
+function keydownAction(event) {
+	if (hangmanKeyOn) {
+		key = event.key.toLowerCase();
+		return letterInWord(totalNumberOfWords);
+	}
+}
+
 // General Mini game functions
 
 // reset mini game Grid
 function resetMiniGameGrid() {
-	for (var i = 0; i < gameGridEl.children.length; i++) {
+	for (let i = 0; i < gameGridEl.children.length; i++) {
 		var itemsToClear = gameGridEl.children[i].children;
 		if (itemsToClear.length > 0) {
 			itemsToClear[itemsToClear.length - 1].remove();
@@ -788,7 +809,7 @@ function loadScene() {
 	// if there is a game to play, check what type of game it is and play it.
 	if (hasGame(taleArray[taleTracker][1].game) == true) {
 		if (taleArray[taleTracker][1].game == "hangman") {
-			playHangman(butcherWordPool, 60, 6);
+			playHangman(butcherWordPool, 60, 3);
 		} else if (taleArray[taleTracker][1].game == "hangman 2") {
 			playHangman(forestWordPool, 60, 6);
 		} else if (taleArray[taleTracker][1].game == "troll") {
@@ -846,11 +867,11 @@ mainGameContinueBtn.addEventListener("click", () => {
 		if (hasGame(taleArray[taleTracker][1].game) == false) {
 			console.log(
 				"update continue button taleTracker: " +
-					taleTracker +
-					" storyI: " +
-					storyIndex +
-					" dialogI: " +
-					dialogIndex
+				taleTracker +
+				" storyI: " +
+				storyIndex +
+				" dialogI: " +
+				dialogIndex
 			);
 
 			storyIndex++;
@@ -904,11 +925,11 @@ dialogueNextBtn.addEventListener("click", () => {
 		if (dialogIndex < taleArray[taleTracker][1].dialog.length) {
 			console.log(
 				"update taleTracker: " +
-					taleTracker +
-					" storyI: " +
-					storyIndex +
-					" dialogI: " +
-					dialogIndex
+				taleTracker +
+				" storyI: " +
+				storyIndex +
+				" dialogI: " +
+				dialogIndex
 			);
 			loadDialog();
 			if (dialogIndex + 1 == taleArray[taleTracker][1].dialog.length) {
@@ -934,8 +955,8 @@ dialogueNextBtn.addEventListener("click", () => {
 					console.log("at 439:" + taleTracker);
 					console.log(
 						taleTracker +
-							" " +
-							Object.keys(tale).indexOf(taleArray[taleTracker][1].next)
+						" " +
+						Object.keys(tale).indexOf(taleArray[taleTracker][1].next)
 					);
 					//
 					taleTracker = Object.keys(tale).indexOf(taleArray[taleTracker][1].next);
@@ -944,11 +965,11 @@ dialogueNextBtn.addEventListener("click", () => {
 				dialogIndex = 0;
 				console.log(
 					"next scene should be enabled. taleTracker: " +
-						taleTracker +
-						" storyI: " +
-						storyIndex +
-						" dialogI: " +
-						dialogIndex
+					taleTracker +
+					" storyI: " +
+					storyIndex +
+					" dialogI: " +
+					dialogIndex
 				);
 				setTimeout(() => {
 					enableContinue(true);
@@ -982,11 +1003,11 @@ dialogueNextBtn.addEventListener("click", () => {
 				dialogIndex = 0;
 				console.log(
 					"next scene should be enabled. taleTracker: " +
-						taleTracker +
-						" storyI: " +
-						storyIndex +
-						" dialogI: " +
-						dialogIndex
+					taleTracker +
+					" storyI: " +
+					storyIndex +
+					" dialogI: " +
+					dialogIndex
 				);
 				enableContinue(true);
 				clearStory();
